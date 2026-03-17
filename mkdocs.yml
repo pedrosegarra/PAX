@@ -9,5 +9,5 @@ nav:
       - 2. Virtualización de RouterOS con GNS3: introduccion/02_virtualizacion_gns3.md
       - 3. Conectando a RouterOS para su administración: introduccion/03_acceso_routeros.md
   - Bloque 2. Configuración básica:
-      - 1. Tema nuevo: bloque_02/01_tema_nuevo.md
+      - 1. Tema nuevo: bloque_02/eliminar.md
       - 2. Tema nuevo: bloque_02/02_tema_nuevo.md
