@@ -242,14 +242,4 @@ Y volvemos a marcar la opción “Use as a linked base VM”, para que se cree u
 
 ---
 
-Nuestra plantilla está lista para ser utilizada en todos los proyectos, con una instalación limpia.
-
-Podemos realizar la prueba, arrastrándola de nuevo al proyecto e iniciando el router, que nos solicitará las credenciales de login.
-
-Entramos con usuario admin, sin contraseña (pulsando intro cuando nos solicite la contraseña).
-
-El router nos solicitará si deseamos leer la licencia de software. Podemos leerla, o indicarle que no, pulsando la tecla ‘n’.
-
-Tras este paso, nos solicitará la nueva contraseña de configuración (que deberemos recordar, para poder administrar el router).
-
-Ya disponemos de un router limpio sobre el que trabajar en los próximos tutoriales.
+Nuestra planti
