@@ -1,8 +1,4 @@
 # Virtualización de RouterOS con GNS3.
-Jorge López Fernández  
-2025/12/26  
-
----
 
 # Índice
 
