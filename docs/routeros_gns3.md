@@ -92,11 +92,13 @@ Indicamos el nombre que queremos dar al disco de nuestro router plantilla, y pul
 
 De vuelta a la ventana principal del asistente, pulsamos de nuevo el botón finalizar.
 
+![Editar plantilla](img/tema2/12_edit.png)
+
 ---
 
 Dado que hemos creado una plantilla con un disco en blanco, necesitaremos inicializar el disco. Para ello, debemos configurar la plantilla con la imagen ISO descargada, para proceder a la instalación. En primer lugar, entramos en la edición de la plantilla, pulsando el botón Edit. 
 
-![Editar plantilla](img/tema2/12_edit.png)
+
 
 Marcamos como opción principal de arranque la unidad de CD.
 
