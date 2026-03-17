@@ -124,9 +124,9 @@ ip/dhcp-client/print
 ---
 
 Para eliminar el cliente DHCP ejecutamos el siguiente comando:
-
+```
 ip/dhcp-client/remove <<índice>>
-
+```
 ![img02](tema01/img20.png)
 
 ---
