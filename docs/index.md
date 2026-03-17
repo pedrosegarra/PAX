@@ -1,7 +1,7 @@
 # Curso MikroTik
 
-## Contenidos
+## Bloques del curso
 
-- [Introducción](mikrotik_routeros.md)
-- [GNS3](routeros_gns3.md)
-- [Acceso](routeros_acceso.md)
+- Bloque 1. Introducción
+- Bloque 2. Configuración básica
+- Bloque 3. Servicios y administración

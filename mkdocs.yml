@@ -1,10 +1,13 @@
-site_name: MikroTik
-
+site_name: Curso MikroTik
 theme:
   name: material
 
 nav:
   - Inicio: index.md
-  - Introducción: mikrotik_routeros.md
-  - GNS3: routeros_gns3.md
-  - Acceso: routeros_acceso.md
+  - Bloque 1. Introducción:
+      - 1. Introducción a MikroTik y RouterOS: introduccion/01_mikrotik_routeros.md
+      - 2. Virtualización de RouterOS con GNS3: introduccion/02_virtualizacion_gns3.md
+      - 3. Conectando a RouterOS para su administración: introduccion/03_acceso_routeros.md
+  - Bloque 2. Configuración básica:
+      - 1. Tema nuevo: bloque_02/01_tema_nuevo.md
+      - 2. Tema nuevo: bloque_02/02_tema_nuevo.md
