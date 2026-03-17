@@ -34,17 +34,16 @@ Para ello, seguiremos los siguientes pasos:
 
 • Arrastra al escenario un elemento NAT, un switch, un router Mikrotik y un appliance Firefox, y conectarlos como muestra la figura, conectando una boca del switch a la primera interfaz física del router.
 
-![img01](../img/bloque_02/tema01/img01.png)
 
-![img02](../img/bloque_02/tema01/img02.png)
+![img02](tema01/img02.png)
 
 * Utilizaremos esta configuración para aislar la red del router, y poder conectar a la consola de administración web con un navegador. 
 
 • Arranca el escenario, pulsando el botón PLAY, y abre la consola del router, haciendo doble clic sobre el mismo.
 
-![img03](../img/bloque_02/tema01/img03.png)
+![img03](tema01/img03.png)
 
-![img04](../img/bloque_02/tema01/img04.png)
+![img04](tema01/img04.png)
 
 ---
 
@@ -56,9 +55,9 @@ Estas credenciales se emplean únicamente para el primer acceso y permiten compr
 
 Posteriormente, el router nos solicitará introducir una nueva contraseña para el usuario admin, que deberemos recordar para poder realizar las siguientes prácticas.
 
-![img05](../img/bloque_02/tema01/img05.png)
+![img05](tema01/img05.png)
 
-![img06](../img/bloque_02/tema01/img06.png)
+![img06](/tema01/img06.png)
 
 ---
 
@@ -70,6 +69,6 @@ system reset-configuration no-defaults=yes
 
 El router reiniciará con la configuración de fábrica, sin añadir ninguna configuración por defecto.
 
-![img07](../img/bloque_02/tema01/img07.png)
+![img07](tema01/img07.png)
 
-![img08](../img/bloque_02/tema01/img08.png)
+![img08](tema01/img08.png)
