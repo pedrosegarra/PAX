@@ -121,11 +121,11 @@ Para poder utilizar WebFig es necesario que el router tenga conectividad IP con 
 
 A diferencia de WinBox, WebFig no permite el acceso por dirección MAC, por lo que resulta imprescindible que el router tenga al menos una dirección IP configurada y accesible. Una vez introducida la IP del router en la barra de direcciones del navegador, el sistema solicitará el usuario y la contraseña.
 
-
+![img11](img/tema3/img11.png)
 
 Si las credenciales son correctas, se cargará la interfaz web de RouterOS, desde la que será posible acceder a las distintas opciones de configuración del router y continuar con las prácticas del curso.
 
-
+![img11](img/tema3/img12.png)
 
 Si los datos son correctos, la aplicación conectará con la interfaz web del router, y nos mostrará sus opciones de configuración.
 
@@ -139,8 +139,8 @@ Desde el punto de vista formativo, el uso de SSH tiene un valor añadido evident
 
 Para poder acceder a RouterOS utilizando un cliente SSH es necesario que el router tenga conectividad IP con el equipo desde el que se realiza la conexión, conocer la dirección IP asignada a alguna de sus interfaces y disponer de un cliente SSH actualizado.
 
-
+![img11](img/tema3/img13.png)
 
 Una vez introducidos los datos de conexión correctos, el cliente establecerá la sesión con el servidor SSH del router y permitirá ejecutar los comandos necesarios para continuar con la configuración y administración del sistema.
 
-![img11](img/tema3/img11.png)
+![img11](img/tema3/img14.png)
