@@ -1,8 +1,4 @@
 # Eliminación de configuración por defecto.
-Jorge López Fernández  
-2025/12/26  
-
----
 
 # Índice
 
