@@ -639,7 +639,7 @@
 <h1 id="configuracion-de-ip-dinamica-sobre-interfaz-fisica">Configuración de IP dinámica sobre interfaz física</h1>
 <h2 id="indice">Índice</h2>
 <p>Introducción<br />
-Ejemplo 2 — Configuración de IP dinámica sobre una interfaz física<br />
+Ejemplo 1 — Configuración de IP dinámica sobre una interfaz física<br />
 Eliminando la configuración aplicada<br />
 Eliminación del cliente DHCP  </p>
 <hr />
@@ -669,7 +669,8 @@ Una vez nos hemos asegurado de que no se ha aplicado configuración manual de IP
 <hr />
 <p><img alt="img02" src="../tema01/img11.png" />
 En la captura, podemos revisar los clientes DHCP activos, tras ejecutar el comando:</p>
-<p>ip/dhcp-client/print</p>
+<pre><code>ip/dhcp-client/print
+</code></pre>
 <p>En mi caso, el servidor DHCP de la red NAT ha asignado la IP 192.168.122.61/24, a la interfaz. Esta información la podemos obtener también desde el listado de IPs asignadas a interfaces, con el comando:</p>
 <p>ip/addresses/print</p>
 <p><img alt="img02" src="../tema01/img12.png" /></p>

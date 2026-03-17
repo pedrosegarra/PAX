@@ -51,7 +51,7 @@ ip/dhcp-client/add interface=ether1 disable=no
 ---
 ![img02](tema01/img11.png)
 En la captura, podemos revisar los clientes DHCP activos, tras ejecutar el comando:
-```
+```bash
 ip/dhcp-client/print
 ```
 En mi caso, el servidor DHCP de la red NAT ha asignado la IP 192.168.122.61/24, a la interfaz. Esta información la podemos obtener también desde el listado de IPs asignadas a interfaces, con el comando:
