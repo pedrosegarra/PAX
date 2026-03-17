@@ -1,8 +1,5 @@
 # Conectando a RouterOS para su administración.
 
-![img01](img/tema3/img01.png)
-
----
 
 # Índice
 
@@ -72,13 +69,17 @@ En los entornos virtualizados, esta conexión tiene su equivalencia directa en l
 
 En un router recién instalado, el acceso inicial se realiza con el usuario admin y la contraseña en blanco. Tras introducir el usuario, basta con pulsar Enter cuando se solicite la contraseña.
 
+![img03](img/tema3/img03.png)
+
 Durante este primer acceso, el sistema mostrará un mensaje preguntando si se desea visualizar la licencia de software. Es posible leerla pulsando y, o bien continuar directamente con el proceso pulsando n para omitir este paso.
 
-![img03](img/tema3/img03.png)
+
 
 ![img04](img/tema3/img04.png)
 
 A continuación, RouterOS solicitará que se establezca una nueva contraseña para el usuario admin. En este momento se debe introducir la contraseña de administración que se vaya a utilizar a partir de ahora. Este paso es obligatorio y marca el inicio de la configuración básica de seguridad del router.
+
+![img05](img/tema3/img05.png)
 
 Dependiendo de la configuración inicial aplicada por RouterOS, es posible que el cliente DHCP esté activo en el primer puerto de red, lo que permitiría que el router obtenga automáticamente una dirección IP. Para comprobarlo, se puede utilizar el siguiente comando:
 
@@ -86,7 +87,7 @@ Dependiendo de la configuración inicial aplicada por RouterOS, es posible que e
 
 Este comando mostrará las direcciones IP asignadas a las distintas interfaces del router.
 
-![img05](img/tema3/img05.png)
+![img06](img/tema3/img06.png)
 
 ---
 
@@ -96,15 +97,19 @@ WinBox es la aplicación gráfica oficial de MikroTik para la administración de
 
 La aplicación WinBox puede descargarse desde la página oficial de MikroTik (https://mikrotik.com/download/winbox). En este caso se utilizará la versión para Windows, aunque existen alternativas para otros sistemas operativos.
 
+![img07](img/tema3/img07.png)
+
 Al abrir WinBox, la aplicación escanea automáticamente la red en busca de dispositivos MikroTik accesibles y muestra una lista con los routers detectados. Esta detección no depende únicamente de direcciones IP: WinBox es capaz de localizar dispositivos utilizando su dirección MAC, lo que resulta especialmente útil cuando el router todavía no tiene una configuración de red definida.
 
-![img06](img/tema3/img06.png)
+![img08](img/tema3/img08.png)
 
 En la ventana principal se muestran las direcciones MAC detectadas y, cuando están disponibles, las direcciones IPv4 e IPv6 asociadas a cada una de ellas. Para conectar con un dispositivo, basta con seleccionar la fila correspondiente y completar los campos de usuario y contraseña.
 
-![img07](img/tema3/img07.png)
+![img09](img/tema3/img09.png)
 
 Si las credenciales son correctas, WinBox establecerá la conexión con el router y mostrará la interfaz de administración, desde la que será posible acceder a todas las opciones de configuración de RouterOS. A partir de este momento, el router queda plenamente accesible para continuar con las tareas del curso.
+
+![img10](img/tema3/img10.png)
 
 ---
 
@@ -116,11 +121,11 @@ Para poder utilizar WebFig es necesario que el router tenga conectividad IP con 
 
 A diferencia de WinBox, WebFig no permite el acceso por dirección MAC, por lo que resulta imprescindible que el router tenga al menos una dirección IP configurada y accesible. Una vez introducida la IP del router en la barra de direcciones del navegador, el sistema solicitará el usuario y la contraseña.
 
-![img08](img/tema3/img08.png)
+
 
 Si las credenciales son correctas, se cargará la interfaz web de RouterOS, desde la que será posible acceder a las distintas opciones de configuración del router y continuar con las prácticas del curso.
 
-![img09](img/tema3/img09.png)
+
 
 Si los datos son correctos, la aplicación conectará con la interfaz web del router, y nos mostrará sus opciones de configuración.
 
@@ -134,7 +139,7 @@ Desde el punto de vista formativo, el uso de SSH tiene un valor añadido evident
 
 Para poder acceder a RouterOS utilizando un cliente SSH es necesario que el router tenga conectividad IP con el equipo desde el que se realiza la conexión, conocer la dirección IP asignada a alguna de sus interfaces y disponer de un cliente SSH actualizado.
 
-![img10](img/tema3/img10.png)
+
 
 Una vez introducidos los datos de conexión correctos, el cliente establecerá la sesión con el servidor SSH del router y permitirá ejecutar los comandos necesarios para continuar con la configuración y administración del sistema.
 
