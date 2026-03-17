@@ -98,31 +98,31 @@ De vuelta a la ventana principal del asistente, pulsamos de nuevo el botón fina
 
 Dado que hemos creado una plantilla con un disco en blanco, necesitaremos inicializar el disco. Para ello, debemos configurar la plantilla con la imagen ISO descargada, para proceder a la instalación. En primer lugar, entramos en la edición de la plantilla, pulsando el botón Edit. 
 
-
+![Boot CD](img/tema2/13_boot_cd.png)
 
 Marcamos como opción principal de arranque la unidad de CD.
 
-![Boot CD](img/tema2/13_boot_cd.png)
+![Icono](img/tema2/14_icono.png)
 
 También podemos etiquetar la plantilla como un router, y asignarle el icono correspondiente.
 
-![Icono](img/tema2/14_icono.png)
+![ISO](img/tema2/15_iso.png)
 
 Seleccionamos la ISO como unidad de CD.
 
-![ISO](img/tema2/15_iso.png)
+![Interfaces](img/tema2/16_interfaces.png)
 
 Configuramos la plantilla para que utilice 4 interfaces de red.
 
-![Interfaces](img/tema2/16_interfaces.png)
+![Linked VM](img/tema2/17_linked.png)
 
 Y desmarcamos la opción “Use as a linked base VM”, para que los cambios aplicados durante la primera ejecución (la instalación) se persistan en el disco de la plantilla original.
 
-![Linked VM](img/tema2/17_linked.png)
+![Plantilla lista](img/tema2/18_lista.png)
 
 Pulsamos el botón Aceptar y tendremos lista nuestra plantilla para reutilizar en todos los escenarios que configuremos.
 
-![Plantilla lista](img/tema2/18_lista.png)
+
 
 ---
 
