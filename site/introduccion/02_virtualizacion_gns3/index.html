@@ -9,18 +9,22 @@
       
       
       
+        <link rel="prev" href="../01_mikrotik_routeros/">
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
+        <link rel="next" href="../03_acceso_routeros/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
     
     
       
-        <title>Virtualización de RouterOS con GNS3. - Curso MikroTik</title>
+        <title>2. Virtualización de RouterOS con GNS3 - Curso MikroTik</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
       
       
 
@@ -39,7 +43,7 @@
       
     
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -74,7 +78,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="Curso MikroTik" class="md-header__button md-logo" aria-label="Curso MikroTik" data-md-component="logo">
+    <a href="../.." title="Curso MikroTik" class="md-header__button md-logo" aria-label="Curso MikroTik" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -94,7 +98,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Virtualización de RouterOS con GNS3.
+              2. Virtualización de RouterOS con GNS3
             
           </span>
         </div>
@@ -172,7 +176,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Curso MikroTik" class="md-nav__button md-logo" aria-label="Curso MikroTik" data-md-component="logo">
+    <a href="../.." title="Curso MikroTik" class="md-nav__button md-logo" aria-label="Curso MikroTik" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -190,7 +194,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -209,18 +213,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
@@ -236,7 +242,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Bloque 1. Introducción
@@ -250,7 +256,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../introduccion/01_mikrotik_routeros.md" class="md-nav__link">
+      <a href="../01_mikrotik_routeros/" class="md-nav__link">
         
   
   
@@ -270,10 +276,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../introduccion/02_virtualizacion_gns3.md" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -284,6 +299,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -296,7 +312,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../introduccion/03_acceso_routeros.md" class="md-nav__link">
+      <a href="../03_acceso_routeros/" class="md-nav__link">
         
   
   
@@ -364,7 +380,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../bloque_02/01_tema_nuevo.md" class="md-nav__link">
+      <a href="../../bloque_02/01_tema_nuevo.md" class="md-nav__link">
         
   
   
@@ -387,7 +403,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../bloque_02/02_tema_nuevo.md" class="md-nav__link">
+      <a href="../../bloque_02/02_tema_nuevo.md" class="md-nav__link">
         
   
   
@@ -471,45 +487,45 @@ Modificación de la plantilla base.  </p>
 <p>• Garantizamos que el software es auténtico y actualizado.<br />
 • Evitamos problemas de seguridad derivados de repositorios no oficiales.  </p>
 <p>Para ello, accedemos a la URL https://mikrotik.com/download, seleccionamos la arquitectura X86, y descargamos la última versión de la imagen ISO correspondiente (durante la redacción de este manual, descargamos la versión 7.20.6).</p>
-<p><img alt="Descarga RouterOS" src="../img/tema2/01_descarga.png" /></p>
+<p><img alt="Descarga RouterOS" src="img/tema2/01_descarga.png" /></p>
 <hr />
 <h2 id="creacion-de-la-plantilla-routeros-7206">Creación de la plantilla RouterOS-7.20.6</h2>
 <p>En este punto vamos a dar un paso especialmente importante desde el punto de vista práctico y organizativo: la creación de una plantilla reutilizable de RouterOS. Trabajar con plantillas nos permite ahorrar tiempo, evitar configuraciones repetitivas y mantener coherencia entre los distintos laboratorios que se vayan creando.</p>
 <p>Al abrir GNS3 por primera vez, nos solicitará crear un nuevo proyecto. Pulsaremos el botón Cancelar.</p>
-<p><img alt="Cancelar proyecto" src="../img/tema2/02_cancelar.png" /></p>
+<p><img alt="Cancelar proyecto" src="img/tema2/02_cancelar.png" /></p>
 <p>Accede a la configuración de GNS, a través de la opción Preferences del menú Edit. </p>
-<p><img alt="Preferences" src="../img/tema2/03_preferences.png" /></p>
+<p><img alt="Preferences" src="img/tema2/03_preferences.png" /></p>
 <p>En el menú lateral, selecciona la opción QEMU VMs dentro de QEMU, y pulsa la opción New, para crear una nueva máquina virtual.</p>
-<p><img alt="QEMU VMs" src="../img/tema2/04_qemu.png" /></p>
+<p><img alt="QEMU VMs" src="img/tema2/04_qemu.png" /></p>
 <p>Se abrirá un asistente, para generar la nueva plantilla. En el primer paso debemos introducir el nombre de la plantilla. Para identificar la versión del router, utilizaremos en el nombre la versión de RouterOS utilizada (RouterOS-7.20.6), y pulsaremos el botón Siguiente.</p>
-<p><img alt="Nombre plantilla" src="../img/tema2/05_nombre.png" /></p>
+<p><img alt="Nombre plantilla" src="img/tema2/05_nombre.png" /></p>
 <p>En la siguiente ventana del asistente, dejaremos los parámetros por defecto, y pulsaremos el botón siguiente.</p>
-<p><img alt="Parametros" src="../img/tema2/06_parametros.png" /></p>
+<p><img alt="Parametros" src="img/tema2/06_parametros.png" /></p>
 <p>En la siguiente ventana del asistente, seleccionaremos como consola vnc, y pulsaremos el botón siguiente.</p>
-<p><img alt="VNC" src="../img/tema2/07_vnc.png" /></p>
+<p><img alt="VNC" src="img/tema2/07_vnc.png" /></p>
 <p>En la siguiente ventana del asistente, marcamos la opción New Image.</p>
-<p><img alt="New Image" src="../img/tema2/08_new_image.png" /></p>
+<p><img alt="New Image" src="img/tema2/08_new_image.png" /></p>
 <p>Pulsamos el botón Create, y en el asistente, dejamos los parámetros por defecto.</p>
-<p><img alt="Create" src="../img/tema2/09_create.png" /></p>
+<p><img alt="Create" src="img/tema2/09_create.png" /></p>
 <p>Pulsamos el botón siguiente, y volvemos a dejar los parámetros por defecto.</p>
-<p><img alt="Parametros disco" src="../img/tema2/10_disco.png" /></p>
+<p><img alt="Parametros disco" src="img/tema2/10_disco.png" /></p>
 <p>Indicamos el nombre que queremos dar al disco de nuestro router plantilla, y pulsamos el botón finaliza. </p>
-<p><img alt="Nombre disco" src="../img/tema2/11_nombre_disco.png" /></p>
+<p><img alt="Nombre disco" src="img/tema2/11_nombre_disco.png" /></p>
 <p>De vuelta a la ventana principal del asistente, pulsamos de nuevo el botón finalizar.</p>
-<p><img alt="Editar plantilla" src="../img/tema2/12_edit.png" /></p>
+<p><img alt="Editar plantilla" src="img/tema2/12_edit.png" /></p>
 <hr />
 <p>Dado que hemos creado una plantilla con un disco en blanco, necesitaremos inicializar el disco. Para ello, debemos configurar la plantilla con la imagen ISO descargada, para proceder a la instalación. En primer lugar, entramos en la edición de la plantilla, pulsando el botón Edit. </p>
-<p><img alt="Boot CD" src="../img/tema2/13_boot_cd.png" /></p>
+<p><img alt="Boot CD" src="img/tema2/13_boot_cd.png" /></p>
 <p>Marcamos como opción principal de arranque la unidad de CD.</p>
-<p><img alt="Icono" src="../img/tema2/14_icono.png" /></p>
+<p><img alt="Icono" src="img/tema2/14_icono.png" /></p>
 <p>También podemos etiquetar la plantilla como un router, y asignarle el icono correspondiente.</p>
-<p><img alt="ISO" src="../img/tema2/15_iso.png" /></p>
+<p><img alt="ISO" src="img/tema2/15_iso.png" /></p>
 <p>Seleccionamos la ISO como unidad de CD.</p>
-<p><img alt="Interfaces" src="../img/tema2/16_interfaces.png" /></p>
+<p><img alt="Interfaces" src="img/tema2/16_interfaces.png" /></p>
 <p>Configuramos la plantilla para que utilice 4 interfaces de red.</p>
-<p><img alt="Linked VM" src="../img/tema2/17_linked.png" /></p>
+<p><img alt="Linked VM" src="img/tema2/17_linked.png" /></p>
 <p>Y desmarcamos la opción “Use as a linked base VM”, para que los cambios aplicados durante la primera ejecución (la instalación) se persistan en el disco de la plantilla original.</p>
-<p><img alt="Plantilla lista" src="../img/tema2/18_lista.png" /></p>
+<p><img alt="Plantilla lista" src="img/tema2/18_lista.png" /></p>
 <p>Pulsamos el botón Aceptar y tendremos lista nuestra plantilla para reutilizar en todos los escenarios que configuremos.</p>
 <hr />
 <p>** Asegúrate de tener un cliente VNC instalado en el sistema, para poder acceder a la consola del Router, durante la ejecución de los proyectos. Para instalar un cliente VNC desde consola, en un sistema basado en Ubuntu, puedes ejecutar: </p>
@@ -520,33 +536,33 @@ sudo apt install tigervnc-viewer;  </p>
 <p>Para crear nuestro primer proyecto, accedemos al menú File, de GNS3, y pulsamos la opción New blank Project.</p>
 <p><img alt="Nuevo proyecto" src="img/tema2/19_new_project.png" /></p>
 <p>A continuación, rellenamos el nombre del proyecto. Para el ejemplo dado, utilizaremos el nombre “prueba-mikrotik-001”, y pulsamos el botón “Aceptar”.</p>
-<p><img alt="Nombre proyecto" src="../img/tema2/20_nombre.png" /></p>
+<p><img alt="Nombre proyecto" src="img/tema2/20_nombre.png" /></p>
 <p>GNS3 nos mostrará un escenario vacío, al que podremos ir añadiendo nuestros routers y equipos, para simular un entorno de red. </p>
 <hr />
 <h1 id="configuracion-del-escenario">Configuración del escenario.</h1>
 <p>Vamos a arrastrar nuestro Router al escenario, accediendo al menú Routers, y arrastrándolo nuestro RouterOS al escenario.</p>
-<p><img alt="Router" src="../img/tema2/21_router.png" /></p>
+<p><img alt="Router" src="img/tema2/21_router.png" /></p>
 <p>A continuación, vamos a arrastrar un elemento NAT al escenario, para conectar el router a la red física. </p>
-<p><img alt="NAT" src="../img/tema2/22_nat.png" /></p>
+<p><img alt="NAT" src="img/tema2/22_nat.png" /></p>
 <p>Por último, conectaremos el puerto 0 del router al puerto 0 del elemento Cloud, utilizando un cable.</p>
-<p><img alt="Conexion" src="../img/tema2/23_conexion.png" /></p>
+<p><img alt="Conexion" src="img/tema2/23_conexion.png" /></p>
 <p>Nuestro escenario está listo para probar.</p>
 <hr />
 <h1 id="arranque-del-dispositivo">Arranque del dispositivo.</h1>
 <p>Para arrancar el escenario, pulsamos el botón PLAY de GNS3. La aplicación nos preguntará si queremos arrancar todos los dispositivos. Le indicamos que sí, y esperamos a que finalice el arranque.</p>
-<p><img alt="Play" src="../img/tema2/24_play.png" /></p>
+<p><img alt="Play" src="img/tema2/24_play.png" /></p>
 <p>En el caso de que no queramos encender todos los dispositivos, cuando tenemos un escenario más complejo, podemos pulsar el botón derecho del ratón sobre el elemento que queremos iniciar/parar/pausar, y seleccionar la opción correspondiente.</p>
-<p><img alt="Opciones" src="../img/tema2/25_opciones.png" /></p>
+<p><img alt="Opciones" src="img/tema2/25_opciones.png" /></p>
 <hr />
 <h1 id="conexion-a-la-consola">Conexión a la consola.</h1>
 <p>Para acceder a la consola de un dispositivo, debemos seleccionar el mismo, y pulsar el botón Console, de la barra de herramientas de GNS3.</p>
 <p>También podemos pulsar el botón derecho del ratón en el elemento al que queremos acceder, y seleccionar la opción Console, del menú desplegable.</p>
-<p><img alt="Console" src="../img/tema2/26_console.png" /></p>
+<p><img alt="Console" src="img/tema2/26_console.png" /></p>
 <p>En ambos casos, se nos mostrará un terminal o escritorio remoto, conectado y listo para interactuar con el elemento.</p>
 <hr />
 <h1 id="instalacion-de-routeros">Instalación de RouterOS.</h1>
 <p>Como vemos, durante el primer arranque, nos solicitará instalar el sistema operativo.</p>
-<p><img alt="Instalacion" src="../img/tema2/27_instalacion.png" /></p>
+<p><img alt="Instalacion" src="img/tema2/27_instalacion.png" /></p>
 <p>Para ello, podemos pulsar la siguiente secuencia de teclas:</p>
 <ul>
 <li>a (instalar todo)  </li>
@@ -555,31 +571,26 @@ sudo apt install tigervnc-viewer;  </p>
 <li>y (confirmamos la acción, para que inicie)  </li>
 </ul>
 <p>Se iniciará la instalación del sistema operativo RouterOS en la plantilla. Esperaremos hasta que nos indique que ha finalizado, y nos pida permiso para reiniciar.</p>
-<p><img alt="Proceso" src="../img/tema2/28_proceso.png" /></p>
+<p><img alt="Proceso" src="img/tema2/28_proceso.png" /></p>
 <p>Pulsamos “ENTER” para reiniciar el router. Dado que la plantilla está configurada para arrancar desde el CD, volverá a iniciarse la instalación. Detenemos la ejecución, pulsando sobre el botón STOP.</p>
 <hr />
 <h1 id="modificacion-de-la-plantilla-base">Modificación de la plantilla base.</h1>
 <p>Seleccionamos el router, en el escenario.</p>
-<p><img alt="Seleccion" src="../img/tema2/29_seleccion.png" /></p>
+<p><img alt="Seleccion" src="img/tema2/29_seleccion.png" /></p>
 <p>Y pulsamos la tecla Suprimir, para eliminarlo del proyecto. </p>
-<p><img alt="Eliminar" src="../img/tema2/30_eliminar.png" /></p>
+<p><img alt="Eliminar" src="img/tema2/30_eliminar.png" /></p>
 <p>Tras eliminarlo, vamos a volver a modificar la plantilla, entrando en el menú Edit → Preferences.</p>
-<p><img alt="Preferences" src="../img/tema2/31_preferences.png" /></p>
+<p><img alt="Preferences" src="img/tema2/31_preferences.png" /></p>
 <p>Seleccionamos la plantilla, y pulsamos el botón editar.</p>
-<p><img alt="Editar" src="../img/tema2/32_editar.png" /></p>
+<p><img alt="Editar" src="img/tema2/32_editar.png" /></p>
 <p>Modificamos la prioridad de arranque, para indicar que arranque desde el disco duro.</p>
-<p><img alt="Boot disco" src="../img/tema2/33_boot.png" /></p>
+<p><img alt="Boot disco" src="img/tema2/33_boot.png" /></p>
 <p>Eliminamos la imagen ISO del CD.</p>
 <p><img alt="Eliminar ISO" src="img/tema2/34_iso.png" /></p>
 <p>Y volvemos a marcar la opción “Use as a linked base VM”, para que se cree una copia del disco para cada instancia de la plantilla.</p>
 <p><img alt="Linked final" src="img/tema2/35_final.png" /></p>
 <hr />
-<p>Nuestra plantilla está lista para ser utilizada en todos los proyectos, con una instalación limpia.</p>
-<p>Podemos realizar la prueba, arrastrándola de nuevo al proyecto e iniciando el router, que nos solicitará las credenciales de login.</p>
-<p>Entramos con usuario admin, sin contraseña (pulsando intro cuando nos solicite la contraseña).</p>
-<p>El router nos solicitará si deseamos leer la licencia de software. Podemos leerla, o indicarle que no, pulsando la tecla ‘n’.</p>
-<p>Tras este paso, nos solicitará la nueva contraseña de configuración (que deberemos recordar, para poder administrar el router).</p>
-<p>Ya disponemos de un router limpio sobre el que trabajar en los próximos tutoriales.</p>
+<p>Nuestra planti</p>
 
 
 
@@ -628,10 +639,10 @@ sudo apt install tigervnc-viewer;  </p>
     
     
       
-      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.92b07e13.min.js"></script>
+      <script src="../../assets/javascripts/bundle.92b07e13.min.js"></script>
       
     
   </body>

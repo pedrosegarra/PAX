@@ -42,7 +42,7 @@ La descarga debe realizarse siempre desde la web oficial de MikroTik, por dos mo
 
 Para ello, accedemos a la URL https://mikrotik.com/download, seleccionamos la arquitectura X86, y descargamos la última versión de la imagen ISO correspondiente (durante la redacción de este manual, descargamos la versión 7.20.6).
 
-![Descarga RouterOS](img/tema2/01_descarga.png)
+![Descarga RouterOS](../img/tema2/01_descarga.png)
 
 ---
 
@@ -52,73 +52,73 @@ En este punto vamos a dar un paso especialmente importante desde el punto de vis
 
 Al abrir GNS3 por primera vez, nos solicitará crear un nuevo proyecto. Pulsaremos el botón Cancelar.
 
-![Cancelar proyecto](img/tema2/02_cancelar.png)
+![Cancelar proyecto](../img/tema2/02_cancelar.png)
 
 Accede a la configuración de GNS, a través de la opción Preferences del menú Edit. 
 
-![Preferences](img/tema2/03_preferences.png)
+![Preferences](../img/tema2/03_preferences.png)
 
 En el menú lateral, selecciona la opción QEMU VMs dentro de QEMU, y pulsa la opción New, para crear una nueva máquina virtual.
 
-![QEMU VMs](img/tema2/04_qemu.png)
+![QEMU VMs](../img/tema2/04_qemu.png)
 
 Se abrirá un asistente, para generar la nueva plantilla. En el primer paso debemos introducir el nombre de la plantilla. Para identificar la versión del router, utilizaremos en el nombre la versión de RouterOS utilizada (RouterOS-7.20.6), y pulsaremos el botón Siguiente.
 
-![Nombre plantilla](img/tema2/05_nombre.png)
+![Nombre plantilla](../img/tema2/05_nombre.png)
 
 En la siguiente ventana del asistente, dejaremos los parámetros por defecto, y pulsaremos el botón siguiente.
 
-![Parametros](img/tema2/06_parametros.png)
+![Parametros](../img/tema2/06_parametros.png)
 
 En la siguiente ventana del asistente, seleccionaremos como consola vnc, y pulsaremos el botón siguiente.
 
-![VNC](img/tema2/07_vnc.png)
+![VNC](../img/tema2/07_vnc.png)
 
 En la siguiente ventana del asistente, marcamos la opción New Image.
 
-![New Image](img/tema2/08_new_image.png)
+![New Image](../img/tema2/08_new_image.png)
 
 Pulsamos el botón Create, y en el asistente, dejamos los parámetros por defecto.
 
-![Create](img/tema2/09_create.png)
+![Create](../img/tema2/09_create.png)
 
 Pulsamos el botón siguiente, y volvemos a dejar los parámetros por defecto.
 
-![Parametros disco](img/tema2/10_disco.png)
+![Parametros disco](../img/tema2/10_disco.png)
 
 Indicamos el nombre que queremos dar al disco de nuestro router plantilla, y pulsamos el botón finaliza. 
 
-![Nombre disco](img/tema2/11_nombre_disco.png)
+![Nombre disco](../img/tema2/11_nombre_disco.png)
 
 De vuelta a la ventana principal del asistente, pulsamos de nuevo el botón finalizar.
 
-![Editar plantilla](img/tema2/12_edit.png)
+![Editar plantilla](../img/tema2/12_edit.png)
 
 ---
 
 Dado que hemos creado una plantilla con un disco en blanco, necesitaremos inicializar el disco. Para ello, debemos configurar la plantilla con la imagen ISO descargada, para proceder a la instalación. En primer lugar, entramos en la edición de la plantilla, pulsando el botón Edit. 
 
-![Boot CD](img/tema2/13_boot_cd.png)
+![Boot CD](../img/tema2/13_boot_cd.png)
 
 Marcamos como opción principal de arranque la unidad de CD.
 
-![Icono](img/tema2/14_icono.png)
+![Icono](../img/tema2/14_icono.png)
 
 También podemos etiquetar la plantilla como un router, y asignarle el icono correspondiente.
 
-![ISO](img/tema2/15_iso.png)
+![ISO](../img/tema2/15_iso.png)
 
 Seleccionamos la ISO como unidad de CD.
 
-![Interfaces](img/tema2/16_interfaces.png)
+![Interfaces](../img/tema2/16_interfaces.png)
 
 Configuramos la plantilla para que utilice 4 interfaces de red.
 
-![Linked VM](img/tema2/17_linked.png)
+![Linked VM](../img/tema2/17_linked.png)
 
 Y desmarcamos la opción “Use as a linked base VM”, para que los cambios aplicados durante la primera ejecución (la instalación) se persistan en el disco de la plantilla original.
 
-![Plantilla lista](img/tema2/18_lista.png)
+![Plantilla lista](../img/tema2/18_lista.png)
 
 Pulsamos el botón Aceptar y tendremos lista nuestra plantilla para reutilizar en todos los escenarios que configuremos.
 
@@ -137,11 +137,11 @@ sudo apt install tigervnc-viewer;
 
 Para crear nuestro primer proyecto, accedemos al menú File, de GNS3, y pulsamos la opción New blank Project.
 
-![Nuevo proyecto](img/tema2/19_new_project.png)
+![Nuevo proyecto](../img/tema2/19_new_project.png)
 
 A continuación, rellenamos el nombre del proyecto. Para el ejemplo dado, utilizaremos el nombre “prueba-mikrotik-001”, y pulsamos el botón “Aceptar”.
 
-![Nombre proyecto](img/tema2/20_nombre.png)
+![Nombre proyecto](../img/tema2/20_nombre.png)
 
 GNS3 nos mostrará un escenario vacío, al que podremos ir añadiendo nuestros routers y equipos, para simular un entorno de red. 
 
@@ -151,15 +151,15 @@ GNS3 nos mostrará un escenario vacío, al que podremos ir añadiendo nuestros r
 
 Vamos a arrastrar nuestro Router al escenario, accediendo al menú Routers, y arrastrándolo nuestro RouterOS al escenario.
 
-![Router](img/tema2/21_router.png)
+![Router](../img/tema2/21_router.png)
 
 A continuación, vamos a arrastrar un elemento NAT al escenario, para conectar el router a la red física. 
 
-![NAT](img/tema2/22_nat.png)
+![NAT](../img/tema2/22_nat.png)
 
 Por último, conectaremos el puerto 0 del router al puerto 0 del elemento Cloud, utilizando un cable.
 
-![Conexion](img/tema2/23_conexion.png)
+![Conexion](../img/tema2/23_conexion.png)
 
 Nuestro escenario está listo para probar.
 
@@ -169,11 +169,11 @@ Nuestro escenario está listo para probar.
 
 Para arrancar el escenario, pulsamos el botón PLAY de GNS3. La aplicación nos preguntará si queremos arrancar todos los dispositivos. Le indicamos que sí, y esperamos a que finalice el arranque.
 
-![Play](img/tema2/24_play.png)
+![Play](../img/tema2/24_play.png)
 
 En el caso de que no queramos encender todos los dispositivos, cuando tenemos un escenario más complejo, podemos pulsar el botón derecho del ratón sobre el elemento que queremos iniciar/parar/pausar, y seleccionar la opción correspondiente.
 
-![Opciones](img/tema2/25_opciones.png)
+![Opciones](../img/tema2/25_opciones.png)
 
 ---
 
@@ -183,7 +183,7 @@ Para acceder a la consola de un dispositivo, debemos seleccionar el mismo, y pul
 
 También podemos pulsar el botón derecho del ratón en el elemento al que queremos acceder, y seleccionar la opción Console, del menú desplegable.
 
-![Console](img/tema2/26_console.png)
+![Console](../img/tema2/26_console.png)
 
 En ambos casos, se nos mostrará un terminal o escritorio remoto, conectado y listo para interactuar con el elemento.
 
@@ -193,7 +193,7 @@ En ambos casos, se nos mostrará un terminal o escritorio remoto, conectado y li
 
 Como vemos, durante el primer arranque, nos solicitará instalar el sistema operativo.
 
-![Instalacion](img/tema2/27_instalacion.png)
+![Instalacion](../img/tema2/27_instalacion.png)
 
 Para ello, podemos pulsar la siguiente secuencia de teclas:
 
@@ -204,7 +204,7 @@ Para ello, podemos pulsar la siguiente secuencia de teclas:
 
 Se iniciará la instalación del sistema operativo RouterOS en la plantilla. Esperaremos hasta que nos indique que ha finalizado, y nos pida permiso para reiniciar.
 
-![Proceso](img/tema2/28_proceso.png)
+![Proceso](../img/tema2/28_proceso.png)
 
 Pulsamos “ENTER” para reiniciar el router. Dado que la plantilla está configurada para arrancar desde el CD, volverá a iniciarse la instalación. Detenemos la ejecución, pulsando sobre el botón STOP.
 
@@ -214,32 +214,32 @@ Pulsamos “ENTER” para reiniciar el router. Dado que la plantilla está confi
 
 Seleccionamos el router, en el escenario.
 
-![Seleccion](img/tema2/29_seleccion.png)
+![Seleccion](../img/tema2/29_seleccion.png)
 
 Y pulsamos la tecla Suprimir, para eliminarlo del proyecto. 
 
-![Eliminar](img/tema2/30_eliminar.png)
+![Eliminar](../img/tema2/30_eliminar.png)
 
 Tras eliminarlo, vamos a volver a modificar la plantilla, entrando en el menú Edit → Preferences.
 
-![Preferences](img/tema2/31_preferences.png)
+![Preferences](../img/tema2/31_preferences.png)
 
 Seleccionamos la plantilla, y pulsamos el botón editar.
 
-![Editar](img/tema2/32_editar.png)
+![Editar](../img/tema2/32_editar.png)
 
 Modificamos la prioridad de arranque, para indicar que arranque desde el disco duro.
 
-![Boot disco](img/tema2/33_boot.png)
+![Boot disco](../img/tema2/33_boot.png)
 
 Eliminamos la imagen ISO del CD.
 
-![Eliminar ISO](img/tema2/34_iso.png)
+![Eliminar ISO](../img/tema2/34_iso.png)
 
 Y volvemos a marcar la opción “Use as a linked base VM”, para que se cree una copia del disco para cada instancia de la plantilla.
 
-![Linked final](img/tema2/35_final.png)
+![Linked final](../img/tema2/35_final.png)
 
 ---
 
-Nuestra planti
+

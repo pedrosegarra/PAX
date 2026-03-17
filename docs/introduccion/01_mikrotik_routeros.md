@@ -36,25 +36,25 @@ En el aula, esta aproximación permite romper con la idea de la red como algo ab
 
 Una vez comprendida la filosofía general de MikroTik, el siguiente paso natural es observar cómo esa forma de entender las redes se concreta en dispositivos reales. MikroTik no trabaja con un único tipo de producto, sino con un conjunto amplio de equipos diseñados para adaptarse a contextos muy diferentes, tanto educativos como profesionales.
 
-![Mikrotik hEX lite](img/tema1/hex_lite.png)
+![Mikrotik hEX lite](../img/tema1/hex_lite.png)
 
 Mikrotik hEX lite
 
 En su catálogo encontramos routers de pequeño tamaño, pensados para instalaciones sencillas o entornos de aprendizaje, así como dispositivos más robustos, preparados para funcionar de manera continua en redes de mayor envergadura. También existen equipos específicos para redes inalámbricas y dispositivos orientados a tareas de conmutación. A pesar de esta diversidad, todos ellos comparten una misma lógica de funcionamiento y una misma filosofía de diseño.
 
-![Mikrotik hAP lite TC](img/tema1/hap_lite_tc.png)
+![Mikrotik hAP lite TC](../img/tema1/hap_lite_tc.png)
 
 Mikrotik hAP lite TC
 
 Este aspecto es especialmente relevante desde un punto de vista formativo. No se trata de aprender a manejar un modelo concreto, sino de familiarizarse con un ecosistema coherente, en el que los conocimientos adquiridos pueden trasladarse de un dispositivo a otro sin empezar de cero. El profesorado y el alumnado trabajan siempre dentro de un mismo marco conceptual, lo que facilita un aprendizaje progresivo y sólido.
 
-![Mikrotik CRS328](img/tema1/crs328.png)
+![Mikrotik CRS328](../img/tema1/crs328.png)
 
 Mikrotik CRS328-24P-4S+RM
 
 Otro rasgo característico del ecosistema MikroTik es que no existe una frontera clara entre dispositivos “básicos” y “avanzados” en cuanto a la forma de trabajar. Las diferencias se encuentran principalmente en las prestaciones del hardware, pero no en la manera de entender la red. Esto permite que un mismo equipo pueda utilizarse inicialmente para ilustrar conceptos sencillos y, más adelante, para analizar situaciones más complejas, sin cambiar de herramienta ni de entorno.
 
-![Mikrotik Wireless Wire](img/tema1/wireless_wire.png)
+![Mikrotik Wireless Wire](../img/tema1/wireless_wire.png)
 
 MIKROTIK WIRELESS WIRE
 
