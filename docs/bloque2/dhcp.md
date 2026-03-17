@@ -3,7 +3,7 @@
 ## Índice
 
 Introducción  
-Ejemplo 2 — Configuración de IP dinámica sobre una interfaz física  
+Ejemplo 1 — Configuración de IP dinámica sobre una interfaz física  
 Eliminando la configuración aplicada  
 Eliminación del cliente DHCP  
 
@@ -51,9 +51,9 @@ ip/dhcp-client/add interface=ether1 disable=no
 ---
 ![img02](tema01/img11.png)
 En la captura, podemos revisar los clientes DHCP activos, tras ejecutar el comando:
-
+```
 ip/dhcp-client/print
-
+```
 En mi caso, el servidor DHCP de la red NAT ha asignado la IP 192.168.122.61/24, a la interfaz. Esta información la podemos obtener también desde el listado de IPs asignadas a interfaces, con el comando:
 
 ip/addresses/print
