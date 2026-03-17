@@ -9,10 +9,8 @@
       
       
       
-        <link rel="prev" href="../../introduccion/03_acceso_routeros/">
+        <link rel="prev" href="../eliminar/">
       
-      
-        <link rel="next" href="../dhcp/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -20,7 +18,7 @@
     
     
       
-        <title>1. Tema nuevo - Curso MikroTik</title>
+        <title>2. Tema nuevo - Curso MikroTik</title>
       
     
     
@@ -62,7 +60,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#eliminacion-de-configuracion-por-defecto" class="md-skip">
+        <a href="#configuracion-de-ip-dinamica-sobre-interfaz-fisica" class="md-skip">
           Skip to content
         </a>
       
@@ -98,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              1. Tema nuevo
+              2. Tema nuevo
             
           </span>
         </div>
@@ -367,6 +365,29 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../eliminar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Tema nuevo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -379,31 +400,20 @@
         
       
       
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
   
   
   <span class="md-ellipsis">
-    1. Tema nuevo
+    2. Tema nuevo
     
   </span>
   
 
-      </a>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../dhcp/" class="md-nav__link">
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -414,6 +424,95 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Índice
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducción
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplo-1-configuracion-de-ip-dinamica-sobre-una-interfaz-fisica" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplo 1 — Configuración de IP dinámica sobre una interfaz física
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejemplo 1 — Configuración de IP dinámica sobre una interfaz física">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creacion-del-cliente-dhcp-en-la-interfaz-ether1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creación del cliente DHCP en la interfaz ether1
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#eliminando-la-configuracion-aplicada" class="md-nav__link">
+    <span class="md-ellipsis">
+      Eliminando la configuración aplicada
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#eliminacion-del-cliente-dhcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Eliminación del cliente DHCP
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -446,6 +545,83 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Índice
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducción
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplo-1-configuracion-de-ip-dinamica-sobre-una-interfaz-fisica" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplo 1 — Configuración de IP dinámica sobre una interfaz física
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejemplo 1 — Configuración de IP dinámica sobre una interfaz física">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creacion-del-cliente-dhcp-en-la-interfaz-ether1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creación del cliente DHCP en la interfaz ether1
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#eliminando-la-configuracion-aplicada" class="md-nav__link">
+    <span class="md-ellipsis">
+      Eliminando la configuración aplicada
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#eliminacion-del-cliente-dhcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Eliminación del cliente DHCP
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -460,47 +636,89 @@
 
 
 
-<h1 id="eliminacion-de-configuracion-por-defecto">Eliminación de configuración por defecto.</h1>
-<h1 id="indice">Índice</h1>
+<h1 id="configuracion-de-ip-dinamica-sobre-interfaz-fisica">Configuración de IP dinámica sobre interfaz física</h1>
+<h2 id="indice">Índice</h2>
 <p>Introducción<br />
-Punto de partida: un router con configuración de fábrica.<br />
-Usuario y contraseña por defecto en RouterOS<br />
-Eliminación de la configuración por defecto de RouterOS.  </p>
+Ejemplo 2 — Configuración de IP dinámica sobre una interfaz física<br />
+Eliminando la configuración aplicada<br />
+Eliminación del cliente DHCP  </p>
 <hr />
-<h1 id="introduccion">Introducción</h1>
-<p>A lo largo de esta semana trabajaremos sobre un escenario típico: la configuración de la interfaz que actuará como gateway, lo que en muchos entornos se denomina de forma informal puerta cero del router. Esta interfaz será la responsable de proporcionar conectividad hacia la red externa (ISP, red del centro, laboratorio, etc.), por lo que resulta un excelente punto de partida para introducir buenas prácticas.</p>
-<p>El recorrido que seguiremos está cuidadosamente ordenado para que el profesorado pueda comparar comportamientos y resultados. Pero antes de empezar, necesitamos dejar en blanco la configuración del router.</p>
+<h2 id="introduccion">Introducción</h2>
+<p>A lo largo de esta práctica trabajaremos sobre un escenario típico: la configuración de la interfaz que actuará como gateway, obteniendo su dirección IP de un servidor DHCP. Este enfoque es extremadamente habitual en entornos reales, donde el router no recibe una configuración fija, sino que depende de un proveedor externo (ISP, red corporativa, red del centro, laboratorio, etc.) para obtener sus parámetros de red.</p>
+<p>Este escenario servirá además como punto de partida de una serie de ordenado para que el profesorado pueda comparar comportamientos y resultados:</p>
+<p>• Primero, configuraremos direccionamiento IP dinámico, mediante un cliente DHCP sobre una interfaz física, el enfoque más simple y directo.<br />
+• A continuación, configuraremos esa misma interfaz con direccionamiento IP estático, analizando qué cambia.<br />
+• Después, daremos el salto conceptual al uso de bridges, aplicando una configuración de IP dinámica sobre un bridge, mediante la configuración de un cliente DHCP sobre el bridge.<br />
+• Finalmente, cerraremos con la configuración de un bridge con IP estática, que es el modelo más habitual en entornos reales con múltiples routers configurados en una red LAN.  </p>
+<p>Esta progresión permite observar cómo RouterOS separa claramente las capas de hardware, enlace y red, y prepara el terreno para configuraciones más avanzadas (LAN con múltiples puertos, firewall, etc.) que se abordarán más adelante en el curso.</p>
 <hr />
-<h1 id="punto-de-partida-un-router-con-configuracion-de-fabrica">Punto de partida: un router con configuración de fábrica.</h1>
-<p>Antes de comenzar cualquier configuración, es obligatorio partir de un entorno controlado y homogéneo. Uno de los errores más frecuentes en formación con MikroTik es trabajar sobre routers que arrastran configuraciones previas (por mínimas que sean), lo que provoca comportamientos inesperados y dificulta enormemente el aprendizaje.</p>
-<p>Para evitarlo, el ejemplo se desarrollará sobre un router con configuración de fábrica (recién instalado en VirtualBox, o recién creado desde la plantilla en GNS3).</p>
-<p>En mi caso, voy a crear un nuevo escenario en GNS3, en el que desplegaré un router desde la plantilla configurada en el tema anterior, que conectará la puerta 0 a un elemento Cloud.</p>
-<p>Para ello, seguiremos los siguientes pasos:</p>
-<p>• Abre GNS3.</p>
-<p>• Crea un proyecto nuevo.<br />
-  o Nombre recomendado: MikroTik-config-basica-interfaces</p>
-<p>• Arrastra al escenario un elemento NAT, un switch, un router Mikrotik y un appliance Firefox, y conectarlos como muestra la figura, conectando una boca del switch a la primera interfaz física del router.</p>
-<p><img alt="img02" src="../tema01/img02.png" /></p>
-<ul>
-<li>Utilizaremos esta configuración para aislar la red del router, y poder conectar a la consola de administración web con un navegador. </li>
-</ul>
-<p>• Arranca el escenario, pulsando el botón PLAY, y abre la consola del router, haciendo doble clic sobre el mismo.</p>
-<p><img alt="img03" src="../tema01/img03.png" /></p>
-<p><img alt="img04" src="../tema01/img04.png" /></p>
+<h2 id="ejemplo-1-configuracion-de-ip-dinamica-sobre-una-interfaz-fisica">Ejemplo 1 — Configuración de IP dinámica sobre una interfaz física</h2>
+<p>Este escenario aborda una configuración usual en entornos reales: la obtención automática de parámetros de red mediante DHCP, configurando una interfaz física del router como cliente DHCP.</p>
+<p>En este caso no se asigna ninguna dirección IP de forma manual. Será el servidor DHCP de la red quien proporcione al router:</p>
+<p>• Dirección IP<br />
+• Máscara de red<br />
+• Puerta de enlace por defecto<br />
+• (Opcionalmente) servidores DNS  </p>
+<p>El objetivo de esta práctica es configurar la primera interfaz del router (ether1) como cliente DHCP, comprobar qué información recibe automáticamente y verificar que el router puede comunicarse a través de dicha interfaz sin intervención manual en el direccionamiento IP.</p>
 <hr />
-<h1 id="usuario-y-contrasena-por-defecto-en-routeros">Usuario y contraseña por defecto en RouterOS</h1>
-<p>Como vimos la pasada semana, el usuario por defecto es admin y la contraseña no está establecida, por lo que no debe introducirse nada en ese campo. Cuando el sistema solicite la contraseña, bastará con pulsar Enter, dejando el campo en blanco.</p>
-<p>Estas credenciales se emplean únicamente para el primer acceso y permiten comprobar que el router funciona correctamente antes de comenzar con su configuración.</p>
-<p>Posteriormente, el router nos solicitará introducir una nueva contraseña para el usuario admin, que deberemos recordar para poder realizar las siguientes prácticas.</p>
-<p><img alt="img05" src="../tema01/img05.png" /></p>
-<p><img alt="img06" src="/tema01/img06.png" /></p>
+<h3 id="creacion-del-cliente-dhcp-en-la-interfaz-ether1">Creación del cliente DHCP en la interfaz ether1</h3>
+<p>En primer lugar, vamos a comprobar que la interfaz ether1 no tiene ninguna IP configurada manualmente, tal como hemos visto en los tutoriales anteriores:</p>
+<p><img alt="img02" src="../tema01/img10.png" />
+Una vez nos hemos asegurado de que no se ha aplicado configuración manual de IP sobre la interfaz ether1, podemos crear el cliente DHCP sobre dicha interfaz:</p>
+<p>ip/dhcp-client/add interface=ether1 disable=no</p>
 <hr />
-<h1 id="eliminacion-de-la-configuracion-por-defecto-de-routeros">Eliminación de la configuración por defecto de RouterOS.</h1>
-<p>Para eliminar la configuración aplicada, y volver a la configuración de fábrica, podemos ejecutar el siguiente comando:</p>
-<p>system reset-configuration no-defaults=yes</p>
-<p>El router reiniciará con la configuración de fábrica, sin añadir ninguna configuración por defecto.</p>
-<p><img alt="img07" src="../tema01/img07.png" /></p>
-<p><img alt="img08" src="../tema01/img08.png" /></p>
+<p><img alt="img02" src="../tema01/img11.png" />
+En la captura, podemos revisar los clientes DHCP activos, tras ejecutar el comando:</p>
+<p>ip/dhcp-client/print</p>
+<p>En mi caso, el servidor DHCP de la red NAT ha asignado la IP 192.168.122.61/24, a la interfaz. Esta información la podemos obtener también desde el listado de IPs asignadas a interfaces, con el comando:</p>
+<p>ip/addresses/print</p>
+<p><img alt="img02" src="../tema01/img12.png" /></p>
+<p>En la captura podemos observar el flag ‘D’, que indica que la asignación de IP se ha realizado de manera dinámica.</p>
+<p>Si queremos obtener información detallada de la configuración asignada por DHCP, podemos ejecutar el siguiente comando:</p>
+<p>ip/dhcp-client/print detail</p>
+<p><img alt="img02" src="../tema01/img13.png" /></p>
+<p>En la captura podemos observar, entre otros:</p>
+<p>• La IP asignada.</p>
+<p>[IMAGEN: consola DHCP]</p>
+<hr />
+<p>• La Puerta de enlace de la red<br />
+• La IP del servidor DHCP<br />
+• La IP del servidor DNS primario<br />
+• …  </p>
+<p>También podemos comprobar la configuración asignada por DHCP (IP, ruta por defecto y servidores DNS) ejecutando los siguientes comandos:</p>
+<p>ip/address/print<br />
+<img alt="img02" src="../tema01/img14.png" />
+ip/route/print<br />
+<img alt="img02" src="../tema01/img15.png" />
+ip/dns/print<br />
+<img alt="img02" src="../tema01/img16.png" /></p>
+<hr />
+<p>Por último, Podemos probar la conectividad de red, ejecutando un ping a Google.com, por ejemplo, mediante el comando:</p>
+<p>ping google.com</p>
+<p><img alt="img02" src="../tema01/img17.png" /></p>
+<p>También podemos acceder al router utilizando un navegador web de la máquina anfitrión, a través de la IP configurada:</p>
+<p><img alt="img02" src="../tema01/img18.png" /></p>
+<hr />
+<h2 id="eliminando-la-configuracion-aplicada">Eliminando la configuración aplicada</h2>
+<p>Antes de continuar, vamos a eliminar toda la configuración aplicada al router, para volver a tener un dispositivo limpio, sin necesidad de aplicar la configuración de fábrica.</p>
+<hr />
+<h2 id="eliminacion-del-cliente-dhcp">Eliminación del cliente DHCP</h2>
+<p>Para mostrar los clientes DHCP configurados, ejecutamos el siguiente comando:</p>
+<p>ip/dhcp-client/print</p>
+<h2 id="_1"><img alt="img02" src="../tema01/img19.png" /></h2>
+<p>Para eliminar el cliente DHCP ejecutamos el siguiente comando:</p>
+<p>ip/dhcp-client/remove &lt;&lt;índice&gt;&gt;</p>
+<p><img alt="img02" src="../tema01/img20.png" /></p>
+<hr />
+<p>Al eliminar el cliente DHCP, se eliminará toda la configuración aplicada por el mismo. Podemos comprobarlo ejecutando los siguientes comandos:</p>
+<p>ip/address/print<br />
+<img alt="img02" src="../tema01/img21.png" />
+ip/route/print<br />
+<img alt="img02" src="../tema01/img22.png" />
+ip/dns/print  </p>
+<p><img alt="img02" src="../tema01/img23.png" /></p>
+<hr />
+<p>Ya tenemos nuestro router sin configuraciones por defecto, preparado para la siguiente práctica.</p>
 
 
 
