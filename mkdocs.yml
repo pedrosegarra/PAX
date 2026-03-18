@@ -14,7 +14,8 @@ nav:
       - 3. Configuración de IP estática: bloque2/ip_estatica.md
       - 4. Configuración de bridge dinámico: bloque2/bridge_dinamico.md
       - 5. Configuración de bridge estático: bloque2/bridge_estatica.md
-      
+      - 6. Actividad práctica: bloque2/tarea_bloque2.md
+       
 markdown_extensions:
   - admonition
   - pymdownx.details
