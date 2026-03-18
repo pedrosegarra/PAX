@@ -45,9 +45,9 @@ En primer lugar, vamos a comprobar que la interfaz ether1 no tiene ninguna IP co
 
 ![img02](tema01/img10.png)
 Una vez nos hemos asegurado de que no se ha aplicado configuración manual de IP sobre la interfaz ether1, podemos crear el cliente DHCP sobre dicha interfaz:
-
+```sh
 ip/dhcp-client/add interface=ether1 disable=no
-
+```
 ---
 ![img02](tema01/img11.png)
 En la captura, podemos revisar los clientes DHCP activos, tras ejecutar el comando:
@@ -55,39 +55,39 @@ En la captura, podemos revisar los clientes DHCP activos, tras ejecutar el coman
 ip/dhcp-client/print
 ```
 En mi caso, el servidor DHCP de la red NAT ha asignado la IP 192.168.122.61/24, a la interfaz. Esta información la podemos obtener también desde el listado de IPs asignadas a interfaces, con el comando:
-
+```sh 
 ip/addresses/print
-
+```
 ![img02](tema01/img12.png)
 
 En la captura podemos observar el flag ‘D’, que indica que la asignación de IP se ha realizado de manera dinámica.
 
 Si queremos obtener información detallada de la configuración asignada por DHCP, podemos ejecutar el siguiente comando:
-
+```sh
 ip/dhcp-client/print detail
-
+```
 ![img02](tema01/img13.png)
 
 En la captura podemos observar, entre otros:
 
 • La IP asignada.
-
-[IMAGEN: consola DHCP]
-
----
-
 • La Puerta de enlace de la red  
 • La IP del servidor DHCP  
 • La IP del servidor DNS primario  
 • …  
 
 También podemos comprobar la configuración asignada por DHCP (IP, ruta por defecto y servidores DNS) ejecutando los siguientes comandos:
-
-ip/address/print  
+```sh
+ip/address/print
+```  
 ![img02](tema01/img14.png)
+```sh
 ip/route/print  
+```
 ![img02](tema01/img15.png)
-ip/dns/print  
+```sh
+ip/dns/print
+```  
 ![img02](tema01/img16.png)
 
 
@@ -116,15 +116,15 @@ Antes de continuar, vamos a eliminar toda la configuración aplicada al router, 
 ## Eliminación del cliente DHCP
 
 Para mostrar los clientes DHCP configurados, ejecutamos el siguiente comando:
-
+```sh
 ip/dhcp-client/print
-
+```
 
 ![img02](tema01/img19.png)
 ---
 
 Para eliminar el cliente DHCP ejecutamos el siguiente comando:
-```
+```sh
 ip/dhcp-client/remove <<índice>>
 ```
 ![img02](tema01/img20.png)
@@ -132,12 +132,17 @@ ip/dhcp-client/remove <<índice>>
 ---
 
 Al eliminar el cliente DHCP, se eliminará toda la configuración aplicada por el mismo. Podemos comprobarlo ejecutando los siguientes comandos:
-
+```sh
 ip/address/print  
+```
 ![img02](tema01/img21.png)
+```sh
 ip/route/print  
+```
 ![img02](tema01/img22.png)
+```sh
 ip/dns/print  
+```
 
 ![img02](tema01/img23.png)
 
