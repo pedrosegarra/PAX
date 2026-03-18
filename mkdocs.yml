@@ -10,6 +10,6 @@ nav:
       - 3. Conectando a RouterOS para su administración: introduccion/03_acceso_routeros.md
   - Bloque 2. Configuración básica:
       - 1. Eliminar configuración: bloque2/eliminar.md
-      - 2. Configuración de DHCP: bloque2/dhcp.md
+      - 2. Configuración de DHCP (ip dinámica): bloque2/dhcp.md
       - 3. Configuración de IP estática: bloque2/ip_estatica.md
       
