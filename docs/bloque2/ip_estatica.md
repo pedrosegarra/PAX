@@ -96,3 +96,174 @@ ip/address/remove <indice>
 
 
 Tras eliminar los elementos configurados, volvemos a tener un router en blanco, preparado para la próxima práctica.
+
+#Preguntas
+
+### 1. ¿Qué es una IP estática?
+<details>
+<summary>Ver respuesta</summary>
+
+Es una dirección IP configurada manualmente en un dispositivo y que no cambia automáticamente.
+
+</details>
+
+### 2. ¿En qué casos se utiliza IP estática?
+<details>
+<summary>Ver respuesta</summary>
+
+En servidores, routers, gateways o entornos donde se requiere una configuración fija y controlada.
+
+</details>
+
+### 3. ¿Qué diferencia hay entre IP estática y dinámica?
+<details>
+<summary>Ver respuesta</summary>
+
+La IP estática se configura manualmente, mientras que la dinámica se obtiene automáticamente mediante DHCP.
+
+</details>
+
+### 4. ¿Por qué un router puede necesitar IP estática?
+<details>
+<summary>Ver respuesta</summary>
+
+Para actuar como gateway estable dentro de una red y garantizar conectividad constante.
+
+</details>
+
+### 5. ¿Qué comando muestra las interfaces del router?
+<details>
+<summary>Ver respuesta</summary>
+
+interface/print
+
+</details>
+
+### 6. ¿Cómo se asigna una IP estática a una interfaz?
+<details>
+<summary>Ver respuesta</summary>
+
+ip/address/add address=192.168.122.61/24 interface=ether1
+
+</details>
+
+### 7. ¿Cómo se comprueba la IP configurada?
+<details>
+<summary>Ver respuesta</summary>
+
+ip/address/print
+
+</details>
+
+### 8. ¿Qué comando añade una ruta por defecto?
+<details>
+<summary>Ver respuesta</summary>
+
+ip/route/add dst-address=0.0.0.0/0 gateway=192.168.122.1
+
+</details>
+
+### 9. ¿Para qué sirve la ruta por defecto?
+<details>
+<summary>Ver respuesta</summary>
+
+Permite que el router envíe tráfico hacia redes externas (Internet).
+
+</details>
+### 10. ¿Cómo se configuran los servidores DNS?
+<details>
+<summary>Ver respuesta</summary>
+
+ip/dns/set servers=8.8.8.8,8.8.4.4 allow-remote-requests=yes
+
+</details>
+
+### 11. ¿Para qué sirven los DNS?
+<details>
+<summary>Ver respuesta</summary>
+
+Para traducir nombres de dominio en direcciones IP.
+
+</details>
+
+### 12. ¿Cómo se comprueba la conectividad a Internet?
+<details>
+<summary>Ver respuesta</summary>
+
+Haciendo un ping, por ejemplo:
+
+ping google.com
+
+</details>
+
+### 13. ¿Qué significa que el ping funcione correctamente?
+<details>
+<summary>Ver respuesta</summary>
+
+Que el router tiene conectividad a Internet y resolución DNS correcta.
+
+</details>
+### 14. ¿Qué pasaría si configuras la IP pero no la ruta por defecto?
+<details>
+<summary>Ver respuesta</summary>
+
+El router solo podrá comunicarse dentro de su red local, pero no tendrá acceso a Internet.
+
+</details>
+
+### 15. ¿Qué ocurre si no configuras los DNS?
+<details>
+<summary>Ver respuesta</summary>
+
+Habrá conectividad IP, pero no se podrán resolver nombres de dominio (no funcionarán URLs).
+
+</details>
+
+### 16. ¿Por qué es importante configurar todos los elementos (IP, ruta, DNS)?
+<details>
+<summary>Ver respuesta</summary>
+
+Porque cada uno cumple una función: la IP identifica el equipo, la ruta permite salir de la red y el DNS permite resolver nombres.
+
+</details>
+### 17. ¿Cómo se eliminan los servidores DNS?
+<details>
+<summary>Ver respuesta</summary>
+
+ip/dns/set servers=""
+
+</details>
+
+### 18. ¿Cómo se elimina una ruta?
+<details>
+<summary>Ver respuesta</summary>
+
+ip/route/print  
+ip/route/remove <indice>
+
+</details>
+
+### 19. ¿Cómo se elimina una IP de una interfaz?
+<details>
+<summary>Ver respuesta</summary>
+
+ip/address/print  
+ip/address/remove <indice>
+
+</details>
+
+### 20. ¿Qué ocurre tras eliminar toda la configuración?
+<details>
+<summary>Ver respuesta</summary>
+
+El router queda sin configuración de red, listo para una nueva práctica.
+
+</details>
+!!! warning
+    No olvides configurar la ruta por defecto o no tendrás acceso a Internet.
+
+!!! danger
+    La IP, la ruta y el DNS deben estar correctamente configurados para que todo funcione.
+
+!!! tip
+    Usa siempre ping para verificar que la configuración es correcta.

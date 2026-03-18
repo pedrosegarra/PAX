@@ -148,3 +148,193 @@ ip/dns/print
 ---
 
 Ya tenemos nuestro router sin configuraciones por defecto, preparado para la siguiente práctica.
+
+
+# Preguntas
+### 1. ¿Qué es un cliente DHCP y para qué se utiliza?
+<details>
+<summary>Ver respuesta</summary>
+
+Un cliente DHCP es un servicio que permite a un dispositivo obtener automáticamente su configuración de red (IP, máscara, gateway, DNS) desde un servidor DHCP.
+
+</details>
+
+### 2. ¿Qué parámetros de red puede proporcionar un servidor DHCP?
+<details>
+<summary>Ver respuesta</summary>
+
+Dirección IP, máscara de red, puerta de enlace por defecto y servidores DNS.
+
+</details>
+
+### 3. ¿Por qué es habitual usar IP dinámica en la interfaz de gateway?
+<details>
+<summary>Ver respuesta</summary>
+
+Porque en muchos entornos (como ISP o redes corporativas) la configuración es proporcionada automáticamente y puede cambiar, facilitando la gestión y evitando configuraciones manuales.
+
+</details>
+
+### 4. ¿Qué significa que una IP tenga el flag D (dynamic)?
+<details>
+<summary>Ver respuesta</summary>
+
+Indica que la dirección IP ha sido asignada dinámicamente por un servidor DHCP.
+
+</details>
+
+### 5. ¿Qué diferencia hay entre IP dinámica e IP estática?
+<details>
+<summary>Ver respuesta</summary>
+
+La IP dinámica se asigna automáticamente por DHCP, mientras que la IP estática se configura manualmente y no cambia.
+
+</details>
+
+### 6. ¿Qué función tiene la puerta de enlace por defecto?
+<details>
+<summary>Ver respuesta</summary>
+
+Permite que el dispositivo se comunique con redes externas, como Internet.
+
+</details>
+
+### 7. ¿Qué papel juegan los servidores DNS?
+<details>
+<summary>Ver respuesta</summary>
+
+Traducen nombres de dominio (como google.com) en direcciones IP.
+
+</details>
+
+### 8. ¿Qué comando permite añadir un cliente DHCP en una interfaz?
+<details>
+<summary>Ver respuesta</summary>
+
+ip/dhcp-client/add interface=ether1 disable=no
+
+</details>
+
+### 9. ¿Qué comando muestra los clientes DHCP activos?
+<details>
+<summary>Ver respuesta</summary>
+
+ip/dhcp-client/print
+
+</details>
+
+### 10. ¿Cómo se puede ver la IP asignada a una interfaz?
+<details>
+<summary>Ver respuesta</summary>
+
+ip/address/print
+
+</details>
+
+### 11. ¿Qué comando muestra información detallada del cliente DHCP?
+<details>
+<summary>Ver respuesta</summary>
+
+ip/dhcp-client/print detail
+
+</details>
+
+### 12. ¿Cómo comprobarías la tabla de rutas del router?
+<details>
+<summary>Ver respuesta</summary>
+
+ip/route/print
+
+</details>
+
+### 13. ¿Qué comando permite comprobar los servidores DNS configurados?
+<details>
+<summary>Ver respuesta</summary>
+
+ip/dns/print
+
+</details>
+### 14. ¿Qué información puedes obtener con ip/dhcp-client/print detail?
+<details>
+<summary>Ver respuesta</summary>
+
+IP asignada, gateway, servidor DHCP, DNS, tiempo de concesión, entre otros.
+
+</details>
+
+### 15. ¿Cómo identificas una IP dinámica?
+<details>
+<summary>Ver respuesta</summary>
+
+Por el flag "D" en el listado de direcciones IP.
+
+</details>
+
+### 16. ¿Qué indica la presencia de una ruta por defecto?
+<details>
+<summary>Ver respuesta</summary>
+
+Que el router puede enviar tráfico hacia otras redes (normalmente Internet).
+
+</details>
+
+### 17. ¿Por qué es importante usar ping google.com?
+<details>
+<summary>Ver respuesta</summary>
+
+Para verificar conectividad a Internet y resolución DNS.
+
+</details>
+### 18. ¿Qué ocurriría si no hay servidor DHCP?
+<details>
+<summary>Ver respuesta</summary>
+
+El dispositivo no obtendría configuración IP automáticamente y no tendría conectividad.
+
+</details>
+
+### 19. ¿Por qué no se asigna manualmente una IP?
+<details>
+<summary>Ver respuesta</summary>
+
+Porque se quiere automatizar la configuración y adaptarse a entornos dinámicos.
+
+</details>
+
+### 20. Explica cómo comprobar la conectividad
+<details>
+<summary>Ver respuesta</summary>
+
+1. Ver IP: ip/address/print  
+2. Ver ruta: ip/route/print  
+3. Ver DNS: ip/dns/print  
+4. Hacer ping a google.com  
+
+</details>
+### 21. ¿Qué comando elimina el cliente DHCP?
+<details>
+<summary>Ver respuesta</summary>
+
+ip/dhcp-client/remove <indice>
+
+</details>
+
+### 22. ¿Qué ocurre al eliminarlo?
+<details>
+<summary>Ver respuesta</summary>
+
+Se eliminan la IP, la ruta por defecto y los DNS asignados por DHCP.
+
+</details>
+
+### 23. ¿Cómo comprobar que se ha eliminado?
+<details>
+<summary>Ver respuesta</summary>
+
+Revisando:
+
+ip/address/print  
+ip/route/print  
+ip/dns/print  
+
+</details>

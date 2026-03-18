@@ -178,4 +178,103 @@ interface/bridge/remove <indice>
 ![img02](tema01/img78.png)
 ---
 
-Tras eliminar los elementos configurados, volvemos a tener un router en blanco, preparado para la próxima práctica.
+Tras eliminar los elementos configurados, volvemos a tener un router en blanco, preparado para la próxima práctica
+
+# Preguntas
+??? question "1. ¿Qué es un bridge en este escenario?"
+    Es una interfaz lógica que actúa como un switch virtual donde se aplica la configuración de red.
+
+??? question "2. ¿Dónde se configura la IP en este caso?"
+    La IP se configura en el bridge, no en la interfaz física.
+
+??? question "3. ¿Qué ventaja tiene usar un bridge con IP estática?"
+    Permite mantener la configuración aunque cambien los puertos físicos.
+
+??? question "4. ¿Qué ocurre con ether1 al añadirlo al bridge?"
+    Deja de ser el punto lógico de red y pasa a ser un puerto del bridge.
+
+??? question "5. ¿Qué aporta este modelo respecto a IP estática en interfaz física?"
+    Mayor flexibilidad y resiliencia frente a fallos de hardware.
+
+??? question "6. ¿Cómo se listan los bridges?"
+    interface/bridge/print
+
+??? question "7. ¿Cómo se crea un bridge?"
+    interface/bridge/add name=bridge-gateway
+
+??? question "8. ¿Cómo se añade ether1 al bridge?"
+    interface/bridge/port/add bridge=bridge-gateway interface=ether1
+
+??? question "9. ¿Cómo se asigna una IP al bridge?"
+    ip/address/add address=192.168.122.61/24 interface=bridge-gateway
+
+??? question "10. ¿Cómo comprobar la IP?"
+    ip/address/print
+
+??? question "11. ¿Cómo se configura la ruta por defecto?"
+    ip/route/add dst-address=0.0.0.0/0 gateway=192.168.122.1
+
+??? question "12. ¿Para qué sirve la ruta por defecto?"
+    Permite salir de la red local hacia otras redes (Internet).
+
+??? question "13. ¿Cómo se configuran los DNS?"
+    ip/dns/set servers=8.8.8.8,8.8.4.4 allow-remote-requests=yes
+
+??? question "14. ¿Para qué sirven los DNS?"
+    Para resolver nombres de dominio en direcciones IP.
+
+??? question "15. ¿Cómo comprobar conectividad?"
+    ping google.com
+??? question "16. ¿Qué ocurre si no configuras la ruta por defecto?"
+    No tendrás acceso a Internet, solo a la red local.
+
+??? question "17. ¿Qué ocurre si no configuras DNS?"
+    No funcionarán los nombres de dominio, aunque sí las IPs.
+
+??? question "18. ¿Por qué es importante configurar IP, ruta y DNS?"
+    Porque cada uno cumple una función necesaria para la conectividad completa.
+
+??? question "19. ¿Por qué el bridge es el elemento clave?"
+    Porque centraliza toda la configuración de red.
+
+??? question "20. ¿Cómo eliminar los DNS?"
+    ip/dns/set servers=""
+
+??? question "21. ¿Cómo eliminar la ruta?"
+    ip/route/print  
+    ip/route/remove <indice>
+
+??? question "22. ¿Cómo eliminar la interfaz del bridge?"
+    interface/bridge/port/print  
+    interface/bridge/port/remove <indice>
+
+??? question "23. ¿Cómo eliminar la IP del bridge?"
+    ip/address/print  
+    ip/address/remove <indice>
+
+??? question "24. ¿Cómo eliminar el bridge?"
+    interface/bridge/print  
+    interface/bridge/remove <indice>
+
+!!! warning "Importante"
+    La IP SIEMPRE se configura en el bridge, no en la interfaz física.
+
+!!! danger "Error típico"
+    Si configuras la IP en ether1 en lugar del bridge, la red no funcionará correctamente.
+
+!!! tip "Consejo"
+    Piensa en el bridge como el verdadero "router lógico".
+
+!!! info "Buenas prácticas"
+    Verifica siempre:
+    
+    ip/address/print  
+    ip/route/print  
+    ip/dns/print  
+
+!!! success "Comprobación final"
+    Si ping google.com responde, la configuración es correcta.
+
+??? question "💡 ¿Cuál es la diferencia clave entre IP estática en interfaz y en bridge?"
+    En la interfaz física la configuración depende del hardware, mientras que en el bridge es independiente y más flexible.
+

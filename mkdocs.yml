@@ -15,3 +15,7 @@ nav:
       - 4. Configuración de bridge dinámico: bloque2/bridge_dinamico.md
       - 5. Configuración de bridge estático: bloque2/bridge_estatica.md
       
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences

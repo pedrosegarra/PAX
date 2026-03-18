@@ -198,3 +198,100 @@ Ip/dns/print
 ![img02](tema01/img59.png)
 Ya tenemos nuestro router sin configuraciones por defecto, preparado para la 
 siguiente práctica.
+
+# Preguntas
+
+??? question "1. ¿Qué es un bridge en RouterOS?"
+    Es una entidad lógica que actúa como un switch virtual, agrupando varias interfaces físicas en una sola red.
+
+??? question "2. ¿Dónde se configura la IP en este escenario?"
+    La IP se configura en el bridge, no en las interfaces físicas.
+
+??? question "3. ¿Qué ventaja tiene usar un bridge?"
+    Permite desacoplar la configuración de red del hardware físico, facilitando cambios sin afectar la red.
+
+??? question "4. ¿Qué ocurre si falla un puerto físico?"
+    Se puede sustituir sin cambiar la configuración IP ni la red, ya que esta está en el bridge.
+
+??? question "5. ¿Qué papel tienen las interfaces físicas?"
+    Actúan como puertos dentro del bridge.
+
+??? question "6. ¿Cómo se listan los bridges?"
+    interface/bridge/print
+
+??? question "7. ¿Cómo se crea un bridge?"
+    interface/bridge/add name=bridge-gateway
+
+??? question "8. ¿Cómo se añade una interfaz al bridge?"
+    interface/bridge/port/add bridge=bridge-gateway interface=ether1
+
+??? question "9. ¿Qué ocurre cuando añades ether1 al bridge?"
+    Deja de ser el punto lógico de red. El punto lógico pasa a ser el bridge.
+
+??? question "10. ¿Cómo verificas que la interfaz está en el bridge?"
+    interface/bridge/port/print
+
+??? question "11. ¿Dónde se configura el cliente DHCP?"
+    En el bridge (no en la interfaz física).
+
+??? question "12. ¿Qué comando crea el cliente DHCP?"
+    ip/dhcp-client/add interface=bridge-gateway disable=no
+
+??? question "13. ¿Cómo ver los clientes DHCP?"
+    ip/dhcp-client/print
+
+??? question "14. ¿Cómo ver la IP asignada?"
+    ip/address/print
+
+??? question "15. ¿Qué indica el flag D?"
+    Que la IP ha sido asignada dinámicamente.
+
+??? question "16. ¿Qué información proporciona DHCP?"
+    IP, gateway, DNS, servidor DHCP, tiempo de concesión.
+
+??? question "17. ¿Cómo comprobar la configuración completa?"
+    ip/address/print  
+    ip/route/print  
+    ip/dns/print  
+
+??? question "18. ¿Cómo comprobar conectividad?"
+    ping google.com
+
+??? question "19. ¿Qué indica que el ping funciona?"
+    Que hay conectividad y resolución DNS correcta.
+
+??? question "20. ¿Cómo ver clientes DHCP antes de eliminar?"
+    ip/dhcp-client/print
+
+??? question "21. ¿Cómo eliminar el cliente DHCP?"
+    ip/dhcp-client/remove <indice>
+
+??? question "22. ¿Qué ocurre al eliminarlo?"
+    Se eliminan IP, rutas y DNS configurados automáticamente.
+
+??? question "23. ¿Cómo comprobar que todo está limpio?"
+    ip/address/print  
+    ip/route/print  
+    ip/dns/print  
+
+!!! warning "Importante"
+    Si existe una IP en la interfaz o en el bridge, debes eliminarla antes de configurar DHCP.
+
+!!! danger "Concepto clave"
+    La IP NO se configura en ether1, sino en el bridge.
+
+!!! tip "Consejo"
+    Piensa en el bridge como un switch virtual: la red vive ahí, no en los puertos.
+
+!!! info "Buenas prácticas"
+    Verifica siempre con:
+    
+    ip/address/print  
+    ip/route/print  
+    ip/dns/print  
+
+!!! success "Comprobación final"
+    Si ping google.com funciona, la configuración es correcta.
+
+??? question "💡 Pregunta clave: ¿Por qué es mejor usar bridge que interfaz física?"
+    Porque permite mayor flexibilidad, resiliencia ante fallos y desacopla la configuración lógica del hardware.
