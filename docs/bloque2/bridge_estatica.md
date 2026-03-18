@@ -36,20 +36,20 @@ interface/bridge/print
 ```
 
 Podemos observar cómo no hay ningún bridge configurado por defecto.
-![img02](tema01/img60.png)
+![img02](tema01/img61.png)
 
 Vamos a crear el bridge que actuará como Gateway de la red, ejecutando el siguiente comando:
 
 ```sh
 interface/bridge/add name=bridge-gateway comment="Bridge Gateway"
 ```
-![img02](tema01/img61.png)
+![img02](tema01/img62.png)
 Verificamos que todo ha ido bien:
 
 ```sh
 interface/bridge/print
 ```
-![img02](tema01/img62.png)
+![img02](tema01/img63.png)
 ---
 
 ## Asignación de la interfaz física al bridge
@@ -59,13 +59,13 @@ Vamos a listar los bridges configurados en nuestro router, ejecutando el siguien
 ```sh
 interface/bridge/print
 ```
-![img02](tema01/img63.png)
+![img02](tema01/img64.png)
 Añadimos la interfaz ether1 al bridge “bridge-gateway”:
 
 ```sh
 interface/bridge/port/add bridge=bridge-gateway interface=ether1
 ```
-![img02](tema01/img64.png)
+![img02](tema01/img65.png)
 Una vez añadida al bridge, **ether1 deja de ser el punto lógico de red**. El punto lógico pasa a ser el bridge.
 
 Verificamos que todo ha ido bien:
@@ -73,7 +73,7 @@ Verificamos que todo ha ido bien:
 ```sh
 interface/bridge/port/print
 ```
-![img02](tema01/img65.png)
+![img02](tema01/img66.png)
 ---
 
 ## Asignación manual de IP al bridge
@@ -85,19 +85,19 @@ Primero listamos los bridges configurados en nuestro router, ejecutando el sigui
 ```sh
 interface/bridge/print
 ```
-![img02](tema01/img66.png)
+![img02](tema01/img67.png)
 En mi caso, configuraré el bridge “bridge-gateway”, asignándole la IP 192.168.122.61/24, ejecutando:
 
 ```sh
 ip/address/add address=192.168.122.61/24 interface=bridge-gateway comment="IP Bridge gateway"
 ```
-![img02](tema01/img67.png)
+![img02](tema01/img68.png)
 Podemos comprobar la asignación de la IP, utilizando el comando:
 
 ```sh
 ip/address/print
 ```
-![img02](tema01/img68.png)
+![img02](tema01/img69.png)
 ---
 
 ## Asignación manual de ruta por defecto
@@ -107,7 +107,7 @@ Si deseamos poder navegar por internet, deberemos indicar cuál es la puerta de 
 ```sh
 ip/route/add dst-address=0.0.0.0/0 gateway=192.168.122.1 comment="Salida a NAT"
 ```
-![img02](tema01/img69.png)
+![img02](tema01/img70.png)
 ---
 
 ## Asignación manual de servidores DNS
@@ -117,14 +117,14 @@ Si se requiere traducción de nombres de dominio, deberemos configurar las IP de
 ```sh
 ip/dns/set servers=8.8.8.8,8.8.4.4 allow-remote-requests=yes
 ```
-![img02](tema01/img70.png)
+![img02](tema01/img71.png)
 
 Con esta configuración, el router tendría acceso a internet. Podemos comprobarlo ejecutando un ping sobre un dominio conocido:
 
 ```sh
 ping google.com
 ```
-![img02](tema01/img71.png)
+![img02](tema01/img72.png)
 También podemos acceder al router utilizando un navegador web de la máquina anfitrión, a través de la IP configurada.
 ![img02](tema01/img73.png)
 ---
@@ -147,7 +147,7 @@ ip/dns/set servers=""
 ip/route/print
 ip/route/remove <indice>
 ```
-![img02](tema01/img74.png)
+![img02](tema01/img75.png)
 ---
 
 ### Eliminamos la interfaz del bridge
@@ -156,7 +156,7 @@ ip/route/remove <indice>
 interface/bridge/port/print
 interface/bridge/port/remove <indice>
 ```
-![img02](tema01/img75.png)
+![img02](tema01/img76.png)
 ---
 
 ### Eliminamos la IP del bridge
@@ -165,7 +165,7 @@ interface/bridge/port/remove <indice>
 ip/address/print
 ip/address/remove <indice>
 ```
-![img02](tema01/img76.png)
+![img02](tema01/img77.png)
 
 ---
 

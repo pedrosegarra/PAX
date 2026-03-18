@@ -9,6 +9,8 @@
       
       
       
+        <link rel="prev" href="../bridge_dinamico/">
+      
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -16,7 +18,7 @@
     
     
       
-        <title>Configuración de IP estática sobre bridge. - Curso MikroTik</title>
+        <title>5. Configuración de bridge estático - Curso MikroTik</title>
       
     
     
@@ -94,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Configuración de IP estática sobre bridge.
+              5. Configuración de bridge estático
             
           </span>
         </div>
@@ -323,18 +325,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
@@ -350,7 +354,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Bloque 2. Configuración básica
@@ -453,10 +457,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../bridge_estatico.md" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    5. Configuración de bridge estático
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -467,6 +493,248 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Índice
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducción
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplo-4-configuracion-de-ip-estatica-sobre-un-bridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplo 4 — Configuración de IP estática sobre un bridge
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creacion-del-bridge-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creación del bridge Gateway
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#asignacion-de-la-interfaz-fisica-al-bridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      Asignación de la interfaz física al bridge
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#asignacion-manual-de-ip-al-bridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      Asignación manual de IP al bridge
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#asignacion-manual-de-ruta-por-defecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Asignación manual de ruta por defecto
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#asignacion-manual-de-servidores-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Asignación manual de servidores DNS
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#eliminando-la-configuracion-aplicada" class="md-nav__link">
+    <span class="md-ellipsis">
+      Eliminando la configuración aplicada
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Eliminando la configuración aplicada">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#eliminamos-las-direcciones-de-los-servidores-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Eliminamos las direcciones de los servidores DNS
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visualizamos-las-rutas-existentes-y-eliminamos-la-ruta-por-defecto-creada" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visualizamos las rutas existentes y eliminamos la ruta por defecto creada
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#eliminamos-la-interfaz-del-bridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      Eliminamos la interfaz del bridge
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#eliminamos-la-ip-del-bridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      Eliminamos la IP del bridge
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#por-ultimo-eliminaremos-el-bridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      Por último, eliminaremos el bridge
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
