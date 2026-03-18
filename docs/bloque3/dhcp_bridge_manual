@@ -1,0 +1,231 @@
+# Configuración de DHCP Server sobre un bridge, de manera manual
+## Índice
+
+- Introducción
+- Escenario a configurar
+- Configuración del bridge  
+  - Creación del bridge LAN-10-10  
+  - Asignación de las interfaces físicas al bridge  
+  - Asignación manual de IP al bridge  
+- Creación del pool de IPs  
+- Configuración del DHCP Network  
+- Activación del DHCP Server sobre el bridge  
+- Validación del servicio DHCP  
+- Comprobación de conectividad entre el cliente y el router  
+- Eliminando la configuración aplicada  
+
+---
+
+## Introducción
+
+En entornos reales basados en RouterOS, la red local (LAN) rara vez se gestiona a través de una única interfaz física. Lo habitual es agrupar varios puertos Ethernet —y, en muchos casos, interfaces inalámbricas— mediante un bridge, que actúa como un dominio de capa 2 común para todos los dispositivos internos.
+
+En este contexto, la configuración del DHCP Server debe realizarse sobre el bridge, y no sobre interfaces individuales, con el objetivo de garantizar que todos los equipos conectados a la LAN, independientemente del puerto físico utilizado, reciban correctamente su configuración IP.
+
+RouterOS implementa el servicio DHCP de forma modular y explícita, separando claramente:
+
+- el rango de direcciones asignables,
+- los parámetros de red ofrecidos a los clientes,
+- y el servicio DHCP asociado a una interfaz concreta.
+
+Esta arquitectura proporciona una gran flexibilidad, pero exige un alto grado de precisión en la configuración. Un error frecuente consiste en activar el DHCP Server sobre una interfaz incorrecta o no coherente con el diseño de la LAN.
+
+En este documento se describe cómo configurar correctamente un DHCP Server sobre un bridge en RouterOS.
+
+---
+
+## Escenario a configurar
+
+Para este tutorial se propone un escenario típico de red doméstica o de pequeña oficina, en el que un router MikroTik gestiona tanto la conexión a Internet como la red local.
+
+Las interfaces ether2 y ether3 se agrupan en un bridge, formando el dominio de la LAN. Sobre este bridge se configurará un DHCP Server que asignará direcciones IP dinámicas dentro del rango:
+
+10.10.0.100 – 10.10.0.200
+
+---
+
+## Configuración del bridge
+
+En primer lugar, se crea el bridge que agrupará las interfaces LAN del router.
+
+### Creación del bridge LAN-10-10
+
+```bash
+/interface/bridge/add name=bridge-10-10 comment="Bridge red 10.10"
+```
+
+Verificación:
+
+```bash
+/interface/bridge/print
+```
+
+---
+
+### Asignación de las interfaces físicas al bridge
+
+```bash
+/interface/bridge/port/add bridge=bridge-10-10 interface=ether2
+/interface/bridge/port/add bridge=bridge-10-10 interface=ether3
+```
+
+Verificación:
+
+```bash
+/interface/bridge/port/print
+```
+
+---
+
+### Asignación manual de IP al bridge
+
+```bash
+/ip/address/add address=10.10.0.1/24 interface=bridge-10-10 comment="IP bridge 10.10"
+```
+
+Verificación:
+
+```bash
+/ip/address/print
+```
+
+Comprobación de ruta automática:
+
+```bash
+/ip/route/print
+```
+
+---
+
+## Creación del pool de IPs
+
+```bash
+/ip/pool/add name=pool-10-10 ranges=10.10.0.100-10.10.0.200
+```
+
+Verificación:
+
+```bash
+/ip/pool/print
+```
+
+---
+
+## Configuración del DHCP Network
+
+```bash
+/ip/dhcp-server/network/add address=10.10.0.0/24 gateway=10.10.0.1 dns-server=10.10.0.1,8.8.8.8
+```
+
+Verificación:
+
+```bash
+/ip/dhcp-server/network/print
+```
+
+---
+
+## Activación del DHCP Server sobre el bridge
+
+```bash
+/ip/dhcp-server/add name=dhcp-10-10 interface=bridge-10-10 address-pool=pool-10-10 lease-time=3600
+```
+
+Verificación:
+
+```bash
+/ip/dhcp-server/print
+```
+
+---
+
+## Validación del servicio DHCP
+
+En el cliente:
+
+```bash
+udhcpc -i eth0
+```
+
+Verificación:
+
+```bash
+ip a
+```
+
+En el router:
+
+```bash
+/ip/dhcp-server/lease/print
+```
+
+---
+
+## Comprobación de conectividad entre el cliente y el router
+
+Desde el cliente:
+
+```bash
+ping 10.10.0.1
+```
+
+Desde el router:
+
+```bash
+ping 10.10.0.200
+```
+
+---
+
+## Eliminando la configuración aplicada
+
+Eliminar DHCP Server:
+
+```bash
+/ip/dhcp-server/remove dhcp-10-10
+```
+
+Eliminar red DHCP:
+
+```bash
+/ip/dhcp-server/network/remove 0
+```
+
+Eliminar pool:
+
+```bash
+/ip/pool/remove pool-10-10
+```
+
+Eliminar IP del bridge:
+
+```bash
+/ip/address/remove [find interface=bridge-10-10]
+```
+
+Eliminar interfaces del bridge:
+
+```bash
+/interface/bridge/port/remove 2
+/interface/bridge/port/remove 1
+```
+
+Eliminar bridge:
+
+```bash
+/interface/bridge/remove bridge-10-10
+```
+
+---
+
+## Comprobación final
+
+```bash
+/interface/bridge/print
+/ip/address/print
+/ip/dhcp-server/network/print
+/ip/dhcp-server/print
+/ip/pool/print
+```
+
+Si no aparece configuración relacionada con 10.10.0.0/24, el router está limpio.
