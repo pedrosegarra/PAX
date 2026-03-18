@@ -13,8 +13,6 @@ Eliminación del cliente DHCP
 
 A lo largo de esta práctica trabajaremos sobre un escenario típico: la configuración de la interfaz que actuará como gateway, obteniendo su dirección IP de un servidor DHCP. Este enfoque es extremadamente habitual en entornos reales, donde el router no recibe una configuración fija, sino que depende de un proveedor externo (ISP, red corporativa, red del centro, laboratorio, etc.) para obtener sus parámetros de red.
 
-Este escenario servirá además como punto de partida de una serie de ordenado para que el profesorado pueda comparar comportamientos y resultados:
-
 • Primero, configuraremos direccionamiento IP dinámico, mediante un cliente DHCP sobre una interfaz física, el enfoque más simple y directo.  
 • A continuación, configuraremos esa misma interfaz con direccionamiento IP estático, analizando qué cambia.  
 • Después, daremos el salto conceptual al uso de bridges, aplicando una configuración de IP dinámica sobre un bridge, mediante la configuración de un cliente DHCP sobre el bridge.  
@@ -51,7 +49,7 @@ ip/dhcp-client/add interface=ether1 disable=no
 ---
 ![img02](tema01/img11.png)
 En la captura, podemos revisar los clientes DHCP activos, tras ejecutar el comando:
-```bash
+```sh
 ip/dhcp-client/print
 ```
 En mi caso, el servidor DHCP de la red NAT ha asignado la IP 192.168.122.61/24, a la interfaz. Esta información la podemos obtener también desde el listado de IPs asignadas a interfaces, con el comando:
