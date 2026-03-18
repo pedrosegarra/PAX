@@ -712,31 +712,31 @@
 <p>Para ello, vamos a configurar la primera interfaz del router con la misma IP que tenía asignada por DHCP (en mi caso 192.168.122.61/24), para posteriormente comprobar que podemos acceder al router a través de esta interfaz.</p>
 <h2 id="asignacion-manual-de-ip">Asignación manual de IP</h2>
 <p>En primer lugar, vamos a listar las interfaces físicas de nuestro router, para seleccionar cuál configuraremos, ejecutando el siguiente comando:</p>
-<pre><code>interface/print
-</code></pre>
-<p><img alt="img02" src="../tema01/img30.png" />
+<p><div class="highlight"><pre><span></span><code>interface/print
+</code></pre></div>
+<img alt="img02" src="../tema01/img30.png" />
 En mi caso, configuraré la interfaz ether1, asignándole la IP 192.168.122.61/24, ejecutando:</p>
-<pre><code>ip/address/add address=192.168.122.61/24 interface=ether1 comment=&quot;Gateway – IP estatica&quot;
-</code></pre>
-<p><img alt="img02" src="../tema01/img31.png" />
+<p><div class="highlight"><pre><span></span><code>ip/address/add address=192.168.122.61/24 interface=ether1 comment=&quot;Gateway – IP estatica&quot;
+</code></pre></div>
+<img alt="img02" src="../tema01/img31.png" />
 Como vemos en la captura, podemos comprobar la asignación de la IP, utilizando el comando:</p>
-<pre><code>ip/address/print
-</code></pre>
-<p><img alt="img02" src="../tema01/img32.png" /></p>
+<p><div class="highlight"><pre><span></span><code>ip/address/print
+</code></pre></div>
+<img alt="img02" src="../tema01/img32.png" /></p>
 <h2 id="asignacion-manual-de-ruta-por-defecto">Asignación manual de ruta por defecto</h2>
 <p>Si deseamos poder navegar por internet, deberemos indicar cuál es la puerta de enlace de la red, añadiendo una ruta por defecto:</p>
-<pre><code>ip/route/add dst-address=0.0.0.0/0 gateway=192.168.122.1 comment=&quot;Salida a NAT&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code>ip/route/add dst-address=0.0.0.0/0 gateway=192.168.122.1 comment=&quot;Salida a NAT&quot;
+</code></pre></div>
 <p><img alt="img02" src="../tema01/img33.png" /></p>
 <h2 id="asignacion-manual-de-servidores-dns">Asignación manual de servidores DNS</h2>
 <p>Y si se requiere traducción de nombres de dominio, deberemos configurar las IP de los servidores DNS:</p>
-<pre><code>ip/dns/set servers=8.8.8.8,8.8.4.4 allow-remote-requests=yes
-</code></pre>
-<p><img alt="img02" src="../tema01/img34.png" />
+<p><div class="highlight"><pre><span></span><code>ip/dns/set servers=8.8.8.8,8.8.4.4 allow-remote-requests=yes
+</code></pre></div>
+<img alt="img02" src="../tema01/img34.png" />
 Con esta configuración, el router tendría acceso a internet. Podemos comprobarlo accediendo a una URL conocida, con el siguiente comando:</p>
-<pre><code>ping google.com
-</code></pre>
-<p><img alt="img02" src="../tema01/img35.png" />
+<p><div class="highlight"><pre><span></span><code>ping google.com
+</code></pre></div>
+<img alt="img02" src="../tema01/img35.png" />
 También podemos acceder al router utilizando un navegador web de la máquina anfitrión, a través de la IP configurada:</p>
 <p><img alt="img02" src="../tema01/img36.png" /></p>
 <h2 id="eliminacion-manual-de-la-configuracion-aplicada">Eliminación manual de la configuración aplicada</h2>
@@ -744,20 +744,193 @@ También podemos acceder al router utilizando un navegador web de la máquina an
 <ul>
 <li>Eliminamos las direcciones de los servidores DNS</li>
 </ul>
-<pre><code>ip/dns/set servers=&quot;&quot;
-</code></pre>
-<p><img alt="img02" src="../tema01/img37.png" />
+<p><div class="highlight"><pre><span></span><code>ip/dns/set servers=&quot;&quot;
+</code></pre></div>
+<img alt="img02" src="../tema01/img37.png" />
 - Visualizamos las rutas existentes, y eliminamos la ruta por defecto creada</p>
-<pre><code>ip/route/print
+<p><div class="highlight"><pre><span></span><code>ip/route/print
 ip/route/remove &lt;indice&gt;
-</code></pre>
-<p><img alt="img02" src="../tema01/img38.png" />
+</code></pre></div>
+<img alt="img02" src="../tema01/img38.png" />
 - Eliminamos la IP de la interfaz física ether1</p>
-<pre><code>ip/address/print
+<p><div class="highlight"><pre><span></span><code>ip/address/print
 ip/address/remove &lt;indice&gt;
-</code></pre>
-<p><img alt="img02" src="../tema01/img39.png" /></p>
+</code></pre></div>
+<img alt="img02" src="../tema01/img39.png" /></p>
 <p>Tras eliminar los elementos configurados, volvemos a tener un router en blanco, preparado para la próxima práctica.</p>
+<h1 id="preguntas">Preguntas</h1>
+<h3 id="1-que-es-una-ip-estatica">1. ¿Qué es una IP estática?</h3>
+<details>
+<summary>Ver respuesta</summary>
+
+Es una dirección IP configurada manualmente en un dispositivo y que no cambia automáticamente.
+
+</details>
+
+<h3 id="2-en-que-casos-se-utiliza-ip-estatica">2. ¿En qué casos se utiliza IP estática?</h3>
+<details>
+<summary>Ver respuesta</summary>
+
+En servidores, routers, gateways o entornos donde se requiere una configuración fija y controlada.
+
+</details>
+
+<h3 id="3-que-diferencia-hay-entre-ip-estatica-y-dinamica">3. ¿Qué diferencia hay entre IP estática y dinámica?</h3>
+<details>
+<summary>Ver respuesta</summary>
+
+La IP estática se configura manualmente, mientras que la dinámica se obtiene automáticamente mediante DHCP.
+
+</details>
+
+<h3 id="4-por-que-un-router-puede-necesitar-ip-estatica">4. ¿Por qué un router puede necesitar IP estática?</h3>
+<details>
+<summary>Ver respuesta</summary>
+
+Para actuar como gateway estable dentro de una red y garantizar conectividad constante.
+
+</details>
+
+<h3 id="5-que-comando-muestra-las-interfaces-del-router">5. ¿Qué comando muestra las interfaces del router?</h3>
+<details>
+<summary>Ver respuesta</summary>
+
+interface/print
+
+</details>
+
+<h3 id="6-como-se-asigna-una-ip-estatica-a-una-interfaz">6. ¿Cómo se asigna una IP estática a una interfaz?</h3>
+<details>
+<summary>Ver respuesta</summary>
+
+ip/address/add address=192.168.122.61/24 interface=ether1
+
+</details>
+
+<h3 id="7-como-se-comprueba-la-ip-configurada">7. ¿Cómo se comprueba la IP configurada?</h3>
+<details>
+<summary>Ver respuesta</summary>
+
+ip/address/print
+
+</details>
+
+<h3 id="8-que-comando-anade-una-ruta-por-defecto">8. ¿Qué comando añade una ruta por defecto?</h3>
+<details>
+<summary>Ver respuesta</summary>
+
+ip/route/add dst-address=0.0.0.0/0 gateway=192.168.122.1
+
+</details>
+
+<h3 id="9-para-que-sirve-la-ruta-por-defecto">9. ¿Para qué sirve la ruta por defecto?</h3>
+<details>
+<summary>Ver respuesta</summary>
+
+Permite que el router envíe tráfico hacia redes externas (Internet).
+
+</details>
+<h3 id="10-como-se-configuran-los-servidores-dns">10. ¿Cómo se configuran los servidores DNS?</h3>
+<details>
+<summary>Ver respuesta</summary>
+
+ip/dns/set servers=8.8.8.8,8.8.4.4 allow-remote-requests=yes
+
+</details>
+
+<h3 id="11-para-que-sirven-los-dns">11. ¿Para qué sirven los DNS?</h3>
+<details>
+<summary>Ver respuesta</summary>
+
+Para traducir nombres de dominio en direcciones IP.
+
+</details>
+
+<h3 id="12-como-se-comprueba-la-conectividad-a-internet">12. ¿Cómo se comprueba la conectividad a Internet?</h3>
+<details>
+<summary>Ver respuesta</summary>
+
+Haciendo un ping, por ejemplo:
+
+ping google.com
+
+</details>
+
+<h3 id="13-que-significa-que-el-ping-funcione-correctamente">13. ¿Qué significa que el ping funcione correctamente?</h3>
+<details>
+<summary>Ver respuesta</summary>
+
+Que el router tiene conectividad a Internet y resolución DNS correcta.
+
+</details>
+<h3 id="14-que-pasaria-si-configuras-la-ip-pero-no-la-ruta-por-defecto">14. ¿Qué pasaría si configuras la IP pero no la ruta por defecto?</h3>
+<details>
+<summary>Ver respuesta</summary>
+
+El router solo podrá comunicarse dentro de su red local, pero no tendrá acceso a Internet.
+
+</details>
+
+<h3 id="15-que-ocurre-si-no-configuras-los-dns">15. ¿Qué ocurre si no configuras los DNS?</h3>
+<details>
+<summary>Ver respuesta</summary>
+
+Habrá conectividad IP, pero no se podrán resolver nombres de dominio (no funcionarán URLs).
+
+</details>
+
+<h3 id="16-por-que-es-importante-configurar-todos-los-elementos-ip-ruta-dns">16. ¿Por qué es importante configurar todos los elementos (IP, ruta, DNS)?</h3>
+<details>
+<summary>Ver respuesta</summary>
+
+Porque cada uno cumple una función: la IP identifica el equipo, la ruta permite salir de la red y el DNS permite resolver nombres.
+
+</details>
+<h3 id="17-como-se-eliminan-los-servidores-dns">17. ¿Cómo se eliminan los servidores DNS?</h3>
+<details>
+<summary>Ver respuesta</summary>
+
+ip/dns/set servers=""
+
+</details>
+
+<h3 id="18-como-se-elimina-una-ruta">18. ¿Cómo se elimina una ruta?</h3>
+<details>
+<summary>Ver respuesta</summary>
+
+ip/route/print  
+ip/route/remove <indice>
+
+</details>
+
+<h3 id="19-como-se-elimina-una-ip-de-una-interfaz">19. ¿Cómo se elimina una IP de una interfaz?</h3>
+<details>
+<summary>Ver respuesta</summary>
+
+ip/address/print  
+ip/address/remove <indice>
+
+</details>
+
+<h3 id="20-que-ocurre-tras-eliminar-toda-la-configuracion">20. ¿Qué ocurre tras eliminar toda la configuración?</h3>
+<details>
+<summary>Ver respuesta</summary>
+
+El router queda sin configuración de red, listo para una nueva práctica.
+
+</details>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>No olvides configurar la ruta por defecto o no tendrás acceso a Internet.</p>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>La IP, la ruta y el DNS deben estar correctamente configurados para que todo funcione.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Usa siempre ping para verificar que la configuración es correcta.</p>
+</div>
 
 
 

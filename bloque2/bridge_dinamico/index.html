@@ -569,67 +569,65 @@ router puede comunicarse correctamente a través del bridge sin necesidad de
 configurar manualmente el direccionamiento IP.</p>
 <h1 id="creacion-del-bridge-gateway">Creación del bridge Gateway</h1>
 <p>En primer lugar, vamos a listar los bridges configurados en nuestro router, 
-ejecutando el siguiente comando: </p>
-<pre><code class="language-sh">interface/bridge/print
-</code></pre>
-<p><img alt="img02" src="../tema01/img40.png" />
+ejecutando el siguiente comando: 
+<div class="highlight"><pre><span></span><code>interface/bridge/print
+</code></pre></div>
+<img alt="img02" src="../tema01/img40.png" />
 Podemos observar cómo no hay ningún bridge configurado por defecto. </p>
 <p>Vamos a crear el bridge que actuará como Gateway de la red, ejecutando el 
-siguiente comando:</p>
-<pre><code class="language-sh">interface/bridge/add name=bridge-gateway comment=”Bridge Gateway”
-</code></pre>
-<p><img alt="img02" src="../tema01/img41.png" /></p>
-<p>Verificamos que todo ha ido bien:</p>
-<pre><code class="language-sh">interface/bridge/print
-</code></pre>
-<p><img alt="img02" src="../tema01/img42.png" /></p>
+siguiente comando:
+<div class="highlight"><pre><span></span><code>interface/bridge/add<span class="w"> </span><span class="nv">name</span><span class="o">=</span>bridge-gateway<span class="w"> </span><span class="nv">comment</span><span class="o">=</span>”Bridge<span class="w"> </span>Gateway”
+</code></pre></div>
+<img alt="img02" src="../tema01/img41.png" /></p>
+<p>Verificamos que todo ha ido bien:
+<div class="highlight"><pre><span></span><code>interface/bridge/print
+</code></pre></div>
+<img alt="img02" src="../tema01/img42.png" /></p>
 <h1 id="asignacion-de-la-interfaz-fisica-al-bridge">Asignación de la interfaz física al bridge</h1>
 <p>Vamos a listar los bridges configurados en nuestro router, ejecutando el siguiente 
-comando: </p>
-<pre><code class="language-sh">interface/bridge/print
-</code></pre>
-<p><img alt="img02" src="../tema01/img43.png" />
-Añadimos la interfaz ether1 al bridge “bridge-gateway”:</p>
-<pre><code class="language-sh">interface/bridge/port/add bridge=bridge-gateway interface=ether1
-</code></pre>
+comando: 
+<div class="highlight"><pre><span></span><code>interface/bridge/print
+</code></pre></div>
+<img alt="img02" src="../tema01/img43.png" />
+Añadimos la interfaz ether1 al bridge “bridge-gateway”:
+<div class="highlight"><pre><span></span><code>interface/bridge/port/add<span class="w"> </span><span class="nv">bridge</span><span class="o">=</span>bridge-gateway<span class="w"> </span><span class="nv">interface</span><span class="o">=</span>ether1
+</code></pre></div></p>
 <p><img alt="img02" src="../tema01/img44.png" />
 Una vez añadida al bridge, ether1 deja de ser el punto lógico de red. El punto 
 lógico pasa a ser el bridge. Verificamos que todo ha ido bien:</p>
-<pre><code class="language-sh">interface/bridge/port/print
-</code></pre>
-<p><img alt="img02" src="../tema01/img45.png" /></p>
+<p><div class="highlight"><pre><span></span><code>interface/bridge/port/print
+</code></pre></div>
+<img alt="img02" src="../tema01/img45.png" /></p>
 <h1 id="creacion-del-cliente-dhcp-en-la-interfaz-ether1">Creación del cliente DHCP en la interfaz ether1</h1>
 <p>Antes de continuar, vamos a comprobar que la interfaz ether1 y el bridge “bridge-gateway” no tienen asignada ninguna IP, tal como hemos visto en los tutoriales 
 anteriores:</p>
-<p><img alt="img02" src="../tema01/img46.png" /></p>
-<pre><code class="language-sh">ip/address/print
-</code></pre>
-<ul>
-<li>Si existe alguna dirección IP asignada a la interfaz o el bridge, 
-debe eliminarse antes de crear el cliente DHCP.</li>
-</ul>
+<p><img alt="img02" src="../tema01/img46.png" />
+<div class="highlight"><pre><span></span><code>ip/address/print
+</code></pre></div>
+* Si existe alguna dirección IP asignada a la interfaz o el bridge, 
+debe eliminarse antes de crear el cliente DHCP.</p>
 <p>Una vez nos hemos asegurado de que la interfaz y el bridge no tienen asignada 
-ninguna IP, podemos crear el cliente DHCP sobre el bridge: </p>
-<pre><code class="language-sh">ip/dhcp-client/add interface=bridge-gateway disable=no
-</code></pre>
-<p><img alt="img02" src="../tema01/img47.png" />
+ninguna IP, podemos crear el cliente DHCP sobre el bridge: 
+<div class="highlight"><pre><span></span><code>ip/dhcp-client/add<span class="w"> </span><span class="nv">interface</span><span class="o">=</span>bridge-gateway<span class="w"> </span><span class="nv">disable</span><span class="o">=</span>no
+</code></pre></div>
+<img alt="img02" src="../tema01/img47.png" />
 Como podemos observar en la captura, para comprobar los clientes DHCP activos 
-ejecutando el comando:</p>
-<pre><code class="language-sh">ip/dhcp-client/print
-</code></pre>
-<p><img alt="img02" src="../tema01/img48.png" />
+ejecutando el comando:
+<div class="highlight"><pre><span></span><code>ip/dhcp-client/print
+</code></pre></div>
+<img alt="img02" src="../tema01/img48.png" />
 En mi caso, el servidor DHCP de la red NAT ha asignado la IP 192.168.122.61/24, al 
 bridge. Esta información la podemos obtener también desde el listado de IPs 
-asignadas a interfaces, con el comando:</p>
-<pre><code class="language-sh">ip/addresses/print
-</code></pre>
-<p>En la captura podemos observar el flag ‘D’, que indica que la asignación de IP se ha 
+asignadas a interfaces, con el comando:
+<div class="highlight"><pre><span></span><code>ip/addresses/print
+</code></pre></div>
+En la captura podemos observar el flag ‘D’, que indica que la asignación de IP se ha 
 realizado de manera dinámica.</p>
 <p>Si queremos obtener información detallada de la configuración asignada por DHCP, 
-podemos ejecutar el siguiente comando:</p>
-<pre><code class="language-sh">Ip/dhcp-client/print detail
-</code></pre>
-<p><img alt="img02" src="../tema01/img49.png" />
+podemos ejecutar el siguiente comando:
+<div class="highlight"><pre><span></span><code>Ip/dhcp-client/print<span class="w"> </span>detail
+</code></pre></div>
+<img alt="img02" src="../tema01/img49.png" />
 En la captura podemos observar, entre otros:</p>
 <p>• La IP asignada.<br />
 • La Puerta de enlace de la red<br />
@@ -637,21 +635,21 @@ En la captura podemos observar, entre otros:</p>
 • La IP del servidor DNS primario<br />
 • …  </p>
 <p>También podemos comprobar la configuración asignada por DHCP (IP, ruta por 
-defecto y servidores DNS) ejecutando los siguientes comandos:</p>
-<pre><code class="language-sh">Ip/address/print  
-</code></pre>
-<p><img alt="img02" src="../tema01/img50.png" /></p>
-<pre><code class="language-sh">Ip/route/print  
-</code></pre>
-<p><img alt="img02" src="../tema01/img51.png" /></p>
-<pre><code class="language-sh">Ip/dns/print  
-</code></pre>
-<p><img alt="img02" src="../tema01/img52.png" />
+defecto y servidores DNS) ejecutando los siguientes comandos:
+<div class="highlight"><pre><span></span><code>Ip/address/print<span class="w">  </span>
+</code></pre></div>
+<img alt="img02" src="../tema01/img50.png" />
+<div class="highlight"><pre><span></span><code>Ip/route/print<span class="w">  </span>
+</code></pre></div>
+<img alt="img02" src="../tema01/img51.png" />
+<div class="highlight"><pre><span></span><code>Ip/dns/print<span class="w">  </span>
+</code></pre></div>
+<img alt="img02" src="../tema01/img52.png" />
 Por último, Podemos probar la conectividad de red, ejecutando un ping a 
-Google.com, por ejemplo, mediante el comando:</p>
-<pre><code class="language-sh">Ping google.com
-</code></pre>
-<p><img alt="img02" src="../tema01/img53.png" />
+Google.com, por ejemplo, mediante el comando:
+<div class="highlight"><pre><span></span><code>Ping<span class="w"> </span>google.com
+</code></pre></div>
+<img alt="img02" src="../tema01/img53.png" />
 También podemos acceder al router utilizando un navegador web de la máquina 
 anfitrión, a través de la IP configurada:
 <img alt="img02" src="../tema01/img54.png" /></p>
@@ -659,27 +657,151 @@ anfitrión, a través de la IP configurada:
 <p>Antes de continuar, vamos a eliminar toda la configuración aplicada al router, para 
 volver a tener un dispositivo limpio.</p>
 <h1 id="eliminacion-del-cliente-dhcp">Eliminación del cliente DHCP</h1>
-<p>Para mostrar los clientes DHCP configurados, ejecutamos el siguiente comando:</p>
-<pre><code class="language-sh">ip/dhcp-client/print
-</code></pre>
-<p><img alt="img02" src="../tema01/img55.png" />
-Para eliminar el cliente DHCP ejecutamos el siguiente comando:</p>
-<pre><code class="language-sh">Ip/dhcp-client/remove &lt;&lt;índice&gt;&gt;
-</code></pre>
-<p><img alt="img02" src="../tema01/img56.png" />
+<p>Para mostrar los clientes DHCP configurados, ejecutamos el siguiente comando:
+<div class="highlight"><pre><span></span><code>ip/dhcp-client/print
+</code></pre></div>
+<img alt="img02" src="../tema01/img55.png" />
+Para eliminar el cliente DHCP ejecutamos el siguiente comando:
+<div class="highlight"><pre><span></span><code>Ip/dhcp-client/remove<span class="w"> </span>&lt;&lt;índice&gt;&gt;
+</code></pre></div>
+<img alt="img02" src="../tema01/img56.png" />
 Al eliminar el cliente DHCP, se eliminará toda la configuración aplicada por el 
-mismo. Podemos comprobarlo ejecutando los siguientes comandos:</p>
-<pre><code class="language-sh">Ip/address/print  
-</code></pre>
-<p><img alt="img02" src="../tema01/img57.png" /></p>
-<pre><code class="language-sh">Ip/route/print  
-</code></pre>
-<p><img alt="img02" src="../tema01/img58.png" /></p>
-<pre><code class="language-sh">Ip/dns/print  
-</code></pre>
-<p><img alt="img02" src="../tema01/img59.png" />
+mismo. Podemos comprobarlo ejecutando los siguientes comandos:
+<div class="highlight"><pre><span></span><code>Ip/address/print<span class="w">  </span>
+</code></pre></div>
+<img alt="img02" src="../tema01/img57.png" />
+<div class="highlight"><pre><span></span><code>Ip/route/print<span class="w">  </span>
+</code></pre></div>
+<img alt="img02" src="../tema01/img58.png" />
+<div class="highlight"><pre><span></span><code>Ip/dns/print<span class="w">  </span>
+</code></pre></div>
+<img alt="img02" src="../tema01/img59.png" />
 Ya tenemos nuestro router sin configuraciones por defecto, preparado para la 
 siguiente práctica.</p>
+<h1 id="preguntas">Preguntas</h1>
+<details class="question">
+<summary>1. ¿Qué es un bridge en RouterOS?</summary>
+<p>Es una entidad lógica que actúa como un switch virtual, agrupando varias interfaces físicas en una sola red.</p>
+</details>
+<details class="question">
+<summary>2. ¿Dónde se configura la IP en este escenario?</summary>
+<p>La IP se configura en el bridge, no en las interfaces físicas.</p>
+</details>
+<details class="question">
+<summary>3. ¿Qué ventaja tiene usar un bridge?</summary>
+<p>Permite desacoplar la configuración de red del hardware físico, facilitando cambios sin afectar la red.</p>
+</details>
+<details class="question">
+<summary>4. ¿Qué ocurre si falla un puerto físico?</summary>
+<p>Se puede sustituir sin cambiar la configuración IP ni la red, ya que esta está en el bridge.</p>
+</details>
+<details class="question">
+<summary>5. ¿Qué papel tienen las interfaces físicas?</summary>
+<p>Actúan como puertos dentro del bridge.</p>
+</details>
+<details class="question">
+<summary>6. ¿Cómo se listan los bridges?</summary>
+<p>interface/bridge/print</p>
+</details>
+<details class="question">
+<summary>7. ¿Cómo se crea un bridge?</summary>
+<p>interface/bridge/add name=bridge-gateway</p>
+</details>
+<details class="question">
+<summary>8. ¿Cómo se añade una interfaz al bridge?</summary>
+<p>interface/bridge/port/add bridge=bridge-gateway interface=ether1</p>
+</details>
+<details class="question">
+<summary>9. ¿Qué ocurre cuando añades ether1 al bridge?</summary>
+<p>Deja de ser el punto lógico de red. El punto lógico pasa a ser el bridge.</p>
+</details>
+<details class="question">
+<summary>10. ¿Cómo verificas que la interfaz está en el bridge?</summary>
+<p>interface/bridge/port/print</p>
+</details>
+<details class="question">
+<summary>11. ¿Dónde se configura el cliente DHCP?</summary>
+<p>En el bridge (no en la interfaz física).</p>
+</details>
+<details class="question">
+<summary>12. ¿Qué comando crea el cliente DHCP?</summary>
+<p>ip/dhcp-client/add interface=bridge-gateway disable=no</p>
+</details>
+<details class="question">
+<summary>13. ¿Cómo ver los clientes DHCP?</summary>
+<p>ip/dhcp-client/print</p>
+</details>
+<details class="question">
+<summary>14. ¿Cómo ver la IP asignada?</summary>
+<p>ip/address/print</p>
+</details>
+<details class="question">
+<summary>15. ¿Qué indica el flag D?</summary>
+<p>Que la IP ha sido asignada dinámicamente.</p>
+</details>
+<details class="question">
+<summary>16. ¿Qué información proporciona DHCP?</summary>
+<p>IP, gateway, DNS, servidor DHCP, tiempo de concesión.</p>
+</details>
+<details class="question">
+<summary>17. ¿Cómo comprobar la configuración completa?</summary>
+<p>ip/address/print<br />
+ip/route/print<br />
+ip/dns/print  </p>
+</details>
+<details class="question">
+<summary>18. ¿Cómo comprobar conectividad?</summary>
+<p>ping google.com</p>
+</details>
+<details class="question">
+<summary>19. ¿Qué indica que el ping funciona?</summary>
+<p>Que hay conectividad y resolución DNS correcta.</p>
+</details>
+<details class="question">
+<summary>20. ¿Cómo ver clientes DHCP antes de eliminar?</summary>
+<p>ip/dhcp-client/print</p>
+</details>
+<details class="question">
+<summary>21. ¿Cómo eliminar el cliente DHCP?</summary>
+<p>ip/dhcp-client/remove <indice></p>
+</details>
+<details class="question">
+<summary>22. ¿Qué ocurre al eliminarlo?</summary>
+<p>Se eliminan IP, rutas y DNS configurados automáticamente.</p>
+</details>
+<details class="question">
+<summary>23. ¿Cómo comprobar que todo está limpio?</summary>
+<p>ip/address/print<br />
+ip/route/print<br />
+ip/dns/print  </p>
+</details>
+<div class="admonition warning">
+<p class="admonition-title">Importante</p>
+<p>Si existe una IP en la interfaz o en el bridge, debes eliminarla antes de configurar DHCP.</p>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Concepto clave</p>
+<p>La IP NO se configura en ether1, sino en el bridge.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Consejo</p>
+<p>Piensa en el bridge como un switch virtual: la red vive ahí, no en los puertos.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Buenas prácticas</p>
+<p>Verifica siempre con:</p>
+<p>ip/address/print<br />
+ip/route/print<br />
+ip/dns/print  </p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">Comprobación final</p>
+<p>Si ping google.com funciona, la configuración es correcta.</p>
+</div>
+<details class="question">
+<summary>💡 Pregunta clave: ¿Por qué es mejor usar bridge que interfaz física?</summary>
+<p>Porque permite mayor flexibilidad, resiliencia ante fallos y desacopla la configuración lógica del hardware.</p>
+</details>
 
 
 
