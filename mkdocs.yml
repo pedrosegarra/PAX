@@ -13,5 +13,5 @@ nav:
       - 2. Configuración de DHCP (ip dinámica): bloque2/dhcp.md
       - 3. Configuración de IP estática: bloque2/ip_estatica.md
       - 4. Configuración de bridge dinámico: bloque2/bridge_dinamico.md
-      - 5. Configuración de bridge estático: bloque2/bridge_estatico.md
+      - 5. Configuración de bridge estático: bloque2/bridge_estatica.md
       
