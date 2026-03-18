@@ -12,13 +12,15 @@
         <link rel="prev" href="../eliminar/">
       
       
+        <link rel="next" href="../ip_estatica/">
+      
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
     
     
       
-        <title>2. Tema nuevo - Curso MikroTik</title>
+        <title>2. Configuración de DHCP (ip dinámica) - Curso MikroTik</title>
       
     
     
@@ -96,7 +98,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              2. Tema nuevo
+              2. Configuración de DHCP (ip dinámica)
             
           </span>
         </div>
@@ -373,7 +375,7 @@
   
   
   <span class="md-ellipsis">
-    1. Tema nuevo
+    1. Eliminar configuración
     
   </span>
   
@@ -405,7 +407,7 @@
   
   
   <span class="md-ellipsis">
-    2. Tema nuevo
+    2. Configuración de DHCP (ip dinámica)
     
   </span>
   
@@ -418,7 +420,7 @@
   
   
   <span class="md-ellipsis">
-    2. Tema nuevo
+    2. Configuración de DHCP (ip dinámica)
     
   </span>
   
@@ -513,6 +515,29 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ip_estatica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Configuración de IP estática
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -665,34 +690,38 @@ Eliminación del cliente DHCP  </p>
 <p>En primer lugar, vamos a comprobar que la interfaz ether1 no tiene ninguna IP configurada manualmente, tal como hemos visto en los tutoriales anteriores:</p>
 <p><img alt="img02" src="../tema01/img10.png" />
 Una vez nos hemos asegurado de que no se ha aplicado configuración manual de IP sobre la interfaz ether1, podemos crear el cliente DHCP sobre dicha interfaz:</p>
-<p>ip/dhcp-client/add interface=ether1 disable=no</p>
+<pre><code class="language-sh">ip/dhcp-client/add interface=ether1 disable=no
+</code></pre>
 <hr />
 <p><img alt="img02" src="../tema01/img11.png" />
 En la captura, podemos revisar los clientes DHCP activos, tras ejecutar el comando:</p>
 <pre><code class="language-bash">ip/dhcp-client/print
 </code></pre>
 <p>En mi caso, el servidor DHCP de la red NAT ha asignado la IP 192.168.122.61/24, a la interfaz. Esta información la podemos obtener también desde el listado de IPs asignadas a interfaces, con el comando:</p>
-<p>ip/addresses/print</p>
+<pre><code class="language-sh">ip/addresses/print
+</code></pre>
 <p><img alt="img02" src="../tema01/img12.png" /></p>
 <p>En la captura podemos observar el flag ‘D’, que indica que la asignación de IP se ha realizado de manera dinámica.</p>
 <p>Si queremos obtener información detallada de la configuración asignada por DHCP, podemos ejecutar el siguiente comando:</p>
-<p>ip/dhcp-client/print detail</p>
+<pre><code class="language-sh">ip/dhcp-client/print detail
+</code></pre>
 <p><img alt="img02" src="../tema01/img13.png" /></p>
 <p>En la captura podemos observar, entre otros:</p>
-<p>• La IP asignada.</p>
-<p>[IMAGEN: consola DHCP]</p>
-<hr />
-<p>• La Puerta de enlace de la red<br />
+<p>• La IP asignada.
+• La Puerta de enlace de la red<br />
 • La IP del servidor DHCP<br />
 • La IP del servidor DNS primario<br />
 • …  </p>
 <p>También podemos comprobar la configuración asignada por DHCP (IP, ruta por defecto y servidores DNS) ejecutando los siguientes comandos:</p>
-<p>ip/address/print<br />
-<img alt="img02" src="../tema01/img14.png" />
-ip/route/print<br />
-<img alt="img02" src="../tema01/img15.png" />
-ip/dns/print<br />
-<img alt="img02" src="../tema01/img16.png" /></p>
+<pre><code class="language-sh">ip/address/print
+</code></pre>
+<p><img alt="img02" src="../tema01/img14.png" /></p>
+<pre><code class="language-sh">ip/route/print  
+</code></pre>
+<p><img alt="img02" src="../tema01/img15.png" /></p>
+<pre><code class="language-sh">ip/dns/print
+</code></pre>
+<p><img alt="img02" src="../tema01/img16.png" /></p>
 <hr />
 <p>Por último, Podemos probar la conectividad de red, ejecutando un ping a Google.com, por ejemplo, mediante el comando:</p>
 <p>ping google.com</p>
@@ -705,19 +734,23 @@ ip/dns/print<br />
 <hr />
 <h2 id="eliminacion-del-cliente-dhcp">Eliminación del cliente DHCP</h2>
 <p>Para mostrar los clientes DHCP configurados, ejecutamos el siguiente comando:</p>
-<p>ip/dhcp-client/print</p>
+<pre><code class="language-sh">ip/dhcp-client/print
+</code></pre>
 <h2 id="_1"><img alt="img02" src="../tema01/img19.png" /></h2>
 <p>Para eliminar el cliente DHCP ejecutamos el siguiente comando:</p>
-<pre><code>ip/dhcp-client/remove &lt;&lt;índice&gt;&gt;
+<pre><code class="language-sh">ip/dhcp-client/remove &lt;&lt;índice&gt;&gt;
 </code></pre>
 <p><img alt="img02" src="../tema01/img20.png" /></p>
 <hr />
 <p>Al eliminar el cliente DHCP, se eliminará toda la configuración aplicada por el mismo. Podemos comprobarlo ejecutando los siguientes comandos:</p>
-<p>ip/address/print<br />
-<img alt="img02" src="../tema01/img21.png" />
-ip/route/print<br />
-<img alt="img02" src="../tema01/img22.png" />
-ip/dns/print  </p>
+<pre><code class="language-sh">ip/address/print  
+</code></pre>
+<p><img alt="img02" src="../tema01/img21.png" /></p>
+<pre><code class="language-sh">ip/route/print  
+</code></pre>
+<p><img alt="img02" src="../tema01/img22.png" /></p>
+<pre><code class="language-sh">ip/dns/print  
+</code></pre>
 <p><img alt="img02" src="../tema01/img23.png" /></p>
 <hr />
 <p>Ya tenemos nuestro router sin configuraciones por defecto, preparado para la siguiente práctica.</p>
