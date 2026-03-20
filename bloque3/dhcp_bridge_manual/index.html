@@ -1,0 +1,1117 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../bloque2/tarea_bloque2/">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>1. Configuración de DHCP Server sobre un bridge, de manera manual - Curso MikroTik</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#configuracion-de-dhcp-server-sobre-un-bridge-de-manera-manual" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Curso MikroTik" class="md-header__button md-logo" aria-label="Curso MikroTik" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Curso MikroTik
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1. Configuración de DHCP Server sobre un bridge, de manera manual
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Curso MikroTik" class="md-nav__button md-logo" aria-label="Curso MikroTik" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Curso MikroTik
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inicio
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Bloque 1. Introducción
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Bloque 1. Introducción
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduccion/01_mikrotik_routeros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introducción a MikroTik y RouterOS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduccion/02_virtualizacion_gns3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Virtualización de RouterOS con GNS3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduccion/03_acceso_routeros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Conectando a RouterOS para su administración
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Bloque 2. Configuración básica
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Bloque 2. Configuración básica
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque2/eliminar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Eliminar configuración
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque2/dhcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Configuración de DHCP (ip dinámica)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque2/ip_estatica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Configuración de IP estática
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque2/bridge_dinamico/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Configuración de bridge dinámico
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque2/bridge_estatica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Configuración de bridge estático
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque2/tarea_bloque2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Actividad práctica
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Bloque 3. Servicios de red esenciales (DHCP y NAT)
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Bloque 3. Servicios de red esenciales (DHCP y NAT)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    1. Configuración de DHCP Server sobre un bridge, de manera manual
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Configuración de DHCP Server sobre un bridge, de manera manual
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Índice
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducción
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Índice
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducción
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="configuracion-de-dhcp-server-sobre-un-bridge-de-manera-manual">Configuración de DHCP Server sobre un bridge, de manera manual.</h1>
+<h2 id="indice">Índice</h2>
+<p>Introducción
+Escenario a configurar
+Configuración del bridge 
+Creación del bridge LAN-10-10 
+Asignación de las interfaces físicas al bridge
+Asignación manual de IP al bridge
+Creación del pool de IPs
+Configuración del DHCP Network 
+Activación del DHCP Server sobre el bridge
+Validación del servicio DHCP 
+Comprobación de conectividad entre el cliente y el router
+Eliminando la configuración aplicada </p>
+<h2 id="introduccion">Introducción</h2>
+<p>En entornos reales basados en RouterOS, la red local (LAN) rara vez se gestiona a 
+través de una única interfaz física. Lo habitual es agrupar varios puertos Ethernet —
+y, en muchos casos, interfaces inalámbricas— mediante un bridge, que actúa 
+como un dominio de capa 2 común para todos los dispositivos internos.</p>
+<p>En este contexto, la configuración del DHCP Server debe realizarse sobre el 
+bridge, y no sobre interfaces individuales, con el objetivo de garantizar que todos 
+los equipos conectados a la LAN, independientemente del puerto físico utilizado, 
+reciban correctamente su configuración IP..</p>
+<p>RouterOS implementa el servicio DHCP de forma modular y explícita, separando 
+claramente:
+• el rango de direcciones asignables,
+• los parámetros de red ofrecidos a los clientes,
+• y el servicio DHCP asociado a una interfaz concreta.</p>
+<p>Esta arquitectura proporciona una gran flexibilidad, pero exige un alto grado de 
+precisión en la configuración. Un error frecuente, incluso entre usuarios con 
+experiencia en redes, consiste en activar el DHCP Server sobre una interfaz 
+incorrecta o no coherente con el diseño de la LAN, lo que puede provocar fallos de 
+conectividad difíciles de diagnosticar.</p>
+<p>En este documento se describe cómo configurar correctamente un DHCP Server 
+sobre un bridge en RouterOS, prestando especial atención a las particularidades 
+del sistema, al orden lógico de configuración y a los errores más comunes 
+asociados a este escenario.</p>
+<p>Se asume que el lector ya conoce el funcionamiento general del protocolo DHCP, 
+por lo que el enfoque se centra exclusivamente en su implementación práctica en 
+MikroTik.</p>
+<h1 id="escenario-a-configurar">Escenario a configurar.</h1>
+<p>Para este tutorial se propone un escenario típico de red doméstica o de pequeña 
+oficina, en el que un router MikroTik gestiona tanto la conexión a Internet como la 
+red local.</p>
+<p>A continuación se presenta un diagrama visual del escenario, con el objetivo de 
+facilitar la comprensión de la topología antes de proceder con la configuración paso 
+a paso.</p>
+<p><img alt="img02" src="../img/80.png" /></p>
+<p>La configuración de la interfaz ether1, que proporcionará conexión a la red WAN, 
+no se abordará en este documento, ya que fue tratada en detalle en los tutoriales 
+de la semana pasada.</p>
+<p>Las interfaces ether2 y ether3 se agrupan en un bridge, formando el dominio de la 
+LAN. Sobre este bridge se configurará un DHCP Server, encargado de asignar 
+direcciones IP dinámicas a los dispositivos de la red local, dentro del rango 
+10.10.0.100 – 10.10.0.200. </p>
+<p>Esta disposición permite que todos los clientes conectados al bridge, ya sea por 
+cable o de forma inalámbrica, reciban automáticamente su configuración de red, 
+garantizando la comunicación entre los dispositivos de la red local y 
+estableciendo la base para el acceso a redes externas.</p>
+<h1 id="configuracion-del-bridge">Configuración del bridge</h1>
+<p>En primer lugar, se procederá a crear el bridge que agrupará las interfaces LAN del 
+router. Este paso es fundamental, ya que todas las interfaces que formarán parte 
+de la red local deben estar unidas en un único dominio de capa, garantizando la 
+correcta comunicación entre los dispositivos internos.</p>
+<p>Una vez creado el bridge, se asignarán al mismo las interfaces físicas 
+correspondientes (ether2 y ether3), asegurando que todo el tráfico de la red local 
+se gestione de forma centralizada a través de esta estructura.</p>
+<p>Finalmente, se asignará una dirección IP estática al bridge, que actuará como 
+puerta de enlace de la red local. Esta dirección será utilizada por los clientes 
+conectados para comunicarse con el router y, posteriormente, acceder a redes 
+externas a través de la WAN. </p>
+<p>Esta organización previa establece la base necesaria sobre la que se configurará el 
+servicio DHCP, permitiendo una asignación automática y coherente de 
+direcciones IP a los dispositivos de la LAN.</p>
+<h1 id="creacion-del-bridge-lan-10-10">Creación del bridge LAN-10-10</h1>
+<p>Partiremos del escenario definido en la sección “AF08 - Configuración de IP 
+dinámica sobre bridge”, en el que contamos con un router con conectividad a 
+Internet a través de un bridge que incluye la interfaz ether1.</p>
+<p><img alt="img02" src="../img/81.png" /></p>
+<p>A modo de resumen, se indican a continuación los comandos necesarios para 
+configurar la interfaz ether1 en caso de partir de un router limpio. Esta 
+configuración establece el acceso a la red WAN mediante DHCP:
+<div class="highlight"><pre><span></span><code>interface/bridge/add<span class="w"> </span><span class="nv">name</span><span class="o">=</span>bridge-gateway<span class="w"> </span><span class="nv">comment</span><span class="o">=</span>”Bridge<span class="w"> </span>Gateway”
+interface/bridge/port/add<span class="w"> </span><span class="nv">bridge</span><span class="o">=</span>bridge-gateway<span class="w"> </span><span class="nv">interface</span><span class="o">=</span>ether1
+ip/dhcp-client/add<span class="w"> </span><span class="nv">interface</span><span class="o">=</span>bridge-gateway<span class="w"> </span><span class="nv">disable</span><span class="o">=</span>no
+</code></pre></div></p>
+<p>!!! [warning] Nota técnica: se asume que la interfaz WAN se gestiona 
+mediante DHCP y que el bridge “bridge-gateway” actúa 
+exclusivamente como enlace hacia la red externa</p>
+<p>A continuación, se procederá a crear el nuevo bridge que dará servicio a la red local 
+10.10.0.0/24, encargado de agrupar las interfaces LAN y de actuar posteriormente 
+como puerta de enlace de la red interna, ejecutando el siguiente comando:</p>
+<p>interface/bridge/add name=bridge-10-10 comment=”Bridge red 10.10”
+<img alt="img02" src="../img/82.png" />
+Por último, verificamos que el bridge se ha creado correctamente ejecutando:
+<div class="highlight"><pre><span></span><code>interface/bridge/print
+</code></pre></div>
+En la salida del comando debe aparecer el bridge bridge-10-10 junto con el bridge 
+utilizado para la conexión WAN
+<img alt="img02" src="../img/83.png" /></p>
+<h1 id="asignacion-de-las-interfaces-fisicas-al-bridge">Asignación de las interfaces físicas al bridge</h1>
+<p>En primer lugar, listamos los bridges configurados en el router para comprobar su 
+estado actual, ejecutando el siguiente comando: 
+<div class="highlight"><pre><span></span><code>interface/bridge/print
+</code></pre></div>
+<img alt="img02" src="../img/84.png" /></p>
+<p>A continuación, añadimos las interfaces físicas ether2 y ether3 al bridge bridge-
+10-10, que actuará como dominio de la red local:
+<div class="highlight"><pre><span></span><code>interface/bridge/port/add<span class="w"> </span><span class="nv">bridge</span><span class="o">=</span>bridge-10-10<span class="w"> </span><span class="nv">interface</span><span class="o">=</span>ether2
+interface/bridge/port/add<span class="w"> </span><span class="nv">bridge</span><span class="o">=</span>bridge-10-10<span class="w"> </span><span class="nv">interface</span><span class="o">=</span>ether3
+</code></pre></div>
+<img alt="img02" src="../img/85.png" /></p>
+<p>Una vez añadidas al bridge, las interfaces ether2 y ether3 dejan de ser puntos 
+lógicos de red de forma individual. A partir de este momento, el punto lógico de 
+comunicación pasa a ser el bridge, que representa a toda la red LAN a nivel de 
+capa 3.</p>
+<p>Por último, verificamos que las interfaces se han añadido correctamente al bridge 
+ejecutando:
+<div class="highlight"><pre><span></span><code>interface/bridge/port/print
+</code></pre></div>
+En la salida del comando deben aparecer ether2 y ether3 asociadas al bridge-10-
+10, confirmando que la estructura de la LAN se ha configurado correctamente.
+<img alt="img02" src="../img/86.png" /></p>
+<h1 id="asignacion-manual-de-ip-al-bridge">Asignación manual de IP al bridge</h1>
+<p>Para finalizar el ejemplo, vamos a asignar una dirección IP al bridge de forma 
+manual.</p>
+<p>Una vez que las interfaces físicas forman parte de un bridge, la configuración IP 
+debe realizarse siempre sobre el bridge, ya que este pasa a ser el punto lógico de 
+red.</p>
+<p>En primer lugar, listamos los bridges existentes en el router: 
+<img alt="img02" src="../img/87.png" />
+<div class="highlight"><pre><span></span><code>interface/bridge/print
+</code></pre></div>
+En este caso, configuraremos el bridge bridge-10-10, asignándole la dirección IP 
+10.10.0.1/24, que actuará como puerta de enlace de la red:
+<div class="highlight"><pre><span></span><code>Ip/address/add<span class="w"> </span><span class="nv">address</span><span class="o">=</span><span class="m">10</span>.10.0.1/24<span class="w"> </span><span class="nv">interface</span><span class="o">=</span>bridge-10-10
+<span class="nv">comment</span><span class="o">=</span>“IP<span class="w"> </span>bridge<span class="w"> </span><span class="m">10</span>.10”
+</code></pre></div>
+<img alt="img02" src="../img/88.png" /></p>
+<p>Comprobamos que la dirección IP se ha asignado correctamente al bridge:
+<div class="highlight"><pre><span></span><code>ip/address/print
+</code></pre></div>
+En este punto, debe observarse que la IP está asociada al bridge y no a las interfaces 
+físicas (ether2, ether3).</p>
+<p><img alt="img02" src="../img/89.png" /></p>
+<p>Al asignar una IP a una interfaz o bridge, RouterOS crea automáticamente la ruta de 
+conexión correspondiente a esa red.</p>
+<p>Podemos verificarlo con el siguiente comando.
+<div class="highlight"><pre><span></span><code>ip/route/print
+</code></pre></div>
+Deberá aparecer una entrada dinámica y activa para la red 10.10.0.0/24, asociada 
+al bridge bridge-10-10</p>
+<p><img alt="img02" src="../img/90.png" /></p>
+<h1 id="creacion-del-pool-de-ips">Creación del pool de IPs</h1>
+<p>El IP Pool define el rango de direcciones que el DHCP Server podrá asignar 
+dinámicamente a los clientes de la red local.</p>
+<p>Para la red 10.10.0.0/24, crearemos un pool con direcciones comprendidas entre 
+10.10.0.100 y 10.10.0.200, ejecutando el siguiente comando: </p>
+<p>ip/pool/add name=pool-10-10 ranges=10.10.0.100-10.10.0.200
+<img alt="img02" src="../img/91.png" />
+Para verificar que el pool se ha creado correctamente, ejecutamos:
+<div class="highlight"><pre><span></span><code>ip/pool/print
+</code></pre></div>
+<img alt="img02" src="../img/92.png" /></p>
+<h1 id="configuracion-del-dhcp-network">Configuración del DHCP Network</h1>
+<p>El DHCP Network define los parámetros de red que se entregarán a los clientes, 
+y no las direcciones IP individuales. Entre estos parámetros se incluyen:</p>
+<p>• La dirección de red.
+• La IP de la puerta de enlace (gateway).
+• Las IPs de los servidores DNS.
+• Opcionalmente, el dominio al que pertenecerán los clientes.</p>
+<p>Para configurar estos parámetros en la red 10.10.0.0/24, ejecutamos:
+<div class="highlight"><pre><span></span><code>ip/dhcp-server/network/add<span class="w"> </span><span class="nv">address</span><span class="o">=</span><span class="m">10</span>.10.0.0/24<span class="w"> </span>
+<span class="nv">gateway</span><span class="o">=</span><span class="m">10</span>.10.0.1<span class="w"> </span>dns-server<span class="o">=</span><span class="m">10</span>.10.0.1,8.8.8.8
+</code></pre></div>
+<img alt="img02" src="../img/93.png" />
+Comprobamos que la configuración se ha generado correctamente con:
+<div class="highlight"><pre><span></span><code>ip/dhcp-server/network/print
+</code></pre></div>
+<img alt="img02" src="../img/94.png" /></p>
+<h1 id="activacion-del-dhcp-server-sobre-el-bridge">Activación del DHCP Server sobre el bridge</h1>
+<p>El DHCP Server es el servicio que escucha las solicitudes de configuración de red 
+de los clientes y les asigna direcciones IP a partir del pool definido previamente.</p>
+<p>Al activarlo, se asocia una interfaz de red con un pool de direcciones y se 
+establece el tiempo de concesión (lease time), que determina durante cuánto 
+tiempo una dirección IP permanece asignada a un cliente antes de ser renovada.</p>
+<p>Para activar el DHCP Server en el bridge bridge-10-10, usando el pool pool-10-10 y 
+un lease time de 1 hora (3600 segundos), ejecutamos:
+<div class="highlight"><pre><span></span><code>ip/dhcp-server/add<span class="w"> </span><span class="nv">name</span><span class="o">=</span>dhcp-10-10<span class="w"> </span><span class="nv">interface</span><span class="o">=</span>bridge-10-10
+address-pool<span class="o">=</span>pool-10-10<span class="w"> </span>lease-time<span class="o">=</span><span class="m">3600</span>
+</code></pre></div>
+<img alt="img02" src="../img/95.png" /></p>
+<p>Podemos verificar que el DHCP Server se ha activado correctamente ejecutando el 
+siguiente comando:
+<div class="highlight"><pre><span></span><code>ip/dhcp-server/print
+</code></pre></div>
+En la salida se debe observar:</p>
+<p>• El nombre del servidor (dhcp-10-10)
+• La interfaz asociada (bridge-10-10)
+• El pool de direcciones asignado (pool-10-10)
+• El lease time configurado</p>
+<p><img alt="img02" src="../img/96.png" /></p>
+<p>Esto confirma que el servicio está activo y listo para asignar direcciones IP a los 
+clientes de la red local.</p>
+<h1 id="validacion-del-servicio-dhcp">Validación del servicio DHCP</h1>
+<p>Para comprobar el correcto funcionamiento del DHCP Server, podemos conectar 
+cualquier equipo cliente a la interfaz ether2 del router. En este ejemplo se ha 
+utilizado una instancia de Alpine Linux como cliente DHCP..</p>
+<p><img alt="img02" src="../img/97.png" />
+Una vez iniciada la instancia, abrimos la consola y forzamos la renovación de la 
+dirección IP ejecutando.
+<div class="highlight"><pre><span></span><code>udhcpc<span class="w"> </span>-i<span class="w"> </span>eth0
+</code></pre></div>
+Durante la ejecución, se puede observar en el terminal el proceso de negociación 
+DHCP, incluyendo la solicitud y la concesión de la dirección IP por parte del 
+servidor.</p>
+<p><img alt="img02" src="../img/98.png" /></p>
+<p>Verificamos la configuración de red asignada al cliente con:
+<div class="highlight"><pre><span></span><code>ip<span class="w"> </span>a
+</code></pre></div>
+Debemos comprobar que la dirección IP obtenida pertenece al pool configurado 
+previamente en el router MikroTik (10.10.0.100–10.10.0.200)</p>
+<p><img alt="img02" src="../img/99.png" /></p>
+<p>Desde la consola del router, es posible confirmar la asignación revisando el lease 
+creado al conceder la IP al cliente:
+<div class="highlight"><pre><span></span><code>ip/dhcp-server/lease/print
+</code></pre></div>
+En la salida se mostrará el cliente, la IP asignada, el tiempo restante del lease y 
+el estado de la asignación, confirmando que el proceso DHCP se ha completado 
+correctamente</p>
+<p><img alt="img02" src="../img/100.png" /></p>
+<p>Este procedimiento valida que el DHCP funciona correctamente y que los equipos 
+conectados al bridge reciben su configuración IP automáticamente, tanto desde el 
+cliente como desde el servidor.</p>
+<h1 id="comprobacion-de-conectividad-entre-el-cliente-y-el-router">Comprobación de conectividad entre el cliente y el router</h1>
+<p>Para asegurarnos de que la red local y el DHCP funcionan correctamente, es 
+importante verificar la conectividad entre el cliente y el router.</p>
+<p>Desde el terminal de la instancia Alpine Linux, comprobamos la conectividad hacia 
+la puerta de enlace de la red (el bridge del router) ejecutando:.
+<div class="highlight"><pre><span></span><code>ping<span class="w"> </span><span class="m">10</span>.10.0.1
+</code></pre></div>
+Si el ping responde correctamente, significa que el cliente ha recibido la IP 
+adecuada y puede comunicarse con el router.</p>
+<p><img alt="img02" src="../img/101.png" /></p>
+<p>De manera inversa, podemos comprobar que el router puede comunicarse con el 
+cliente.</p>
+<p>Primero, revisamos en el lease del DHCP Server la IP asignada al cliente
+<div class="highlight"><pre><span></span><code>ip/dhcp-server/lease/print
+</code></pre></div>
+En la salida, observaremos la dirección IP asignada a la instancia de Alpine Linux 
+(por ejemplo, 10.10.0.200).</p>
+<p><img alt="img02" src="../img/102.png" /></p>
+<p>A continuación, ejecutamos un ping desde la consola del router hacia el cliente.
+<div class="highlight"><pre><span></span><code>ping<span class="w"> </span><span class="m">10</span>.10.0.200
+</code></pre></div>
+Si la respuesta es positiva, esto confirma que la comunicación bidireccional entre 
+el router y el cliente funciona correctamente, y que el DHCP ha asignado la IP de 
+forma adecuada.</p>
+<p><img alt="img02" src="../img/103.png" /></p>
+<p>Este procedimiento garantiza que el cliente puede comunicarse con la puerta de 
+enlace y que el router puede llegar al cliente, estableciendo así la base para la 
+conectividad interna y futura salida a Internet.</p>
+<h1 id="eliminando-la-configuracion-aplicada">Eliminando la configuración aplicada.</h1>
+<p>Antes de iniciar un nuevo escenario o repetir un laboratorio, es fundamental 
+eliminar correctamente la configuración aplicada en el router. Este 
+procedimiento evita que queden restos de configuraciones anteriores que puedan 
+generar comportamientos inesperados o errores complejos de diagnosticar.</p>
+<p>Aunque RouterOS ofrece la opción de realizar un reset completo del equipo, en 
+entornos formativos y profesionales resulta mucho más instructivo y seguro 
+desmontar la configuración de forma manual y ordenada, respetando las 
+dependencias entre los distintos elementos (DHCP, direcciones IP, bridges, pools, 
+etc.).</p>
+<p>En esta sección se describe el procedimiento paso a paso para retirar toda la 
+configuración implementada en el escenario, comprendiendo qué se elimina en 
+cada momento y por qué, dejando el router en un estado limpio y listo para futuras 
+prácticas o nuevas configuraciones.</p>
+<p>Comenzamos eliminando el servicio DHCP, ya que depende directamente del resto 
+de elementos de la configuración.</p>
+<p>Listamos los servidores DHCP configurados:
+<div class="highlight"><pre><span></span><code>ip/dhcp-server/print
+</code></pre></div>
+<img alt="img02" src="../img/104.png" /></p>
+<p>Eliminamos el DHCP Server creado para el escenario (en este caso, dhcp-10-10):
+<div class="highlight"><pre><span></span><code>ip/dhcp-server/remove<span class="w"> </span>dhcp-10-10
+</code></pre></div>
+<img alt="img02" src="../img/105.png" /></p>
+<p>Alternativamente, también podría eliminarse utilizando su índice, por ejemplo:
+<div class="highlight"><pre><span></span><code>ip/dhcp-server/remove<span class="w"> </span><span class="m">0</span>”
+</code></pre></div>
+Tras eliminar el servidor, los leases asociados se eliminan automáticamente. 
+Podemos comprobarlo ejecutando:
+<div class="highlight"><pre><span></span><code>ip/dhcp-server/lease/print
+</code></pre></div>
+<img alt="img02" src="../img/106.png" /></p>
+<p>En configuraciones más complejas podría existir algún lease residual. En ese caso, 
+podría eliminarse manualmente mediante su índice:
+<div class="highlight"><pre><span></span><code>ip/dhcp-server/lease/remove<span class="w"> </span>&lt;&lt;índice&gt;&gt;
+</code></pre></div>
+El siguiente paso es eliminar la configuración de DHCP Network, que define los 
+parámetros de red ofrecidos a los clientes. Listamos las redes DHCP configuradas:
+<div class="highlight"><pre><span></span><code>/ip/dhcp-server/network/print
+</code></pre></div>
+<img alt="img02" src="../img/107.png" /></p>
+<p>Eliminamos la red correspondiente al escenario (en el ejemplo, el índice 0):
+<div class="highlight"><pre><span></span><code>/ip/dhcp-server/network/remove<span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+<img alt="img02" src="../img/108.png" /></p>
+<p>A continuación, eliminamos el pool de direcciones utilizado por el DHCP Server.</p>
+<p>Listamos los pools configurados:
+<div class="highlight"><pre><span></span><code>/ip/pool/print
+</code></pre></div>
+<img alt="img02" src="../img/109.png" /></p>
+<p>Eliminamos el pool creado para este laboratorio:
+<div class="highlight"><pre><span></span><code>/ip/pool/remove<span class="w"> </span>pool-10-10
+</code></pre></div>
+<img alt="img02" src="../img/110.png" /></p>
+<p>Antes de eliminar el bridge, es obligatorio retirar cualquier dirección IP asociada.</p>
+<p>Listamos las direcciones IP configuradas en el router.
+<div class="highlight"><pre><span></span><code>/ip/address/print
+</code></pre></div>
+<img alt="img02" src="../img/111.png" /></p>
+<p>Eliminamos la IP asignada al bridge bridge-10-10, utilizando el índice 
+correspondiente o el filtro por interfaz:
+<div class="highlight"><pre><span></span><code>/ip/address/remove<span class="w"> </span><span class="o">[</span>find<span class="w"> </span><span class="nv">interface</span><span class="o">=</span>bridge-10-10<span class="o">]</span>
+</code></pre></div>
+O bien:
+<div class="highlight"><pre><span></span><code>/ip/address/remove<span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+<img alt="img02" src="../img/112.png" /></p>
+<p>Un bridge no puede eliminarse mientras tenga interfaces asociadas. Listamos los 
+puertos del bridge:
+<div class="highlight"><pre><span></span><code>/interface/bridge/port/print
+</code></pre></div>
+<img alt="img02" src="../img/113.png" /></p>
+<p>Eliminamos las interfaces ether2 y ether3 del bridge:
+<div class="highlight"><pre><span></span><code>/interface/bridge/port/remove<span class="w"> </span><span class="m">2</span>
+/interface/bridge/port/remove<span class="w"> </span><span class="m">1</span>
+</code></pre></div>
+<img alt="img02" src="../img/114.png" /></p>
+<p>Una vez eliminado todo lo anterior, el bridge puede borrarse sin problemas.</p>
+<p>Listamos los bridges configurados:
+<div class="highlight"><pre><span></span><code>/interface/bridge/print
+</code></pre></div>
+<img alt="img02" src="../img/115.png" /></p>
+<p>Eliminamos el bridge bridge-10-10, utilizando su nombre como parámetro:
+<div class="highlight"><pre><span></span><code>/interface/bridge/remove<span class="w"> </span>bridge-10-10
+</code></pre></div>
+o utilizando su índice:
+<div class="highlight"><pre><span></span><code>/interface/bridge/remove<span class="w"> </span><span class="m">1</span>
+</code></pre></div>
+<img alt="img02" src="../img/116.png" /></p>
+<p>En este punto solo quedaría eliminar la configuración de la interfaz ether1, 
+correspondiente a la conexión WAN, que ha sido tratada en detalle en los tutoriales 
+de la semana pasada.</p>
+<p>Para comprobar que el router ha quedado limpio, ejecutamos los siguientes 
+comandos:
+<div class="highlight"><pre><span></span><code>interface/bridge/print
+ip/address/print
+ip/dhcp-server/network/print
+ip/dhcp-server/print
+ip/pool/print
+</code></pre></div>
+Si no aparece ninguna configuración relacionada con la red 10.10.0.0/24, el router 
+está correctamente limpio y listo para un nuevo laboratorio.</p>
+<p><img alt="img02" src="../img/117.png" /></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>
