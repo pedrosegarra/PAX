@@ -17,6 +17,7 @@ nav:
       - 6. Actividad práctica: bloque2/tarea_bloque2.md
   - Bloque 3. Servicios de red esenciales (DHCP y NAT):
       - 1. Configuración de DHCP Server sobre un bridge, de manera manual: bloque3/dhcp_bridge_manual.md
+      - 2. Configuración de DHCP Server sobre un bridge, utilizando el asistente: bloque3/dhcp_bridge_asistente.md
       
 
     
