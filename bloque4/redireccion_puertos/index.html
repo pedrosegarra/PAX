@@ -9,10 +9,8 @@
       
       
       
-        <link rel="prev" href="../ip_estatica/">
+        <link rel="prev" href="../configuracion_reglas_firewall/">
       
-      
-        <link rel="next" href="../bridge_estatica/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -20,7 +18,7 @@
     
     
       
-        <title>4. Configuración de bridge dinámico - Curso MikroTik</title>
+        <title>2. Redirección de puertos (Port Forwarding) - Curso MikroTik</title>
       
     
     
@@ -62,7 +60,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#configuracion-de-ip-dinamica-sobre-interfaz-fisica" class="md-skip">
+        <a href="#redireccion-de-puertos" class="md-skip">
           Skip to content
         </a>
       
@@ -98,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              4. Configuración de bridge dinámico
+              2. Redirección de puertos (Port Forwarding)
             
           </span>
         </div>
@@ -327,20 +325,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
@@ -356,7 +352,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Bloque 2. Configuración básica
@@ -370,7 +366,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../eliminar/" class="md-nav__link">
+      <a href="../../bloque2/eliminar/" class="md-nav__link">
         
   
   
@@ -393,7 +389,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../dhcp/" class="md-nav__link">
+      <a href="../../bloque2/dhcp/" class="md-nav__link">
         
   
   
@@ -416,7 +412,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ip_estatica/" class="md-nav__link">
+      <a href="../../bloque2/ip_estatica/" class="md-nav__link">
         
   
   
@@ -436,19 +432,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../bloque2/bridge_dinamico/" class="md-nav__link">
         
   
   
@@ -459,7 +446,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -472,7 +458,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../bridge_estatica/" class="md-nav__link">
+      <a href="../../bloque2/bridge_estatica/" class="md-nav__link">
         
   
   
@@ -495,7 +481,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tarea_bloque2/" class="md-nav__link">
+      <a href="../../bloque2/tarea_bloque2/" class="md-nav__link">
         
   
   
@@ -682,18 +668,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
@@ -709,7 +697,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Bloque 4. Firewall, redirección de puertos y DMZ
@@ -723,7 +711,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../bloque4/configuracion_reglas_firewall/" class="md-nav__link">
+      <a href="../configuracion_reglas_firewall/" class="md-nav__link">
         
   
   
@@ -743,10 +731,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../bloque4/redireccion_puertos/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -757,6 +754,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -803,279 +801,80 @@
 
 
 
-<h1 id="configuracion-de-ip-dinamica-sobre-interfaz-fisica">Configuración de IP dinámica sobre interfaz física.</h1>
+<h1 id="redireccion-de-puertos">Redirección de puertos.</h1>
 <h1 id="indice">Índice</h1>
-<p>Introducción<br />
-Ejemplo 3 — Configuración de IP dinámica sobre un bridge<br />
-Creación del bridge Gateway 
-Asignación de la interfaz física al bridge 
-Eliminando la configuración aplicada 
-Eliminación del cliente DHCP  </p>
+<p>Introducción
+Flujo del tráfico en una redirección de puertos en MikroTik
+Estructura general de una regla de redirección de puertos (dst-nat)
+Ejemplo
+Regla NAT: redirección de puertos (dst-nat).
+Regla de firewall: permitir el tráfico redirigido (forward).</p>
 <h1 id="introduccion">Introducción</h1>
-<p>A lo largo de esta práctica volveremos a trabajar sobre la configuración de la 
-interfaz que actuará como gateway, obteniendo su dirección IP de un servidor 
-DHCP, pero en lugar de configurar un cliente DHCP sobre la interfaz física ether1, 
-realizaremos la configuración sobre un bridge.</p>
-<p>Un bridge en RouterOS es una entidad lógica que actúa como un switch virtual, 
-permitiendo agrupar varias interfaces físicas para que funcionen como un único 
-segmento de red. La dirección IP, las rutas y los servicios de red se aplican al bridge, 
-no a los puertos individuales, lo que permite separar claramente la configuración 
-de red del hardware físico.</p>
-<p>Esta abstracción aporta ventajas operativas clave. Por un lado, permite que varios 
-puertos físicos del dispositivo se comporten como una única red lógica. Por 
-otro, si un puerto físico falla o necesita ser sustituido, basta con retirarlo del 
-bridge y añadir otro puerto, sin modificar la dirección IP, las rutas ni los servicios 
-asociados. De este modo, la red sigue funcionando sin cambios estructurales y se 
-reducen tanto los tiempos de intervención como la probabilidad de errores.</p>
-<p>Desde el punto de vista conceptual, es importante interiorizar que:</p>
-<p>• Las interfaces físicas actúan como puertos.<br />
-• El bridge actúa como un switch lógico.<br />
-• La dirección IP se asigna al bridge, no a cada puerto.  </p>
-<h1 id="ejemplo-3-configuracion-de-ip-dinamica-sobre-un-bridge">Ejemplo 3 — Configuración de IP dinámica sobre un bridge</h1>
-<p>Este tercer escenario representa una evolución del modelo inicial de configuración, 
-introduciendo una capa de abstracción que aporta resiliencia frente al fallo de un 
-puerto físico.</p>
-<p>Para ello, se creará un bridge al que se añadirá la primera interfaz del router. La 
-configuración de red se aplicará sobre este bridge, y no directamente sobre la 
-interfaz física. A continuación, se configurará un cliente DHCP en el bridge, se 
-analizará la información de red recibida automáticamente y se verificará que el 
-router puede comunicarse correctamente a través del bridge sin necesidad de 
-configurar manualmente el direccionamiento IP.</p>
-<h1 id="creacion-del-bridge-gateway">Creación del bridge Gateway</h1>
-<p>En primer lugar, vamos a listar los bridges configurados en nuestro router, 
-ejecutando el siguiente comando: 
-<div class="highlight"><pre><span></span><code>interface/bridge/print
+<p>Hasta este punto del curso, se ha trabajado la configuración del firewall con el objetivo de controlar y proteger el tráfico que circula por el router, aplicando políticas de seguridad basadas en el principio de mínimo privilegio: permitir únicamente el tráfico necesario y bloquear el resto.</p>
+<p>Sin embargo, en escenarios reales de administración de redes, no siempre es suficiente con impedir accesos desde el exterior. En muchas ocasiones es necesario publicar servicios internos, de forma que puedan ser accesibles desde Internet de manera controlada.</p>
+<p>La redirección de puertos permite que el tráfico entrante dirigido a la dirección IP del router (generalmente su dirección IP pública) y a un puerto concreto sea enviado a un equipo específico de la red interna. Este mecanismo es habitual para exponer servicios como servidores web, aplicaciones corporativas o accesos remotos, manteniendo el resto de la red protegida tras el router.</p>
+<p>En MikroTik, la redirección de puertos no se implementa mediante reglas de firewall, sino a través de reglas de NAT, concretamente de tipo dst-nat. Estas reglas modifican el destino de los paquetes entrantes y hacen que el tráfico pase a ser tratado por la cadena forward, donde el firewall decide finalmente si se permite o se bloquea la comunicación.</p>
+<p>Es importante entender que una redirección de puertos mal configurada puede comprometer seriamente la seguridad de la red, ya que expone directamente un servicio interno a Internet. Por este motivo, la redirección de puertos debe ir siempre acompañada de reglas de firewall específicas y bien ubicadas, que limiten el acceso únicamente a lo estrictamente necesario.</p>
+<p>En los siguientes apartados se estudiará el funcionamiento de la redirección de puertos en MikroTik desde un enfoque práctico, analizando el flujo del tráfico, la relación entre NAT y firewall, y aplicando configuraciones típicas que servirán de base para escenarios más avanzados, como la implementación de una DMZ.</p>
+<h1 id="flujo-del-trafico-en-una-redireccion-de-puertos-en-mikrotik">Flujo del tráfico en una redirección de puertos en MikroTik.</h1>
+<p>Antes de escribir una regla de redirección, es fundamental entender qué ocurre realmente cuando un paquete llega al router (normalmente desde internet) y queremos redirigirlo a un servidor interno. Este punto suele ser la mayor fuente de errores conceptuales.</p>
+<p>De manera simplificada, podemos decir que:
+- El paquete llega al router, normalmente desde Internet, a través de la interfaz WAN.
+- El router evalúa las reglas de NAT de tipo dst-nat, comprobando si existe alguna regla que coincida con las características del paquete (interfaz de entrada, protocolo y puerto destino).
+- Si una regla dst-nat hace match, el router modifica el paquete:
+  - Cambia la dirección IP destino por la del servidor interno.
+  - Cambia el puerto destino por el puerto en el que escucha el servicio interno.
+- Tras aplicar el dst-nat, el tráfico pasa a la cadena forward.
+- El paquete ya no va dirigido al router, sino a un host interno, por lo que no se evalúa en la cadena input, sino en forward, donde el firewall decide finalmente si la comunicación se permite o se bloquea.</p>
+<p>NAT redirige el tráfico, pero el firewall decide si pasa o no.
+Una redirección sin firewall es una mala configuración.</p>
+<h1 id="estructura-general-de-una-regla-de-redireccion-de-puertos-dst-nat">Estructura general de una regla de redirección de puertos (dst-nat)</h1>
+<p>De forma genérica, una regla de redirección de puertos tiene la siguiente estructura:
+<div class="highlight"><pre><span></span><code>/ip firewall nat add chain=dstnat in-interface=&lt;interfaz_de_entrada&gt;
+protocol=&lt;tcp|udp&gt; dst-port=&lt;puerto_del_router&gt;
+action=dst-nat to-addresses=&lt;ip_interna&gt; to-ports=&lt;puerto_interno&gt;
 </code></pre></div>
-<img alt="img02" src="../tema01/img40.png" />
-Podemos observar cómo no hay ningún bridge configurado por defecto. </p>
-<p>Vamos a crear el bridge que actuará como Gateway de la red, ejecutando el 
-siguiente comando:
-<div class="highlight"><pre><span></span><code>interface/bridge/add<span class="w"> </span><span class="nv">name</span><span class="o">=</span>bridge-gateway<span class="w"> </span><span class="nv">comment</span><span class="o">=</span>”Bridge<span class="w"> </span>Gateway”
+Donde:
+- chain=dstnat indica que la regla se evalúa cuando el paquete entra al router y va dirigido a una IP de destino.
+- in-interface limita la aplicación de la regla a los paquetes que entran por la interfaz WAN (por ejemplo, ether1).
+- protocol indica el protocolo del paquete. Es obligatorio cuando se filtra por puerto. Normalmente tcp o udp.
+- dst-port es el puerto destino original del paquete, es decir, el puerto público al que se conecta el cliente desde Internet.
+- action=dst-nat indica que el router va a modificar el destino del paquete.
+- to-addresses indica la dirección IP del servidor interno al que se redirige el tráfico.
+- to-ports indica el puerto del servicio en el servidor interno (puede coincidir o no con el puerto externo).</p>
+<p>Importante:
+- Si el router utiliza masquerade o src-nat para la salida a Internet, el tráfico de respuesta funcionará automáticamente.
+- Si no existe una regla de src-nat, la redirección no será funcional, aunque la regla dst-nat sea correcta.</p>
+<p>Este punto es clave para evitar la típica pregunta: “La regla está bien, pero no funciona”.</p>
+<h1 id="ejemplo">Ejemplo.</h1>
+<p>Partiendo del siguiente escenario, en el que suponemos configurada:
+- La red interna 192.168.1.0/24, en el bridge lan, asociado a ether2.
+- Acceso a internet desde la red interna, mediante la configuración de NAT.</p>
+<p><img alt="img02" src="../img/20.png" />
+Vamos a configurar la redirección de puertos para permitir acceso al servidor web publicado en la IP 192.168.1.100 puerto 443.</p>
+<h1 id="regla-nat-redireccion-de-puertos-dst-nat">Regla NAT: redirección de puertos (dst-nat).</h1>
+<p>En primer lugar, debemos escribir la regla NAT que modifique la dirección y puerto destino del paquete.</p>
+<p>Para ello, escribiremos la siguiente regla:
+<div class="highlight"><pre><span></span><code>ip/firewall/nat/add chain=dstnat
+in-interface=ether1 protocol=tcp dst-port=443
+action=dst-nat to-addresses=192.168.1.100 to-ports=443
+comment=&quot;Redirección HTTPS a servidor interno&quot;
 </code></pre></div>
-<img alt="img02" src="../tema01/img41.png" /></p>
-<p>Verificamos que todo ha ido bien:
-<div class="highlight"><pre><span></span><code>interface/bridge/print
+Analicemos la regla paso a paso:
+- chain=dstnat indica que queremos modificar el destino del paquete.
+- in-interface=ether1 indica que la regla solo se aplica al tráfico que entra por ether1.
+- protocol=tcp indica que solo se redirigirán paquetes TCP (dado que queremos redirigir tráfico HTTPS)
+- dst-port=443 indica que solo se redirigirán los paquetes que se dirijan al puerto 443 del router (puerto de HTTPS).
+- action=dst-nat indica que se va a cambiar el destino del paquete.
+- to-addresses / to-ports indica el nuevo destino: IP del servicio interno y su puerto real.</p>
+<h1 id="regla-de-firewall-permitir-el-trafico-redirigido-forward">Regla de firewall: permitir el tráfico redirigido (forward).</h1>
+<p>Una vez evaluada la regla dstnat el paquete deja de pertenecer al chain input, para pasar a pertenecer al chain forward, por lo que será necesario añadir la regla pertinente para que el tráfico pueda llegar al servicio destino.</p>
+<p>Para ello, debemos añadir la siguiente regla:
+<div class="highlight"><pre><span></span><code>ip/firewall/filter/add chain=forward in-interface=ether1 connection-state=new
+protocol=tcp dst-address=192.168.1.100 dst-port=443 action=accept
+comment=&quot;Permitir HTTPS redirigido al servidor&quot;
 </code></pre></div>
-<img alt="img02" src="../tema01/img42.png" /></p>
-<h1 id="asignacion-de-la-interfaz-fisica-al-bridge">Asignación de la interfaz física al bridge</h1>
-<p>Vamos a listar los bridges configurados en nuestro router, ejecutando el siguiente 
-comando: 
-<div class="highlight"><pre><span></span><code>interface/bridge/print
-</code></pre></div>
-<img alt="img02" src="../tema01/img43.png" />
-Añadimos la interfaz ether1 al bridge “bridge-gateway”:
-<div class="highlight"><pre><span></span><code>interface/bridge/port/add<span class="w"> </span><span class="nv">bridge</span><span class="o">=</span>bridge-gateway<span class="w"> </span><span class="nv">interface</span><span class="o">=</span>ether1
-</code></pre></div></p>
-<p><img alt="img02" src="../tema01/img44.png" />
-Una vez añadida al bridge, ether1 deja de ser el punto lógico de red. El punto 
-lógico pasa a ser el bridge. Verificamos que todo ha ido bien:</p>
-<p><div class="highlight"><pre><span></span><code>interface/bridge/port/print
-</code></pre></div>
-<img alt="img02" src="../tema01/img45.png" /></p>
-<h1 id="creacion-del-cliente-dhcp-en-la-interfaz-ether1">Creación del cliente DHCP en la interfaz ether1</h1>
-<p>Antes de continuar, vamos a comprobar que la interfaz ether1 y el bridge “bridge-gateway” no tienen asignada ninguna IP, tal como hemos visto en los tutoriales 
-anteriores:</p>
-<p><img alt="img02" src="../tema01/img46.png" />
-<div class="highlight"><pre><span></span><code>ip/address/print
-</code></pre></div>
-* Si existe alguna dirección IP asignada a la interfaz o el bridge, 
-debe eliminarse antes de crear el cliente DHCP.</p>
-<p>Una vez nos hemos asegurado de que la interfaz y el bridge no tienen asignada 
-ninguna IP, podemos crear el cliente DHCP sobre el bridge: 
-<div class="highlight"><pre><span></span><code>ip/dhcp-client/add<span class="w"> </span><span class="nv">interface</span><span class="o">=</span>bridge-gateway<span class="w"> </span><span class="nv">disable</span><span class="o">=</span>no
-</code></pre></div>
-<img alt="img02" src="../tema01/img47.png" />
-Como podemos observar en la captura, para comprobar los clientes DHCP activos 
-ejecutando el comando:
-<div class="highlight"><pre><span></span><code>ip/dhcp-client/print
-</code></pre></div>
-<img alt="img02" src="../tema01/img48.png" />
-En mi caso, el servidor DHCP de la red NAT ha asignado la IP 192.168.122.61/24, al 
-bridge. Esta información la podemos obtener también desde el listado de IPs 
-asignadas a interfaces, con el comando:
-<div class="highlight"><pre><span></span><code>ip/addresses/print
-</code></pre></div>
-En la captura podemos observar el flag ‘D’, que indica que la asignación de IP se ha 
-realizado de manera dinámica.</p>
-<p>Si queremos obtener información detallada de la configuración asignada por DHCP, 
-podemos ejecutar el siguiente comando:
-<div class="highlight"><pre><span></span><code>Ip/dhcp-client/print<span class="w"> </span>detail
-</code></pre></div>
-<img alt="img02" src="../tema01/img49.png" />
-En la captura podemos observar, entre otros:</p>
-<p>• La IP asignada.<br />
-• La Puerta de enlace de la red<br />
-• La IP del servidor DHCP<br />
-• La IP del servidor DNS primario<br />
-• …  </p>
-<p>También podemos comprobar la configuración asignada por DHCP (IP, ruta por 
-defecto y servidores DNS) ejecutando los siguientes comandos:
-<div class="highlight"><pre><span></span><code>Ip/address/print<span class="w">  </span>
-</code></pre></div>
-<img alt="img02" src="../tema01/img50.png" />
-<div class="highlight"><pre><span></span><code>Ip/route/print<span class="w">  </span>
-</code></pre></div>
-<img alt="img02" src="../tema01/img51.png" />
-<div class="highlight"><pre><span></span><code>Ip/dns/print<span class="w">  </span>
-</code></pre></div>
-<img alt="img02" src="../tema01/img52.png" />
-Por último, Podemos probar la conectividad de red, ejecutando un ping a 
-Google.com, por ejemplo, mediante el comando:
-<div class="highlight"><pre><span></span><code>Ping<span class="w"> </span>google.com
-</code></pre></div>
-<img alt="img02" src="../tema01/img53.png" />
-También podemos acceder al router utilizando un navegador web de la máquina 
-anfitrión, a través de la IP configurada:
-<img alt="img02" src="../tema01/img54.png" /></p>
-<h1 id="eliminando-la-configuracion-aplicada">Eliminando la configuración aplicada</h1>
-<p>Antes de continuar, vamos a eliminar toda la configuración aplicada al router, para 
-volver a tener un dispositivo limpio.</p>
-<h1 id="eliminacion-del-cliente-dhcp">Eliminación del cliente DHCP</h1>
-<p>Para mostrar los clientes DHCP configurados, ejecutamos el siguiente comando:
-<div class="highlight"><pre><span></span><code>ip/dhcp-client/print
-</code></pre></div>
-<img alt="img02" src="../tema01/img55.png" />
-Para eliminar el cliente DHCP ejecutamos el siguiente comando:
-<div class="highlight"><pre><span></span><code>Ip/dhcp-client/remove<span class="w"> </span>&lt;&lt;índice&gt;&gt;
-</code></pre></div>
-<img alt="img02" src="../tema01/img56.png" />
-Al eliminar el cliente DHCP, se eliminará toda la configuración aplicada por el 
-mismo. Podemos comprobarlo ejecutando los siguientes comandos:
-<div class="highlight"><pre><span></span><code>Ip/address/print<span class="w">  </span>
-</code></pre></div>
-<img alt="img02" src="../tema01/img57.png" />
-<div class="highlight"><pre><span></span><code>Ip/route/print<span class="w">  </span>
-</code></pre></div>
-<img alt="img02" src="../tema01/img58.png" />
-<div class="highlight"><pre><span></span><code>Ip/dns/print<span class="w">  </span>
-</code></pre></div>
-<img alt="img02" src="../tema01/img59.png" />
-Ya tenemos nuestro router sin configuraciones por defecto, preparado para la 
-siguiente práctica.</p>
-<h1 id="preguntas">Preguntas</h1>
-<details class="question">
-<summary>1. ¿Qué es un bridge en RouterOS?</summary>
-<p>Es una entidad lógica que actúa como un switch virtual, agrupando varias interfaces físicas en una sola red.</p>
-</details>
-<details class="question">
-<summary>2. ¿Dónde se configura la IP en este escenario?</summary>
-<p>La IP se configura en el bridge, no en las interfaces físicas.</p>
-</details>
-<details class="question">
-<summary>3. ¿Qué ventaja tiene usar un bridge?</summary>
-<p>Permite desacoplar la configuración de red del hardware físico, facilitando cambios sin afectar la red.</p>
-</details>
-<details class="question">
-<summary>4. ¿Qué ocurre si falla un puerto físico?</summary>
-<p>Se puede sustituir sin cambiar la configuración IP ni la red, ya que esta está en el bridge.</p>
-</details>
-<details class="question">
-<summary>5. ¿Qué papel tienen las interfaces físicas?</summary>
-<p>Actúan como puertos dentro del bridge.</p>
-</details>
-<details class="question">
-<summary>6. ¿Cómo se listan los bridges?</summary>
-<p>interface/bridge/print</p>
-</details>
-<details class="question">
-<summary>7. ¿Cómo se crea un bridge?</summary>
-<p>interface/bridge/add name=bridge-gateway</p>
-</details>
-<details class="question">
-<summary>8. ¿Cómo se añade una interfaz al bridge?</summary>
-<p>interface/bridge/port/add bridge=bridge-gateway interface=ether1</p>
-</details>
-<details class="question">
-<summary>9. ¿Qué ocurre cuando añades ether1 al bridge?</summary>
-<p>Deja de ser el punto lógico de red. El punto lógico pasa a ser el bridge.</p>
-</details>
-<details class="question">
-<summary>10. ¿Cómo verificas que la interfaz está en el bridge?</summary>
-<p>interface/bridge/port/print</p>
-</details>
-<details class="question">
-<summary>11. ¿Dónde se configura el cliente DHCP?</summary>
-<p>En el bridge (no en la interfaz física).</p>
-</details>
-<details class="question">
-<summary>12. ¿Qué comando crea el cliente DHCP?</summary>
-<p>ip/dhcp-client/add interface=bridge-gateway disable=no</p>
-</details>
-<details class="question">
-<summary>13. ¿Cómo ver los clientes DHCP?</summary>
-<p>ip/dhcp-client/print</p>
-</details>
-<details class="question">
-<summary>14. ¿Cómo ver la IP asignada?</summary>
-<p>ip/address/print</p>
-</details>
-<details class="question">
-<summary>15. ¿Qué indica el flag D?</summary>
-<p>Que la IP ha sido asignada dinámicamente.</p>
-</details>
-<details class="question">
-<summary>16. ¿Qué información proporciona DHCP?</summary>
-<p>IP, gateway, DNS, servidor DHCP, tiempo de concesión.</p>
-</details>
-<details class="question">
-<summary>17. ¿Cómo comprobar la configuración completa?</summary>
-<p>ip/address/print<br />
-ip/route/print<br />
-ip/dns/print  </p>
-</details>
-<details class="question">
-<summary>18. ¿Cómo comprobar conectividad?</summary>
-<p>ping google.com</p>
-</details>
-<details class="question">
-<summary>19. ¿Qué indica que el ping funciona?</summary>
-<p>Que hay conectividad y resolución DNS correcta.</p>
-</details>
-<details class="question">
-<summary>20. ¿Cómo ver clientes DHCP antes de eliminar?</summary>
-<p>ip/dhcp-client/print</p>
-</details>
-<details class="question">
-<summary>21. ¿Cómo eliminar el cliente DHCP?</summary>
-<p>ip/dhcp-client/remove <indice></p>
-</details>
-<details class="question">
-<summary>22. ¿Qué ocurre al eliminarlo?</summary>
-<p>Se eliminan IP, rutas y DNS configurados automáticamente.</p>
-</details>
-<details class="question">
-<summary>23. ¿Cómo comprobar que todo está limpio?</summary>
-<p>ip/address/print<br />
-ip/route/print<br />
-ip/dns/print  </p>
-</details>
-<div class="admonition warning">
-<p class="admonition-title">Importante</p>
-<p>Si existe una IP en la interfaz o en el bridge, debes eliminarla antes de configurar DHCP.</p>
-</div>
-<div class="admonition danger">
-<p class="admonition-title">Concepto clave</p>
-<p>La IP NO se configura en ether1, sino en el bridge.</p>
-</div>
-<div class="admonition tip">
-<p class="admonition-title">Consejo</p>
-<p>Piensa en el bridge como un switch virtual: la red vive ahí, no en los puertos.</p>
-</div>
-<div class="admonition info">
-<p class="admonition-title">Buenas prácticas</p>
-<p>Verifica siempre con:</p>
-<p>ip/address/print<br />
-ip/route/print<br />
-ip/dns/print  </p>
-</div>
-<div class="admonition success">
-<p class="admonition-title">Comprobación final</p>
-<p>Si ping google.com funciona, la configuración es correcta.</p>
-</div>
-<details class="question">
-<summary>💡 Pregunta clave: ¿Por qué es mejor usar bridge que interfaz física?</summary>
-<p>Porque permite mayor flexibilidad, resiliencia ante fallos y desacopla la configuración lógica del hardware.</p>
-</details>
+Debemos recordar incluir la regla en la posición correcta, para que llegue a ser evaluada, teniendo en cuenta lo aprendido hasta el momento.</p>
 
 
 

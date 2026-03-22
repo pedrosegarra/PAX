@@ -9,6 +9,10 @@
       
       
       
+        <link rel="prev" href="../../bloque3/configuracion_nat/">
+      
+      
+        <link rel="next" href="../redireccion_puertos/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -16,7 +20,7 @@
     
     
       
-        <title>Configuración de reglas de firewall. - Curso MikroTik</title>
+        <title>1. Configuración de firewall en RouterOS - Curso MikroTik</title>
       
     
     
@@ -94,7 +98,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Configuración de reglas de firewall.
+              1. Configuración de firewall en RouterOS
             
           </span>
         </div>
@@ -666,18 +670,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
@@ -693,7 +699,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Bloque 4. Firewall, redirección de puertos y DMZ
@@ -704,10 +710,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../firewall.md" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    1. Configuración de firewall en RouterOS
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -718,6 +746,179 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Índice
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducción
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-se-define-una-regla-de-firewall-en-mikrotik" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cómo se define una regla de firewall en MikroTik.
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cómo se define una regla de firewall en MikroTik.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#elementos-de-tipo-chain" class="md-nav__link">
+    <span class="md-ellipsis">
+      Elementos de tipo chain
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#elementos-de-tipo-action" class="md-nav__link">
+    <span class="md-ellipsis">
+      Elementos de tipo action
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#elementos-de-tipo-filtro-condiciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Elementos de tipo filtro (condiciones)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#procesamiento-de-las-reglas-de-firewall-en-mikrotik" class="md-nav__link">
+    <span class="md-ellipsis">
+      Procesamiento de las reglas de firewall en MikroTik.
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Procesamiento de las reglas de firewall en MikroTik.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ausencia-de-politica-implicita" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ausencia de política implícita
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplo-practico" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplo práctico.
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejemplo práctico.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-1-permitir-el-trafico-ya-establecido" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplo 1 – Permitir el tráfico ya establecido.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-2-bloquear-trafico-invalido" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplo 2 – Bloquear tráfico inválido.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-3-permitir-salida-a-internet-desde-la-lan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplo 3 – Permitir salida a Internet desde la LAN.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-4-bloquear-el-resto-del-trafico" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplo 4 – Bloquear el resto del tráfico.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-5-eliminacion-de-una-regla-configurada" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplo 5 – Eliminación de una regla configurada.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-6-anadir-una-regla-en-una-posicion-especifica" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplo 6 – Añadir una regla en una posición específica.
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -730,58 +931,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../redireccion_puertos.md" class="md-nav__link">
+      <a href="../redireccion_puertos/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     2. Redirección de puertos (Port Forwarding)
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../dmz.md" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    3. Configuración de DMZ (Zona Desmilitarizada)
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Actividad_bloque4.md" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    4. Actividad práctica
     
   </span>
   
