@@ -9,10 +9,8 @@
       
       
       
-        <link rel="prev" href="../dhcp_bridge_manual/">
+        <link rel="prev" href="../dhcp_reservas/">
       
-      
-        <link rel="next" href="../dhcp_reservas/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -20,7 +18,7 @@
     
     
       
-        <title>2. Configuración de DHCP Server sobre un bridge, utilizando el asistente - Curso MikroTik</title>
+        <title>4. Configuración de NAT (Network Address Translation) - Curso MikroTik</title>
       
     
     
@@ -62,7 +60,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#configuracion-de-dhcp-server-sobre-un-bridge-mediante-el-asistente-de-router-os" class="md-skip">
+        <a href="#configuracion-de-nat" class="md-skip">
           Skip to content
         </a>
       
@@ -98,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              2. Configuración de DHCP Server sobre un bridge, utilizando el asistente
+              4. Configuración de NAT (Network Address Translation)
             
           </span>
         </div>
@@ -573,19 +571,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../dhcp_bridge_asistente/" class="md-nav__link">
         
   
   
@@ -596,7 +585,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -629,10 +617,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../configuracion_nat/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    4. Configuración de NAT (Network Address Translation)
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -643,6 +653,89 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Índice
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducción
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#escenario-a-configurar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Escenario a configurar.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-de-nat-con-masquerade" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración de NAT con masquerade
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comprobacion-de-la-configuracion-aplicada" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comprobación de la configuración aplicada
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#eliminando-la-configuracion-aplicada" class="md-nav__link">
+    <span class="md-ellipsis">
+      Eliminando la configuración aplicada.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anexo-combinaciones-frecuentes-de-parametros-en-nat-de-salida" class="md-nav__link">
+    <span class="md-ellipsis">
+      Anexo: Combinaciones frecuentes de parámetros en NAT de salida
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -675,6 +768,77 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Índice
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducción
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#escenario-a-configurar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Escenario a configurar.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-de-nat-con-masquerade" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración de NAT con masquerade
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comprobacion-de-la-configuracion-aplicada" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comprobación de la configuración aplicada
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#eliminando-la-configuracion-aplicada" class="md-nav__link">
+    <span class="md-ellipsis">
+      Eliminando la configuración aplicada.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anexo-combinaciones-frecuentes-de-parametros-en-nat-de-salida" class="md-nav__link">
+    <span class="md-ellipsis">
+      Anexo: Combinaciones frecuentes de parámetros en NAT de salida
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -689,234 +853,123 @@
 
 
 
-<h1 id="configuracion-de-dhcp-server-sobre-un-bridge-mediante-el-asistente-de-router-os">Configuración de DHCP Server sobre un bridge mediante el asistente de Router OS.</h1>
-<h1 id="indice">Índice</h1>
-<p>Introducción </p>
-<p>Escenario a configurar </p>
-<p>Estado inicial esperado del router  </p>
-<p>Creación del servicio DHCP Server mediante la ejecución del asistente </p>
-<p>Comprobación de la configuración aplicada </p>
-<p>Validación del servicio DHCP  </p>
-<p>Comprobación de conectividad entre el cliente y el router  </p>
-<p>Eliminando la configuración aplicada</p>
-<h1 id="introduccion">Introducción</h1>
-<p>En este documento se aborda la creación de un servicio DHCP Server utilizando </p>
-<p>el  asistente  (DHCP  Setup)  integrado  en  RouterOS.  Este  método  guiado  permite </p>
-<p>desplegar rápidamente un servidor DHCP funcional, siendo especialmente útil en </p>
-<p>escenarios sencillos, laboratorios formativos o primeras configuraciones. </p>
-<p>A  diferencia  de  la  configuración  manual  —donde  cada  componente  (IP,  pool, </p>
-<p>network y servidor DHCP) se define de forma explícita—, el asistente automatiza </p>
-<p>gran parte del proceso. Sin embargo, es importante comprender  qué  elementos </p>
-<p>crea  internamente  y  con  qué  valores,  para  poder  diagnosticar  problemas  o </p>
-<p>modificar la configuración posteriormente. </p>
-<p>El escenario de partida será similar al utilizado en los documentos anteriores: </p>
-<p>•  Un router MikroTik con conectividad a Internet. </p>
-<p>•  Un bridge que agrupa las interfaces LAN. </p>
-<p>•  Una red local sobre la que se desplegará el servicio DHCP. </p>
-<p>A lo largo del documento se mostrará: </p>
-<p>•  Cómo lanzar el asistente DHCP. </p>
-<p>•  Qué preguntas realiza y qué significa cada una. </p>
-<p>•  Qué configuraciones se generan automáticamente. </p>
-<p>•  Cómo verificar y ajustar el resultado final. </p>
-<p>Este enfoque permite comparar de forma directa la configuración asistida frente a </p>
-<p>la configuración manual, reforzando la comprensión real de RouterOS y preparando </p>
-<p>al lector para entornos más complejos. </p>
-<h1 id="escenario-a-configurar">Escenario a configurar.</h1>
-<p>Para este tutorial se propone reutilizar el escenario propuesto en el documento </p>
-<p>anterior, de modo que podamos centrarnos exclusivamente en el uso del asistente </p>
-<p>de RouterOS para la creación del servicio DHCP. </p>
-<p>A continuación, se presenta un diagrama visual del escenario, con el objetivo de </p>
-<p>facilitar la comprensión de la topología antes de proceder con la configuración paso </p>
-<p>a paso. </p>
-<p><img alt="img02" src="../p2/1.png" /></p>
-<p>La configuración de la interfaz ether1, encargada de proporcionar la conexión a la </p>
-<p>red WAN, no se abordará en este documento, ya que fue tratada en detalle en los </p>
-<p>tutoriales de la semana pasada. </p>
-<p>Del mismo modo, no se explicará la creación del bridge que agrupa las interfaces </p>
-<p>ether2 y ether3, ni la asignación de la dirección IP al bridge, puesto que estos </p>
-<p>aspectos ya han sido desarrollados y validados en el documento anterior.  </p>
-<h1 id="estado-inicial-esperado-del-router">Estado inicial esperado del router</h1>
-<p>Antes de ejecutar el asistente de configuración de DHCP, es importante comprobar </p>
-<p>que  el  router  se  encuentra  en  un  estado  inicial  coherente  con  el  escenario </p>
-<p>propuesto.  Esto  evitará  conflictos  y  permitirá  que  el  asistente  genere  la </p>
-<p>configuración de forma correcta. </p>
-<p>En este punto, el router debe cumplir las siguientes condiciones: </p>
-<p>•  Existe  un  bridge  de  LAN  que  agrupa  las  interfaces  internas  (por  ejemplo, </p>
-<p>ether2 y ether3). </p>
-<p>•  El bridge tiene asignada una dirección IP estática, que actuará como puerta </p>
-<p>de enlace de la red local (por ejemplo, 10.10.0.1/24). </p>
-<p>•  No  existe  ningún  servicio  DHCP  activo  sobre  el  bridge  ni  sobre  las </p>
-<p>interfaces LAN. </p>
-<p>•  El  router  dispone  de  conectividad  a  Internet  a  través  de  la  interfaz  WAN </p>
-<p>(ether1), aunque este aspecto no se validará en este documento. </p>
-<p>Antes  de  continuar,  se  recomienda  verificar  el  estado  del  router  ejecutando  los </p>
-<p>siguientes comandos: </p>
-<p>Comprobación de bridges: 
-<div class="highlight"><pre><span></span><code>/interface/bridge/print<span class="w"> </span>
+<h1 id="configuracion-de-nat">Configuración de NAT.</h1>
+<h2 id="indice">Índice</h2>
+<p>Introducción 
+Escenario a configurar<br />
+Configuración de NAT con masquerade 
+Comprobación de la configuración aplicada<br />
+Eliminando la configuración aplicada<br />
+Anexo: Combinaciones frecuentes de parámetros en NAT de salida  </p>
+<hr />
+<h2 id="introduccion">Introducción</h2>
+<p>En este documento se explica la creación y configuración de NAT (Network Address Translation) en RouterOS, una función clave que permite a los dispositivos de una red local acceder a otras redes, como Internet, utilizando una única dirección IP pública.</p>
+<hr />
+<h2 id="escenario-a-configurar">Escenario a configurar.</h2>
+<p>Como escenario de partida, se reutiliza la configuración establecida en el documento “AF10 - Configuración de DHCP Server sobre bridge, de manera manual”, donde contamos con un bridge LAN con IP 10.10.0.1/24 y clientes conectados.</p>
+<p><img alt="img02" src="../p2/50.png" /></p>
+<hr />
+<p>A lo largo de esta guía se mostrará cómo implementar NAT mediante masquerade, asociando la salida de la red 10.10 a la interfaz ether1. Esto permitirá que todos los clientes de la red local puedan navegar por Internet correctamente, mientras se mantiene la gestión centralizada y segura de la traducción de direcciones.</p>
+<p>Para este tutorial se propone reutilizar el escenario propuesto en el documento anterior, de modo que podamos centrarnos exclusivamente en el uso del asistente de RouterOS para la creación del servicio DHCP.</p>
+<p>La configuración de la interfaz ether1, encargada de proporcionar la conexión a la red WAN, no se abordará en este documento, ya que fue tratada en detalle en los tutoriales de la semana pasada.</p>
+<p>Del mismo modo, no se explicará la creación del bridge que agrupa las interfaces ether2 y ether3, ni la asignación de la dirección IP al bridge, ni la configuración del servicio DHCP asociado al bridge, puesto que estos aspectos ya han sido desarrollados y validados en el documento anterior.</p>
+<hr />
+<h2 id="configuracion-de-nat-con-masquerade">Configuración de NAT con masquerade</h2>
+<p>Para permitir que los dispositivos de la red local accedan a Internet utilizando la dirección IP del router, configuraremos NAT mediante masquerade en RouterOS. Este tipo de NAT es ideal para redes domésticas o pequeñas oficinas, ya que adapta dinámicamente la traducción de direcciones a la IP de salida de la interfaz WAN.</p>
+<p>Antes de crear la regla de NAT, debemos identificar la interfaz que conecta el router a Internet. En nuestro escenario, esta interfaz es el bridge gateway, que ya tiene conectividad a la red WAN y una IP asignada dinámicamente.</p>
+<p>Para comprobar el listado de interfaces, ejecutamos el comando:</p>
+<div class="highlight"><pre><span></span><code>interface/print
 </code></pre></div>
- <img alt="img02" src="../p2/2.png" />
-Comprobación de puertos asociados a los bridges: 
-<div class="highlight"><pre><span></span><code>/interface/bridge/port/print<span class="w"> </span>
+<p>En la siguiente captura podemos observar la interfaz bridge-gateway, sobre la que aplicaremos las reglas NAT.</p>
+<p><img alt="img02" src="../p2/51.png" /></p>
+<p>Con la interfaz WAN identificada, creamos la regla de masquerade que permitirá que todo el tráfico saliente desde la LAN se traduzca correctamente:</p>
+<p><div class="highlight"><pre><span></span><code>ip/firewall/nat/add chain=srcnat 
+out-interface=bridge-gateway action=masquerade
 </code></pre></div>
-<img alt="img02" src="../p2/3.png" />
-Comprobación de direcciones IP: 
-<div class="highlight"><pre><span></span><code>/ip/address/print<span class="w"> </span>
+<img alt="img02" src="../p2/52.png" />
+Donde:</p>
+<ul>
+<li>chain=srcnat: indica que la regla se aplica al tráfico saliente desde la LAN hacia otra red.</li>
+<li>out-interface=bridge-gateway: especifica la interfaz de salida, es decir, la WAN.</li>
+<li>
+<p>action=masquerade: realiza la traducción de direcciones de forma dinámica, adaptándose automáticamente a la IP pública de la interfaz.</p>
+</li>
+<li>
+<p>Todo el tráfico de redes internas podrá salir a internet utilizando la interfaz bridge-gateway, debido a que no se ha añadido a la regla un filtro de dirección de origen</p>
+</li>
+</ul>
+<hr />
+<h2 id="comprobacion-de-la-configuracion-aplicada">Comprobación de la configuración aplicada</h2>
+<p>Una vez creada la regla de NAT, es importante verificar que los clientes de la red local pueden acceder correctamente a Internet.</p>
+<p>En nuestro escenario, utilizaremos un cliente Alpine Linux conectado al bridge LAN (red 10.10.0.0/24) para realizar la prueba. Los pasos son los siguientes:</p>
+<ul>
+<li>Abrir la consola del cliente Alpine Linux.</li>
+<li>Comprobar la resolución de nombres y la conectividad a Internet ejecutando un ping hacia un dominio público, por ejemplo:</li>
+</ul>
+<p><div class="highlight"><pre><span></span><code>ping google.com
 </code></pre></div>
-<img alt="img02" src="../p2/4.png" /></p>
-<p>Comprobación de servicios DHCP existentes: 
-<div class="highlight"><pre><span></span><code>/ip/dhcp-server/print<span class="w"> </span>
-</code></pre></div></p>
-<p><img alt="img02" src="../p2/5.png" /></p>
-<p>Si  el  router  cumple  estas  condiciones,  se  puede  proceder  con  seguridad  a  la </p>
-<p>ejecución del asistente de configuración de DHCP. </p>
-<h1 id="creacion-del-servicio-dhcp-server-mediante-la-ejecucion-del-asistente">Creación  del  servicio  DHCP  Server  mediante  la  ejecución  del asistente</h1>
-<p>DHCP Setup permite desplegar un servidor DHCP funcional de forma guiada. Este </p>
-<p>asistente no introduce nuevos conceptos, sino que automatiza la creación de los </p>
-<p>mismos elementos que se configurarían manualmente: </p>
-<p>•  Pool de direcciones IP </p>
-<p>•  Parámetros de DHCP Network </p>
-<p>•  Activación del servicio DHCP </p>
-<p>El  asistente  se  ejecuta  desde  la  línea  de  comandos  mediante  la  siguiente </p>
-<p>instrucción: 
-<div class="highlight"><pre><span></span><code>ip/dhcp-server/setup<span class="w"> </span>
+<img alt="img02" src="../p2/53.png" />
+Observar los resultados:</p>
+<ul>
+<li>Si el cliente recibe respuestas, significa que el NAT está funcionando correctamente y que el servidor DHCP ha proporcionado correctamente la información de gateway y DNS.</li>
+<li>
+<p>Si el ping falla, conviene revisar que:</p>
+</li>
+<li>
+<p>La interfaz WAN del router está activa y tiene conectividad.</p>
+</li>
+<li>La regla de NAT está habilitada y correctamente asociada a la interfaz WAN (ether1).</li>
+<li>El cliente ha recibido IP, gateway y DNS correctos desde el DHCP Server.</li>
+</ul>
+<p>Con esta verificación, aseguramos que el tráfico de la red 10.10 se enruta hacia Internet a través del router y que el NAT está operando según lo esperado.</p>
+<hr />
+<h2 id="eliminando-la-configuracion-aplicada">Eliminando la configuración aplicada.</h2>
+<p>Antes de iniciar un nuevo laboratorio o escenario, es fundamental eliminar correctamente todas las configuraciones previas. Esto evita conflictos, errores difíciles de diagnosticar y asegura que el router queda limpio para nuevas prácticas.</p>
+<p>En este caso, comenzaremos retirando las reglas de NAT creadas para la red 10.10.</p>
+<p>Para identificar las reglas aplicadas en el router, ejecutamos:</p>
+<p><div class="highlight"><pre><span></span><code>ip/firewall/nat/print
 </code></pre></div>
-A  partir  de  su  ejecución,  RouterOS  irá  planteando  una  serie  de  preguntas </p>
-<p>secuenciales.  Cada  una  de  ellas  corresponde  a  una  parte  concreta  de  la </p>
-<p>configuración interna del servicio DHCP.  </p>
-<p>Es fundamental comprender que cada respuesta genera uno o varios objetos de </p>
-<p>configuración reales, visibles posteriormente mediante los comandos print. </p>
-<p>Aunque  el  asistente  facilita  enormemente  el  despliegue  inicial,  es  importante </p>
-<p>remarcar que no valida el diseño de red ni comprueba si las decisiones tomadas </p>
-<p>son las más adecuadas para el escenario. Por este motivo, su uso debe ir siempre </p>
-<p>acompañado de una revisión posterior de la configuración generada. </p>
-<p>En primer lugar, el asistente solicita la interfaz de red sobre la que se activará el </p>
-<p>servicio DHCP. En este escenario, seleccionamos el bridge bridge-10-10, ya que </p>
-<p>representa el dominio lógico de la red LAN. </p>
-<p><img alt="img02" src="../p2/6.png" /></p>
-<p>A  continuación,  el  asistente  solicita  el  espacio  de  direcciones  IP  de  la  red. </p>
-<p>RouterOS propone automáticamente un valor basado en la dirección IP configurada </p>
-<p>en  la  interfaz  seleccionada  en  el  paso  anterior.  Para  este  ejemplo,  se  acepta  la </p>
-<p>propuesta 10.10.0.0/24. </p>
-<p><img alt="img02" src="../p2/7.png" /></p>
-<p>Una vez definido el espacio de direcciones, el asistente solicita la dirección IP de </p>
-<p>la  puerta  de  enlace  (gateway)  de  la  red.  De  nuevo,  RouterOS  genera  una </p>
-<p>sugerencia  coherente  con  la  configuración  existente.  En  este  escenario,  se </p>
-<p>mantiene la dirección 10.10.0.1 como gateway de la red.</p>
-<p><img alt="img02" src="../p2/8.png" /></p>
-<p>El siguiente parámetro corresponde al rango de direcciones IP que podrá asignar </p>
-<p>el  servicio  DHCP,  a  partir  del  cual  se  creará  el  pool  de  direcciones.  Para  este </p>
-<p>laboratorio, se define el rango 10.10.0.100-10.10.0.200. </p>
-<p><img alt="img02" src="../p2/9.png" /></p>
-<p>Posteriormente, el asistente pregunta si se desean configurar servidores DNS que </p>
-<p>serán proporcionados a los clientes. En este caso, se responde afirmativamente  e </p>
-<p>introducimos las direcciones 10.10.0.1 y 8.8.4.4. </p>
-<p><img alt="img02" src="../p2/10.png" /></p>
-<p>Por  último,  el  asistente  solicita  el  tiempo  de  concesión  (lease  time)  de  las </p>
-<p>direcciones  IP.  Para  el  ejemplo  actual,  se  mantiene  el  valor  por  defecto,  1800 </p>
-<p>segundos, suficiente para un entorno de laboratorio. </p>
-<p>Una vez completadas estas preguntas, RouterOS crea automáticamente todos los </p>
-<p>elementos  necesarios  para  el  funcionamiento  del  servicio  DHCP,  que  serán </p>
-<p>analizados y verificados en la siguiente sección. </p>
-<h1 id="comprobacion-de-la-configuracion-aplicada">Comprobación de la configuración aplicada</h1>
-<p>Una  vez  finalizado  el  asistente  de  configuración  del  servidor  DHCP,  es </p>
-<p>imprescindible verificar que todos los elementos se han creado correctamente y </p>
-<p>que el servicio está operativo.  </p>
-<p>Podemos  realizar  esta  comprobación  desde  la  línea  de  comandos  (CLI),  ya  que </p>
-<p>permite validar cada componente de forma precisa. </p>
-<p>Comprobamos que el servidor DHCP está creado, habilitado y asociado a la interfaz </p>
-<p>correcta: 
-<div class="highlight"><pre><span></span><code>Ip/dhcp-server<span class="w"> </span>print<span class="w"> </span>
+<img alt="img02" src="../p2/54.png" />
+Este comando mostrará todas las reglas de NAT configuradas, incluyendo nuestra regla de masquerade sobre la interfaz bridge-gateway.</p>
+<p>Podemos eliminar la regla utilizando su índice tal como aparece en la lista:</p>
+<p><div class="highlight"><pre><span></span><code>ip/firewall/nat/remove 0
 </code></pre></div>
-<img alt="img02" src="../p2/11.png" /></p>
-<p>Confirmamos: </p>
-<p>•  Que el servidor aparece como enabled=yes. </p>
-<p>•  Que la interfaz asociada es bridge-10-10. </p>
-<p>•  Que el estado es running. </p>
-<p>A  continuación,  validamos  que  la  red  DHCP  se  ha  creado  con  los  parámetros </p>
-<p>correctos: 
-<div class="highlight"><pre><span></span><code>ip/dhcp-server/network/print<span class="w"> </span>
-</code></pre></div></p>
-<p><img alt="img02" src="../p2/12.png" /></p>
-<p>Comprobamos que se han credo correctamente los siguientes parámetros: </p>
-<p>•  Red: 10.10.0.0/24 </p>
-<p>•  Gateway: 10.10.0.1 </p>
-<p>•  Servidores DNS: 10.10.0.1, 8.8.4.4 </p>
-<p>Verificamos que el rango de direcciones IP dinámicas se ha creado correctamente: 
-<div class="highlight"><pre><span></span><code>Ip/pool/print<span class="w"> </span>
-</code></pre></div></p>
-<p><img alt="img02" src="../p2/13.png" /></p>
-<p>Debemos encontrar un pool con el rango 10.10.0.100-10.10.0.200 </p>
-<p>También podemos comprobar que los clientes están recibiendo direcciones IP del </p>
-<p>servidor DHCP: 
-<div class="highlight"><pre><span></span><code>ip/dhcp-server/lease/print<span class="w"> </span>
+<img alt="img02" src="../p2/55.png" />
+Esto elimina la regla que permitía la salida de la red 10.10 hacia Internet. Para asegurarnos de que la regla se ha eliminado correctamente, ejecutamos nuevamente:</p>
+<div class="highlight"><pre><span></span><code>ip/firewall/nat/print
 </code></pre></div>
-<img alt="img02" src="../p2/14.png" /></p>
-<p>En este listado aparecerán los dispositivos conectados, mostrando: </p>
-<p>•  Dirección IP asignada </p>
-<p>•  Dirección MAC </p>
-<p>•  Estado de la concesión (bound) </p>
-<h1 id="validacion-del-servicio-dhcp">Validación del servicio DHCP</h1>
-<p>Para comprobar el correcto funcionamiento del DHCP Server, podemos conectar </p>
-<p>cualquier  equipo  cliente  a  la  interfaz  ether2  del  router.  En  este  ejemplo  se  ha </p>
-<p>utilizado una instancia de Alpine Linux como cliente DHCP.</p>
-<p><img alt="img02" src="../p2/15.png" /></p>
-<p>Una  vez  iniciada  la  instancia,  abrimos  la  consola  y  forzamos  la  renovación  de  la </p>
-<p>dirección IP ejecutando. 
-<div class="highlight"><pre><span></span><code>udhcpc<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>
+<p>La regla de masquerade no debería aparecer en la lista.</p>
+<p>El resto de configuraciones aplicadas al escenario (IP en el bridge, pool de DHCP, leases, etc.) se deben eliminar siguiendo los procedimientos descritos en los documentos anteriores sobre DHCP y configuración de bridges.</p>
+<hr />
+<h2 id="anexo-combinaciones-frecuentes-de-parametros-en-nat-de-salida">Anexo: Combinaciones frecuentes de parámetros en NAT de salida</h2>
+<p>Cuando configuramos NAT de salida en RouterOS, normalmente utilizamos combinaciones de chain, src-address, out-interface y action para adaptar la traducción de direcciones al escenario de red. Casos más comunes:</p>
+<ul>
+<li>Masquerade para todas la LAN: traduce todas las IPs salientes de cualquier red interna que pase por la WAN (bridge-gateway)</li>
+</ul>
+<div class="highlight"><pre><span></span><code>ip/firewall/nat/add chain=srcnat out-interface=bridge-gateway action=masquerade comment=&quot;NAT general&quot;
 </code></pre></div>
-Durante la ejecución, se puede observar en el terminal el proceso de negociación </p>
-<p>DHCP,  incluyendo  la  solicitud  y  la  concesión  de  la  dirección  IP  por  parte  del </p>
-<p>servidor. </p>
-<p><img alt="img02" src="../p2/16.png" /></p>
-<p>Verificamos la configuración de red asignada al cliente con: 
-<div class="highlight"><pre><span></span><code>ip<span class="w"> </span>a<span class="w"> </span>
+<ul>
+<li>Masquerade solo para una red interna específica: limita la traducción únicamente al tráfico proveniente de la red 10.10.0.0/24</li>
+</ul>
+<div class="highlight"><pre><span></span><code>ip/firewall/nat/add chain=srcnat 
+src-address=10.10.0.0/24 out-interface=bridge-gateway
+action=masquerade comment=&quot;NAT red 10.10&quot;
 </code></pre></div>
-Debemos comprobar que la dirección IP obtenida pertenece al pool configurado </p>
-<p>previamente en el router MikroTik (10.10.0.100–10.10.0.200) </p>
-<p><img alt="img02" src="../p2/17.png" /></p>
-<p>Desde la consola del router, es posible confirmar la asignación revisando el lease </p>
-<p>creado al conceder la IP al cliente: 
-<div class="highlight"><pre><span></span><code>ip/dhcp-server/lease/print<span class="w"> </span>
+<ul>
+<li>Masquerade solo para una interfaz de red interna específica: limita la traducción únicamente al tráfico proveniente de la interfaz bridge-10-10</li>
+</ul>
+<div class="highlight"><pre><span></span><code>ip/firewall/nat/add chain=srcnat 
+in-interface=bridge-10-10 out-interface=bridge-gateway
+action=masquerade comment=&quot;NAT bridge 10.10&quot;
 </code></pre></div>
-En la salida se mostrará el cliente, la IP asignada, el tiempo restante del lease y </p>
-<p>el estado de la asignación, confirmando que el proceso DHCP se ha completado </p>
-<p>correctamente.</p>
-<p><img alt="img02" src="../p2/18.png" /></p>
-<p>Este procedimiento valida que el DHCP funciona correctamente y que los equipos </p>
-<p>conectados al bridge reciben su configuración IP automáticamente, tanto desde el </p>
-<p>cliente como desde el servidor. </p>
-<h1 id="comprobacion-de-conectividad-entre-el-cliente-y-el-router">Comprobación de conectividad entre el cliente y el router</h1>
-<p>Para  asegurarnos  de  que  la  red  local  y  el  DHCP  funcionan  correctamente,  es </p>
-<p>importante verificar la conectividad entre el cliente y el router. </p>
-<p>Desde el terminal de la instancia Alpine Linux, comprobamos la conectividad hacia </p>
-<p>la puerta de enlace de la red (el bridge del router) ejecutando:
-<div class="highlight"><pre><span></span><code>ping<span class="w"> </span><span class="m">10</span>.10.0.1<span class="w"> </span>
+<ul>
+<li>Source NAT a IP fija (src-nat): traduce todas las IPs internas a una IP pública específica en la WAN</li>
+</ul>
+<div class="highlight"><pre><span></span><code>ip/firewall/nat/add chain=srcnat 
+src-address=10.10.0.0/24 out-interface=bridge-gateway
+action=src-nat to-addresses=200.50.60.100
+comment=&quot;NAT a IP fija&quot;
 </code></pre></div>
-Si  el  ping  responde  correctamente,  significa  que  el  cliente  ha  recibido  la  IP </p>
-<p>adecuada y puede comunicarse con el router. </p>
-<p><img alt="img02" src="../p2/19.png" /></p>
-<p>De manera inversa, podemos comprobar que el router puede comunicarse con el </p>
-<p>cliente. </p>
-<p>Primero, revisamos en el lease del DHCP Server la IP asignada al cliente 
-<div class="highlight"><pre><span></span><code>ip/dhcp-server/lease/print<span class="w"> </span>
-</code></pre></div>
-En la salida, observaremos la dirección IP asignada a la instancia de Alpine Linux </p>
-<p>(por ejemplo, 10.10.0.200). </p>
-<p><img alt="img02" src="../p2/20.png" /></p>
-<p>A continuación, ejecutamos un ping desde la consola del router hacia el cliente. 
-<div class="highlight"><pre><span></span><code>ping<span class="w"> </span><span class="m">10</span>.10.0.200<span class="w"> </span>
-</code></pre></div>
-Si la respuesta es positiva, esto confirma que la comunicación bidireccional entre </p>
-<p>el router y el cliente funciona correctamente, y que el DHCP ha asignado la IP de </p>
-<p>forma adecuada. </p>
-<p><img alt="img02" src="../p2/21.png" /></p>
-<p>Este procedimiento garantiza que el cliente puede comunicarse con la puerta de </p>
-<p>enlace  y  que  el  router  puede  llegar  al  cliente,  estableciendo  así  la  base  para  la </p>
-<p>conectividad interna y futura salida a Internet. </p>
-<p>Eliminando la configuración aplicada. </p>
-<p>Dado que el asistente genera la misma configuración que el proceso manual, para </p>
-<p>deshacer  la  configuración,  seguiremos  el  procedimiento  descrito  en  el  anterior </p>
-<p>documento.  </p>
 
 
 

@@ -20,6 +20,8 @@ nav:
       - 2. Configuración de DHCP Server sobre un bridge, utilizando el asistente: bloque3/dhcp_bridge_asistente.md
       - 3. Reservas de IP en DHCP (DHCP Static Leases)l: bloque3/dhcp_reservas.md
       - 4. Configuración de NAT (Network Address Translation): bloque3/configuracion_nat.md
+      - 5. Actividad práctica: bloque3/Actividad_bloque3.md
+
 
             
       
