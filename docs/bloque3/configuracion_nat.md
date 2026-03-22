@@ -21,6 +21,8 @@ En este documento se explica la creación y configuración de NAT (Network Addre
 
 Como escenario de partida, se reutiliza la configuración establecida en el documento “AF10 - Configuración de DHCP Server sobre bridge, de manera manual”, donde contamos con un bridge LAN con IP 10.10.0.1/24 y clientes conectados.
 
+![img02](p2/50.png)
+
 ---
 
 A lo largo de esta guía se mostrará cómo implementar NAT mediante masquerade, asociando la salida de la red 10.10 a la interfaz ether1. Esto permitirá que todos los clientes de la red local puedan navegar por Internet correctamente, mientras se mantiene la gestión centralizada y segura de la traducción de direcciones.
@@ -47,13 +49,15 @@ interface/print
 
 En la siguiente captura podemos observar la interfaz bridge-gateway, sobre la que aplicaremos las reglas NAT.
 
+![img02](p2/51.png)
+
 Con la interfaz WAN identificada, creamos la regla de masquerade que permitirá que todo el tráfico saliente desde la LAN se traduzca correctamente:
 
 ```
 ip/firewall/nat/add chain=srcnat 
 out-interface=bridge-gateway action=masquerade
 ```
-
+![img02](p2/52.png)
 Donde:
 
 - chain=srcnat: indica que la regla se aplica al tráfico saliente desde la LAN hacia otra red.
@@ -76,7 +80,7 @@ En nuestro escenario, utilizaremos un cliente Alpine Linux conectado al bridge L
 ```
 ping google.com
 ```
-
+![img02](p2/53.png)
 Observar los resultados:
 
 - Si el cliente recibe respuestas, significa que el NAT está funcionando correctamente y que el servidor DHCP ha proporcionado correctamente la información de gateway y DNS.
@@ -101,7 +105,7 @@ Para identificar las reglas aplicadas en el router, ejecutamos:
 ```
 ip/firewall/nat/print
 ```
-
+![img02](p2/54.png)
 Este comando mostrará todas las reglas de NAT configuradas, incluyendo nuestra regla de masquerade sobre la interfaz bridge-gateway.
 
 Podemos eliminar la regla utilizando su índice tal como aparece en la lista:
@@ -109,7 +113,7 @@ Podemos eliminar la regla utilizando su índice tal como aparece en la lista:
 ```
 ip/firewall/nat/remove 0
 ```
-
+![img02](p2/55.png)
 Esto elimina la regla que permitía la salida de la red 10.10 hacia Internet. Para asegurarnos de que la regla se ha eliminado correctamente, ejecutamos nuevamente:
 
 ```
