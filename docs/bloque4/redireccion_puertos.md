@@ -90,12 +90,12 @@ comment="Redirección HTTPS a servidor interno"
 ```
 Analicemos la regla paso a paso:
 
-- chain=dstnat indica que queremos modificar el destino del paquete.
-- in-interface=ether1 indica que la regla solo se aplica al tráfico que entra por ether1.
-- protocol=tcp indica que solo se redirigirán paquetes TCP (dado que queremos redirigir tráfico HTTPS)
-- dst-port=443 indica que solo se redirigirán los paquetes que se dirijan al puerto 443 del router (puerto de HTTPS).
-- action=dst-nat indica que se va a cambiar el destino del paquete.
-- to-addresses / to-ports indica el nuevo destino: IP del servicio interno y su puerto real.
+- **chain=dstnat** indica que queremos modificar el destino del paquete.
+- **in-interface=ether1** indica que la regla solo se aplica al tráfico que entra por ether1.
+- **protocol=tcp** indica que solo se redirigirán paquetes TCP (dado que queremos redirigir tráfico HTTPS)
+- **dst-port=443** indica que solo se redirigirán los paquetes que se dirijan al puerto 443 del router (puerto de HTTPS).
+- **action=dst-nat** indica que se va a cambiar el destino del paquete.
+- **to-addresses / to-ports** indica el nuevo destino: IP del servicio interno y su puerto real.
 
 # Regla de firewall: permitir el tráfico redirigido (forward).
 Una vez evaluada la regla dstnat el paquete deja de pertenecer al chain input, para pasar a pertenecer al chain forward, por lo que será necesario añadir la regla pertinente para que el tráfico pueda llegar al servicio destino.
