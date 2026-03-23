@@ -39,22 +39,29 @@ Una redirección sin firewall es una mala configuración.
 
 # Estructura general de una regla de redirección de puertos (dst-nat)
 De forma genérica, una regla de redirección de puertos tiene la siguiente estructura:
-```
+```sh
 /ip firewall nat add chain=dstnat in-interface=<interfaz_de_entrada>
 protocol=<tcp|udp> dst-port=<puerto_del_router>
 action=dst-nat to-addresses=<ip_interna> to-ports=<puerto_interno>
 ```
 Donde:
 - chain=dstnat indica que la regla se evalúa cuando el paquete entra al router y va dirigido a una IP de destino.
+
 - in-interface limita la aplicación de la regla a los paquetes que entran por la interfaz WAN (por ejemplo, ether1).
+
 - protocol indica el protocolo del paquete. Es obligatorio cuando se filtra por puerto. Normalmente tcp o udp.
+
 - dst-port es el puerto destino original del paquete, es decir, el puerto público al que se conecta el cliente desde Internet.
+
 - action=dst-nat indica que el router va a modificar el destino del paquete.
+
 - to-addresses indica la dirección IP del servidor interno al que se redirige el tráfico.
+
 - to-ports indica el puerto del servicio en el servidor interno (puede coincidir o no con el puerto externo).
 
 Importante:
 - Si el router utiliza masquerade o src-nat para la salida a Internet, el tráfico de respuesta funcionará automáticamente.
+
 - Si no existe una regla de src-nat, la redirección no será funcional, aunque la regla dst-nat sea correcta.
 
 Este punto es clave para evitar la típica pregunta: “La regla está bien, pero no funciona”.
@@ -62,6 +69,7 @@ Este punto es clave para evitar la típica pregunta: “La regla está bien, per
 # Ejemplo.
 Partiendo del siguiente escenario, en el que suponemos configurada:
 - La red interna 192.168.1.0/24, en el bridge lan, asociado a ether2.
+
 - Acceso a internet desde la red interna, mediante la configuración de NAT.
 
 ![img02](img/20.png)
