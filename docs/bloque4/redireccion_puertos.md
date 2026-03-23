@@ -45,21 +45,23 @@ protocol=<tcp|udp> dst-port=<puerto_del_router>
 action=dst-nat to-addresses=<ip_interna> to-ports=<puerto_interno>
 ```
 Donde:
-- chain=dstnat indica que la regla se evalúa cuando el paquete entra al router y va dirigido a una IP de destino.
 
-- in-interface limita la aplicación de la regla a los paquetes que entran por la interfaz WAN (por ejemplo, ether1).
+- **chain=dstnat** indica que la regla se evalúa cuando el paquete entra al router y va dirigido a una IP de destino.
 
-- protocol indica el protocolo del paquete. Es obligatorio cuando se filtra por puerto. Normalmente tcp o udp.
+- **in-interface** limita la aplicación de la regla a los paquetes que entran por la interfaz WAN (por ejemplo, ether1).
 
-- dst-port es el puerto destino original del paquete, es decir, el puerto público al que se conecta el cliente desde Internet.
+- **protocol** indica el protocolo del paquete. Es obligatorio cuando se filtra por puerto. Normalmente tcp o udp.
 
-- action=dst-nat indica que el router va a modificar el destino del paquete.
+- **dst-port** es el puerto destino original del paquete, es decir, el puerto público al que se conecta el cliente desde Internet.
 
-- to-addresses indica la dirección IP del servidor interno al que se redirige el tráfico.
+- **action=dst-nat** indica que el router va a modificar el destino del paquete.
 
-- to-ports indica el puerto del servicio en el servidor interno (puede coincidir o no con el puerto externo).
+- **to-addresses** indica la dirección IP del servidor interno al que se redirige el tráfico.
+
+- **to-ports** indica el puerto del servicio en el servidor interno (puede coincidir o no con el puerto externo).
 
 Importante:
+
 - Si el router utiliza masquerade o src-nat para la salida a Internet, el tráfico de respuesta funcionará automáticamente.
 
 - Si no existe una regla de src-nat, la redirección no será funcional, aunque la regla dst-nat sea correcta.
@@ -68,6 +70,7 @@ Este punto es clave para evitar la típica pregunta: “La regla está bien, per
 
 # Ejemplo.
 Partiendo del siguiente escenario, en el que suponemos configurada:
+
 - La red interna 192.168.1.0/24, en el bridge lan, asociado a ether2.
 
 - Acceso a internet desde la red interna, mediante la configuración de NAT.
@@ -86,6 +89,7 @@ action=dst-nat to-addresses=192.168.1.100 to-ports=443
 comment="Redirección HTTPS a servidor interno"
 ```
 Analicemos la regla paso a paso:
+
 - chain=dstnat indica que queremos modificar el destino del paquete.
 - in-interface=ether1 indica que la regla solo se aplica al tráfico que entra por ether1.
 - protocol=tcp indica que solo se redirigirán paquetes TCP (dado que queremos redirigir tráfico HTTPS)
