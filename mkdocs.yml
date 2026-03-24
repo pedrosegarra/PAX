@@ -24,6 +24,8 @@ nav:
   - Bloque 4. Firewall, redirección de puertos y DMZ:
       - 1. Configuración de firewall en RouterOS: bloque4/configuracion_reglas_firewall.md
       - 2. Redirección de puertos (Port Forwarding): bloque4/redireccion_puertos.md
+      - 3. Configuración de DMZ (Zona Desmilitarizada): bloque4/configuracion_dmz.md
+
       
 
             
