@@ -9,6 +9,8 @@
       
       
       
+        <link rel="prev" href="../redireccion_puertos/">
+      
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -16,7 +18,7 @@
     
     
       
-        <title>Configuración de una DMZ. - Curso MikroTik</title>
+        <title>3. Configuración de DMZ (Zona Desmilitarizada) - Curso MikroTik</title>
       
     
     
@@ -94,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Configuración de una DMZ.
+              3. Configuración de DMZ (Zona Desmilitarizada)
             
           </span>
         </div>
@@ -666,18 +668,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
@@ -693,7 +697,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Bloque 4. Firewall, redirección de puertos y DMZ
@@ -741,6 +745,386 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    3. Configuración de DMZ (Zona Desmilitarizada)
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Configuración de DMZ (Zona Desmilitarizada)
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Índice
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducción
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplo-de-configuracion-de-dmz-con-mikrotik" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplo de configuración de DMZ con Mikrotik.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#escenario-de-partida" class="md-nav__link">
+    <span class="md-ellipsis">
+      Escenario de partida
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creacion-de-los-bridges-dmz-y-lan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creación de los bridges DMZ y LAN
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aplicando-la-configuracion-de-red-del-puerto-ether1-con-un-cliente-dhcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Aplicando la configuración de red del puerto ether1 con un cliente DHCP
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aplicando-la-configuracion-de-red-de-los-bridges-lan-y-dmz-de-manera-estatica" class="md-nav__link">
+    <span class="md-ellipsis">
+      Aplicando la configuración de red de los bridges LAN y DMZ de manera estática
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creando-los-servidores-dhcp-para-bridge-lan-y-bridge-dmz" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creando los servidores DHCP para bridge-lan y bridge-dmz
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configurando-nat-para-proporcionar-salida-a-internet-a-las-redes-dmz-y-lan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configurando NAT, para proporcionar salida a internet a las redes DMZ y LAN.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configurando-las-reglas-de-firewall-necesarias-para-proteger-nuestra-infraestructura" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configurando las reglas de firewall necesarias para proteger nuestra infraestructura.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reglas-input-proteger-el-router" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reglas INPUT: proteger el router
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reglas INPUT: proteger el router">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#aceptar-conexiones-ya-establecidas-relacionadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Aceptar conexiones ya establecidas / relacionadas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bloquear-conexiones-invalidas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bloquear conexiones inválidas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#permitir-icmp-pingtroubleshoting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Permitir ICMP (ping/troubleshoting)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#permitir-administracion-solo-desde-lan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Permitir administración SOLO desde LAN
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bloqueo-final-de-todo-lo-demas-hacia-el-router" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bloqueo final de todo lo demás hacia el router
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprobacion-de-reglas-input-aplicadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comprobación de reglas input aplicadas.
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reglas-forward-politicas-entre-zonas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reglas FORWARD: políticas entre zonas
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reglas FORWARD: políticas entre zonas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#permitir-establishedrelated" class="md-nav__link">
+    <span class="md-ellipsis">
+      Permitir established/related
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bloquear-conexiones-invalidas_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bloquear conexiones inválidas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#permitir-trafico-de-red-lan-hacia-wan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Permitir tráfico de red LAN hacia WAN
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#permitir-trafico-de-red-lan-hacia-dmz" class="md-nav__link">
+    <span class="md-ellipsis">
+      Permitir tráfico de red LAN hacia DMZ
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#permitir-trafico-de-red-dmz-hacia-wan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Permitir tráfico de red DMZ hacia WAN
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bloquear-trafico-de-red-dmz-hacia-lan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bloquear tráfico de red DMZ hacia LAN
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bloquear-trafico-de-red-wan-hacia-lan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bloquear tráfico de red WAN hacia LAN
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bloquear-trafico-de-red-wan-hacia-dmz" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bloquear tráfico de red WAN hacia DMZ
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bloquear-cualquier-otro-tipo-de-trafico" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bloquear cualquier otro tipo de tráfico
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprobacion-de-reglas-forward-aplicadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comprobación de reglas forward aplicadas.
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#publicacion-del-servicio-http-a-internet-wan-dmz" class="md-nav__link">
+    <span class="md-ellipsis">
+      Publicación del servicio HTTP a internet (WAN → DMZ)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Publicación del servicio HTTP a internet (WAN → DMZ)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dst-nat-redirigir-tcp80-hacia-el-servidor-dmz" class="md-nav__link">
+    <span class="md-ellipsis">
+      DST-NAT: redirigir TCP/80 hacia el servidor DMZ
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filter-permitir-el-forward-wan-dmz-solo-para-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      FILTER: permitir el forward WAN → DMZ solo para HTTP
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#corregir-la-ordenacion-de-las-reglas-aplicadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Corregir la ordenación de las reglas aplicadas.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-del-servidor-http-en-alpine-linux-y-validacion-del-escenario" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración del servidor http en Alpine Linux y validación del escenario.
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
