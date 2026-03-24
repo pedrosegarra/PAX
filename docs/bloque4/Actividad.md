@@ -13,3 +13,6 @@ Qué tráfico se debe permitir, especificando:
 origen,
 destino,
 protocolo y puerto.
+
+En definitiva se debe montar totalmente el ejercicio.
+
