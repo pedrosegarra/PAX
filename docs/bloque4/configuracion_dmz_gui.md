@@ -3,28 +3,28 @@
 
 # Índice
 
-Introducción
-Ejemplo de configuración de DMZ con Mikrotik.
-Escenario de partida
-Creación de los bridges DMZ y LAN
-Aplicando la configuración de red del puerto ether1 con un cliente DHCP
-Conectando al panel web del router.
-Aplicando la configuración de red de los bridges LAN y DMZ de manera estática
-Creando los servidores DHCP para bridge-lan y bridge-dmz
-Configurando NAT, para proporcionar salida a internet a las redes DMZ y LAN.
-Configurando las reglas de firewall necesarias para proteger nuestra infraestructura.
-Reglas INPUT: proteger el router
-Reglas FORWARD: políticas entre zonas
-Publicación del servicio HTTP a internet (WAN → DMZ)
-Corregir la ordenación de las reglas aplicadas.
-Configuración del servidor http en Alpine Linux y validación del escenario.
-Añadiendo un nuevo segmento de red.
-Reserva de IP (Lease) estática para R2 en R1
-Configuración de cliente DHCP en ether1 de R2
-Configuración de la red 192.168.1.0/24 en R2
-Configuración del servidor DHCP para la red de oficina, en R2
-Configuración Ruta de R1 a la red de oficina
-Conclusión.
+## Introducción
+### Ejemplo de configuración de DMZ con Mikrotik.
+### Escenario de partida
+#### Creación de los bridges DMZ y LAN
+#### Aplicando la configuración de red del puerto ether1 con un cliente DHCP
+#### Conectando al panel web del router.
+#### Aplicando la configuración de red de los bridges LAN y DMZ de manera estática
+#### Creando los servidores DHCP para bridge-lan y bridge-dmz
+#### Configurando NAT, para proporcionar salida a internet a las redes DMZ y LAN.
+#### Configurando las reglas de firewall necesarias para proteger nuestra infraestructura.
+##### Reglas INPUT: proteger el router
+##### Reglas FORWARD: políticas entre zonas
+##### Publicación del servicio HTTP a internet (WAN → DMZ)
+##### Corregir la ordenación de las reglas aplicadas.
+#### Configuración del servidor http en Alpine Linux y validación del escenario.
+### Añadiendo un nuevo segmento de red.
+#### Reserva de IP (Lease) estática para R2 en R1
+#### Configuración de cliente DHCP en ether1 de R2
+#### Configuración de la red 192.168.1.0/24 en R2
+#### Configuración del servidor DHCP para la red de oficina, en R2
+#### Configuración Ruta de R1 a la red de oficina
+### Conclusión.
 
 # Introducción
 
