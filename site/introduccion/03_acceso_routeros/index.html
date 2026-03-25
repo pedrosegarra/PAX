@@ -1,0 +1,1052 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../02_virtualizacion_gns3/">
+      
+      
+        <link rel="next" href="../../bloque2/eliminar/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>3. Conectando a RouterOS para su administración - Curso MikroTik</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#conectando-a-routeros-para-su-administracion" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Curso MikroTik" class="md-header__button md-logo" aria-label="Curso MikroTik" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Curso MikroTik
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              3. Conectando a RouterOS para su administración
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Curso MikroTik" class="md-nav__button md-logo" aria-label="Curso MikroTik" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Curso MikroTik
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inicio
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Bloque 1. Introducción
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Bloque 1. Introducción
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_mikrotik_routeros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introducción a MikroTik y RouterOS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_virtualizacion_gns3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Virtualización de RouterOS con GNS3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Conectando a RouterOS para su administración
+    
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Bloque 2. Configuración básica
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Bloque 2. Configuración básica
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque2/eliminar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Eliminar configuración
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque2/dhcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Configuración de DHCP (ip dinámica)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque2/ip_estatica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Configuración de IP estática
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque2/bridge_dinamico/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Configuración de bridge dinámico
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque2/bridge_estatica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Configuración de bridge estático
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque2/tarea_bloque2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Actividad práctica
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Bloque 3. Servicios de red esenciales (DHCP y NAT)
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Bloque 3. Servicios de red esenciales (DHCP y NAT)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque3/dhcp_bridge_manual/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Configuración de DHCP Server sobre un bridge, de manera manual
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque3/dhcp_bridge_asistente/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Configuración de DHCP Server sobre un bridge, utilizando el asistente
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque3/dhcp_reservas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Reservas de IP en DHCP (DHCP Static Leases)l
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque3/configuracion_nat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Configuración de NAT (Network Address Translation)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque3/actividad_bloque3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Actividad práctica
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Bloque 4. Firewall, redirección de puertos y DMZ
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Bloque 4. Firewall, redirección de puertos y DMZ
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque4/configuracion_reglas_firewall/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Configuración de firewall en RouterOS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque4/redireccion_puertos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Redirección de puertos (Port Forwarding)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque4/configuracion_dmz/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Configuración de DMZ (Zona Desmilitarizada)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque4/configuracion_dmz_gui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Configuración de DMZ - Gui
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Bloque 5. Configuración de VLANS y servicio DNS
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Bloque 5. Configuración de VLANS y servicio DNS
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque5/servicio_dns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Servicio DNS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="conectando-a-routeros-para-su-administracion">Conectando a RouterOS para su administración.</h1>
+<h1 id="indice">Índice</h1>
+<p>Introducción<br />
+Estado inicial del router<br />
+Usuario y contraseña por defecto en RouterOS<br />
+Acceso por consola.<br />
+Primer acceso a Mikrotik<br />
+Acceso utilizando la aplicación WinBox<br />
+Acceso utilizando WebFig<br />
+Acceso mediante un cliente SSH  </p>
+<hr />
+<h1 id="introduccion">Introducción</h1>
+<p>Una vez creada y puesta en marcha la instancia de RouterOS, ya sea en VirtualBox o en GNS3, el siguiente paso natural es acceder al router para empezar a configurarlo. A partir de este momento dejamogs atrás la fase de despliegue y entramos en la parte realmente importante del trabajo: modificar y ajustar el comportamiento del sistema.</p>
+<p>RouterOS permite la administración a través de distintas interfaces, todas ellas habituales en entornos profesionales. La elección de una u otra dependerá del contexto, del estado del router y del tipo de tarea que se vaya a realizar.</p>
+<p>De forma general, dispondremos de las siguientes opciones:</p>
+<p>• Consola, que ofrece un acceso directo en modo texto y suele utilizarse en el primer arranque, en tareas de diagnóstico o cuando no existe conectividad de red.<br />
+• WinBox, la aplicación gráfica específica de MikroTik, muy utilizada en la administración diaria por su rapidez y facilidad de uso.<br />
+• WebFig, una interfaz web accesible desde el navegador, especialmente útil en entornos donde no se puede instalar software adicional.<br />
+• SSH, un método de acceso remoto en modo texto, ampliamente empleado en la administración de sistemas y redes.  </p>
+<p>A lo largo del curso iremos utilizando varias de estas formas de acceso, priorizando en cada momento la que resulte más adecuada según el escenario planteado y los objetivos de la práctica.</p>
+<hr />
+<h1 id="estado-inicial-del-router">Estado inicial del router</h1>
+<p>En el primer acceso, RouterOS se presenta en su estado inicial, sin configuraciones previas aplicadas. El sistema arranca “en limpio”, lo que significa que no hay parámetros personalizados cargados y que el comportamiento del router es el esperado tras una instalación recién realizada.</p>
+<p>En este punto, todas las interfaces están disponibles y operativas desde el punto de vista físico, pero aún no tienen definida ninguna lógica de red: no hay direcciones IP asignadas, ni reglas, ni servicios configurados. El router está, por tanto, listo para comenzar a configurarse paso a paso.</p>
+<p>Desde el punto de vista didáctico, este momento es especialmente importante. Todo el alumnado parte exactamente del mismo estado, lo que facilita el seguimiento de las prácticas, la comparación de resultados y la detección de errores cuando algo no funciona como se espera.</p>
+<hr />
+<h1 id="usuario-y-contrasena-por-defecto-en-routeros">Usuario y contraseña por defecto en RouterOS</h1>
+<p>En la primera conexión a RouterOS, independientemente del método utilizado —consola, WinBox, WebFig o SSH—, el sistema solicitará un usuario y una contraseña. Mientras no se haya aplicado ninguna configuración previa, RouterOS utiliza unas credenciales por defecto muy simples, pensadas para facilitar el acceso inicial al dispositivo.</p>
+<p>El usuario por defecto es admin y la contraseña no está establecida, por lo que no debe introducirse nada en ese campo. Cuando el sistema solicite la contraseña, bastará con pulsar Enter, dejando el campo en blanco.</p>
+<p>Estas credenciales se emplean únicamente para el primer acceso y permiten comprobar que el router funciona correctamente antes de comenzar con su configuración.</p>
+<hr />
+<h1 id="acceso-por-consola">Acceso por consola.</h1>
+<p>En un router físico de MikroTik, la conexión por consola es el método más básico y fiable para acceder al sistema. No depende de que la red esté configurada ni de que exista conectividad previa, por lo que se utiliza habitualmente durante la primera puesta en marcha, en tareas de mantenimiento o en situaciones de recuperación.</p>
+<p>El procedimiento es sencillo. El router se conecta al ordenador mediante un cable de consola, que puede ser de tipo serie o USB según el modelo. En algunos dispositivos concretos, también es posible conectar directamente un monitor y un teclado. Desde el ordenador se utiliza un programa de terminal (como PuTTY, Minicom u otro equivalente) y se abre una sesión de consola con los parámetros habituales del puerto. Al encender el router, se muestran los mensajes de arranque y, una vez finalizado el proceso, aparece el prompt solicitando usuario y contraseña.</p>
+<p>Este tipo de acceso representa el nivel más directo de interacción con el sistema, equivalente a estar físicamente delante del router y trabajar con él sin intermediarios.</p>
+<p>En los entornos virtualizados, esta conexión tiene su equivalencia directa en la consola de VirtualBox o en la consola de GNS3, que son las utilizadas en los apartados anteriores para comprobar la correcta instalación y el arranque de RouterOS.</p>
+<p><img alt="img02" src="../../img/tema3/img02.png" /></p>
+<hr />
+<h1 id="primer-acceso-a-mikrotik">Primer acceso a Mikrotik</h1>
+<p>En un router recién instalado, el acceso inicial se realiza con el usuario admin y la contraseña en blanco. Tras introducir el usuario, basta con pulsar Enter cuando se solicite la contraseña.</p>
+<p><img alt="img03" src="../../img/tema3/img03.png" /></p>
+<p>Durante este primer acceso, el sistema mostrará un mensaje preguntando si se desea visualizar la licencia de software. Es posible leerla pulsando y, o bien continuar directamente con el proceso pulsando n para omitir este paso.</p>
+<p><img alt="img04" src="../../img/tema3/img04.png" /></p>
+<p>A continuación, RouterOS solicitará que se establezca una nueva contraseña para el usuario admin. En este momento se debe introducir la contraseña de administración que se vaya a utilizar a partir de ahora. Este paso es obligatorio y marca el inicio de la configuración básica de seguridad del router.</p>
+<p><img alt="img05" src="../../img/tema3/img05.png" /></p>
+<p>Dependiendo de la configuración inicial aplicada por RouterOS, es posible que el cliente DHCP esté activo en el primer puerto de red, lo que permitiría que el router obtenga automáticamente una dirección IP. Para comprobarlo, se puede utilizar el siguiente comando:</p>
+<p>/ip/address/print.</p>
+<p>Este comando mostrará las direcciones IP asignadas a las distintas interfaces del router.</p>
+<p><img alt="img06" src="../../img/tema3/img06.png" /></p>
+<hr />
+<h1 id="acceso-utilizando-la-aplicacion-winbox">Acceso utilizando la aplicación WinBox</h1>
+<p>WinBox es la aplicación gráfica oficial de MikroTik para la administración de dispositivos RouterOS. Se trata de una herramienta ligera, rápida y muy completa, que permite configurar prácticamente todos los aspectos del router de forma visual, manteniendo en todo momento un control preciso sobre el sistema.</p>
+<p>La aplicación WinBox puede descargarse desde la página oficial de MikroTik (https://mikrotik.com/download/winbox). En este caso se utilizará la versión para Windows, aunque existen alternativas para otros sistemas operativos.</p>
+<p><img alt="img07" src="../../img/tema3/img07.png" /></p>
+<p>Al abrir WinBox, la aplicación escanea automáticamente la red en busca de dispositivos MikroTik accesibles y muestra una lista con los routers detectados. Esta detección no depende únicamente de direcciones IP: WinBox es capaz de localizar dispositivos utilizando su dirección MAC, lo que resulta especialmente útil cuando el router todavía no tiene una configuración de red definida.</p>
+<p><img alt="img08" src="../../img/tema3/img08.png" /></p>
+<p>En la ventana principal se muestran las direcciones MAC detectadas y, cuando están disponibles, las direcciones IPv4 e IPv6 asociadas a cada una de ellas. Para conectar con un dispositivo, basta con seleccionar la fila correspondiente y completar los campos de usuario y contraseña.</p>
+<p><img alt="img09" src="../../img/tema3/img09.png" /></p>
+<p>Si las credenciales son correctas, WinBox establecerá la conexión con el router y mostrará la interfaz de administración, desde la que será posible acceder a todas las opciones de configuración de RouterOS. A partir de este momento, el router queda plenamente accesible para continuar con las tareas del curso.</p>
+<p><img alt="img10" src="../../img/tema3/img10.png" /></p>
+<hr />
+<h1 id="acceso-utilizando-webfig">Acceso utilizando WebFig</h1>
+<p>WebFig es la interfaz web de administración incluida en RouterOS. Permite gestionar un router MikroTik directamente desde un navegador, sin necesidad de instalar ningún software adicional en el equipo desde el que se accede. A nivel funcional, WebFig ofrece prácticamente las mismas opciones que WinBox, pero accesibles a través de HTTP o HTTPS.</p>
+<p>Para poder utilizar WebFig es necesario que el router tenga conectividad IP con el equipo cliente y conocer la dirección IP asignada a alguna de sus interfaces. Además, será suficiente con disponer de un navegador web actualizado.</p>
+<p>A diferencia de WinBox, WebFig no permite el acceso por dirección MAC, por lo que resulta imprescindible que el router tenga al menos una dirección IP configurada y accesible. Una vez introducida la IP del router en la barra de direcciones del navegador, el sistema solicitará el usuario y la contraseña.</p>
+<p><img alt="img11" src="../../img/tema3/img11.png" /></p>
+<p>Si las credenciales son correctas, se cargará la interfaz web de RouterOS, desde la que será posible acceder a las distintas opciones de configuración del router y continuar con las prácticas del curso.</p>
+<p><img alt="img11" src="../../img/tema3/img12.png" /></p>
+<p>Si los datos son correctos, la aplicación conectará con la interfaz web del router, y nos mostrará sus opciones de configuración.</p>
+<hr />
+<h1 id="acceso-mediante-un-cliente-ssh">Acceso mediante un cliente SSH</h1>
+<p>El acceso mediante SSH (Secure Shell) permite administrar RouterOS de forma remota, segura y en modo texto a través de la red. Es uno de los métodos más habituales en entornos profesionales, especialmente cuando se trabaja desde sistemas GNU/Linux, macOS o desde servidores sin entorno gráfico.</p>
+<p>Desde el punto de vista formativo, el uso de SSH tiene un valor añadido evidente: acerca al alumnado a la administración real de sistemas y redes, donde el acceso remoto y la línea de comandos forman parte del trabajo cotidiano.</p>
+<p>Para poder acceder a RouterOS utilizando un cliente SSH es necesario que el router tenga conectividad IP con el equipo desde el que se realiza la conexión, conocer la dirección IP asignada a alguna de sus interfaces y disponer de un cliente SSH actualizado.</p>
+<p><img alt="img11" src="../../img/tema3/img13.png" /></p>
+<p>Una vez introducidos los datos de conexión correctos, el cliente establecerá la sesión con el servidor SSH del router y permitirá ejecutar los comandos necesarios para continuar con la configuración y administración del sistema.</p>
+<p><img alt="img11" src="../../img/tema3/img14.png" /></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>

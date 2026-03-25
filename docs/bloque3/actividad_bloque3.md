@@ -11,3 +11,5 @@ Deberás entregar un breve documento o evidencias gráficas que permitan verific
     Las rutas configuradas.
     Los parámetros del servidor DHCP.
     La configuración de NAT, mostrando que solo se aplica a la red LAN.
+
+Además, debes entregar exportable el proyecto gns3
