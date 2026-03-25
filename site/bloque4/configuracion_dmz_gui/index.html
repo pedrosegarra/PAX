@@ -849,34 +849,51 @@
 
 <h1 id="configuracion-de-una-dmz-desde-gui">Configuración de una DMZ desde GUI.</h1>
 <h1 id="indice">Índice</h1>
-<h2 id="introduccion">Introducción</h2>
-<h3 id="ejemplo-de-configuracion-de-dmz-con-mikrotik">Ejemplo de configuración de DMZ con Mikrotik.</h3>
-<h3 id="escenario-de-partida">Escenario de partida</h3>
-<h4 id="creacion-de-los-bridges-dmz-y-lan">Creación de los bridges DMZ y LAN</h4>
-<h4 id="aplicando-la-configuracion-de-red-del-puerto-ether1-con-un-cliente-dhcp">Aplicando la configuración de red del puerto ether1 con un cliente DHCP</h4>
-<h4 id="conectando-al-panel-web-del-router">Conectando al panel web del router.</h4>
-<h4 id="aplicando-la-configuracion-de-red-de-los-bridges-lan-y-dmz-de-manera-estatica">Aplicando la configuración de red de los bridges LAN y DMZ de manera estática</h4>
-<h4 id="creando-los-servidores-dhcp-para-bridge-lan-y-bridge-dmz">Creando los servidores DHCP para bridge-lan y bridge-dmz</h4>
-<h4 id="configurando-nat-para-proporcionar-salida-a-internet-a-las-redes-dmz-y-lan">Configurando NAT, para proporcionar salida a internet a las redes DMZ y LAN.</h4>
-<h4 id="configurando-las-reglas-de-firewall-necesarias-para-proteger-nuestra-infraestructura">Configurando las reglas de firewall necesarias para proteger nuestra infraestructura.</h4>
-<h5 id="reglas-input-proteger-el-router">Reglas INPUT: proteger el router</h5>
-<h5 id="reglas-forward-politicas-entre-zonas">Reglas FORWARD: políticas entre zonas</h5>
-<h5 id="publicacion-del-servicio-http-a-internet-wan-dmz">Publicación del servicio HTTP a internet (WAN → DMZ)</h5>
-<h5 id="corregir-la-ordenacion-de-las-reglas-aplicadas">Corregir la ordenación de las reglas aplicadas.</h5>
-<h4 id="configuracion-del-servidor-http-en-alpine-linux-y-validacion-del-escenario">Configuración del servidor http en Alpine Linux y validación del escenario.</h4>
-<h3 id="anadiendo-un-nuevo-segmento-de-red">Añadiendo un nuevo segmento de red.</h3>
-<h4 id="reserva-de-ip-lease-estatica-para-r2-en-r1">Reserva de IP (Lease) estática para R2 en R1</h4>
-<h4 id="configuracion-de-cliente-dhcp-en-ether1-de-r2">Configuración de cliente DHCP en ether1 de R2</h4>
-<h4 id="configuracion-de-la-red-1921681024-en-r2">Configuración de la red 192.168.1.0/24 en R2</h4>
-<h4 id="configuracion-del-servidor-dhcp-para-la-red-de-oficina-en-r2">Configuración del servidor DHCP para la red de oficina, en R2</h4>
-<h4 id="configuracion-ruta-de-r1-a-la-red-de-oficina">Configuración Ruta de R1 a la red de oficina</h4>
-<h3 id="conclusion">Conclusión.</h3>
-<h1 id="introduccion_1">Introducción</h1>
+<h1 id="indice_1">Índice</h1>
+<ul>
+<li>
+<p>Introducción</p>
+</li>
+<li>
+<p>Ejemplo de configuración de DMZ con Mikrotik</p>
+</li>
+<li>Escenario de partida</li>
+<li>Creación de los bridges DMZ y LAN</li>
+<li>Aplicando la configuración de red del puerto ether1 con un cliente DHCP</li>
+<li>Conectando al panel web del router</li>
+<li>Aplicando la configuración de red de los bridges LAN y DMZ de manera estática</li>
+<li>Creando los servidores DHCP para bridge-lan y bridge-dmz</li>
+<li>Configurando NAT, para proporcionar salida a internet a las redes DMZ y LAN</li>
+<li>Configurando las reglas de firewall necesarias para proteger nuestra infraestructura<ul>
+<li>Reglas INPUT: proteger el router</li>
+<li>Reglas FORWARD: políticas entre zonas</li>
+</ul>
+</li>
+<li>Publicación del servicio HTTP a internet (WAN → DMZ)</li>
+<li>Corregir la ordenación de las reglas aplicadas</li>
+<li>
+<p>Configuración del servidor http en Alpine Linux y validación del escenario</p>
+</li>
+<li>
+<p>Añadiendo un nuevo segmento de red</p>
+</li>
+<li>Reserva de IP (Lease) estática para R2 en R1</li>
+<li>Configuración de cliente DHCP en ether1 de R2</li>
+<li>Configuración de la red 192.168.1.0/24 en R2</li>
+<li>Configuración del servidor DHCP para la red de oficina, en R2</li>
+<li>
+<p>Configuración Ruta de R1 a la red de oficina</p>
+</li>
+<li>
+<p>Conclusión</p>
+</li>
+</ul>
+<h1 id="introduccion">Introducción</h1>
 <p>En esta práctica vamos a repetir íntegramente el ejercicio de configuración de una DMZ, manteniendo el mismo escenario, la misma arquitectura de red y las mismas políticas de seguridad ya trabajadas.</p>
 <p>La diferencia fundamental será el enfoque: en lugar de realizar la configuración desde la consola mediante comandos, utilizaremos exclusivamente los entornos gráficos de RouterOS, concretamente WinBox y el panel web (WebFig).</p>
 <p>El objetivo es analizar cómo se traduce cada instrucción de terminal en su equivalente visual, comprender la estructura interna de RouterOS desde otra perspectiva y observar las diferencias.</p>
 <p>De este modo, podremos comparar ambos métodos de trabajo —CLI y GUI— evaluando ventajas, limitaciones y escenarios de uso recomendados en entornos profesionales reales.</p>
-<h1 id="ejemplo-de-configuracion-de-dmz-con-mikrotik_1">Ejemplo de configuración de DMZ con Mikrotik.</h1>
+<h1 id="ejemplo-de-configuracion-de-dmz-con-mikrotik">Ejemplo de configuración de DMZ con Mikrotik.</h1>
 <p>En este escenario vamos a configurar un router MikroTik que actúa como punto central de interconexión y control de seguridad entre tres zonas claramente diferenciadas, cada una con un nivel de confianza distinto:</p>
 <ul>
 <li><strong>WAN (Wide Area Network)</strong>: la zona WAN representa la conexión a Internet, es decir, una red no confiable sobre la que no tenemos control. La WAN se considerará la zona de menor confianza.</li>
@@ -886,7 +903,7 @@
 <p><img alt="img02" src="../img/80.png" /></p>
 <p>Para ello, vamos a crear un nuevo escenario en GNS3, que iremos configurando paso a paso.</p>
 <p><img alt="img02" src="../img/81.png" /></p>
-<h1 id="escenario-de-partida_1">Escenario de partida</h1>
+<h1 id="escenario-de-partida">Escenario de partida</h1>
 <p>Vamos a partir del siguiente escenario en GNS3, que iremos configurando paso a paso, hasta llegar al objetivo marcado en el punto anterior.</p>
 <p><img alt="img02" src="../img/82.png" /></p>
 <p>Vamos a conectar el nodo NAT con el puerto ethernet0 del router (que se corresponderá con la interfaz ether1 en la consola de Mikrotik). También añadiremos un cliente web y un cliente WinBox a la red NAT, para poder ejecutar los primeros pasos de configuración del router.</p>
@@ -908,7 +925,7 @@
 <p><img alt="img02" src="../img/90.png" /></p>
 <p>Accedemos al panel IP → DHCP Server, donde no debe existir ningún registro:</p>
 <p><img alt="img02" src="../img/91.png" /></p>
-<h1 id="creacion-de-los-bridges-dmz-y-lan_1">Creación de los bridges DMZ y LAN</h1>
+<h1 id="creacion-de-los-bridges-dmz-y-lan">Creación de los bridges DMZ y LAN</h1>
 <p>Para empezar, vamos a crear los bridges DMZ y LAN, sobre los que aplicaremos la configuración de las redes internas. Para ello, accedemos al panel Bridge → Bridge, y pulsamos el botón “New”.</p>
 <p><img alt="img02" src="../img/92.png" /></p>
 <p>Rellenamos los datos para el bridge de la red LAN, como se muestra en la captura, y pulsamos el botón “Ok”.</p>
@@ -928,7 +945,7 @@
 <p><img alt="img02" src="../img/99.png" /></p>
 <p>Comprobamos que las interfaces se han añadido correctamente a los bridges correspondientes:</p>
 <p><img alt="img02" src="../img/100.png" /></p>
-<h1 id="aplicando-la-configuracion-de-red-del-puerto-ether1-con-un-cliente-dhcp_1">Aplicando la configuración de red del puerto ether1 con un cliente DHCP</h1>
+<h1 id="aplicando-la-configuracion-de-red-del-puerto-ether1-con-un-cliente-dhcp">Aplicando la configuración de red del puerto ether1 con un cliente DHCP</h1>
 <p>Para continuar, vamos a configurar la dirección IP de la interfaz ether1, creando un cliente DHCP, que obtenga la dirección IP del servidor DHCP al que esté conectada la red.</p>
 <p>Para ello, accedemos al panel IP → DHCP Client, y pulsamos el botón New.</p>
 <p><img alt="img02" src="../img/101.png" /></p>
@@ -951,13 +968,13 @@ En el panel IP → Routes podemos ver la configuración de la ruta por defecto, 
 <p><img alt="img02" src="../img/106.png" /></p>
 <p>Podemos comprobar la conectividad con internet, por ejemplo, utilizando la herramienta tools -&gt; traceroute.</p>
 <p><img alt="img02" src="../img/107.png" /></p>
-<h1 id="conectando-al-panel-web-del-router_1">Conectando al panel web del router.</h1>
+<h1 id="conectando-al-panel-web-del-router">Conectando al panel web del router.</h1>
 <p>Antes de continuar, vamos a conectar al panel web del router, para continuar la configuración desde el entorno gráfico que proporciona (que mejora sensiblemente la usabilidad con respecto al appliance de WinBox en GNS3).</p>
 <p>Para ello, abrimos un cliente conectado a la red Wan, y accedemos a la IP asignada por el servidor DHCP a la interfaz ether1 (en mi caso, 192.168.122.72).</p>
 <p><img alt="img02" src="../img/108.png" /></p>
 <p>Tras realizar login, pulsamos sobre la opción “Advanced” para mostrar todas las opciones de la interfaz gráfica.</p>
 <p><img alt="img02" src="../img/109.png" /></p>
-<h1 id="aplicando-la-configuracion-de-red-de-los-bridges-lan-y-dmz-de-manera-estatica_1">Aplicando la configuración de red de los bridges LAN y DMZ de manera estática</h1>
+<h1 id="aplicando-la-configuracion-de-red-de-los-bridges-lan-y-dmz-de-manera-estatica">Aplicando la configuración de red de los bridges LAN y DMZ de manera estática</h1>
 <p>Vamos a configurar la dirección IP de los bridges bridge-lan y bridge-dmz, para que su direccionamiento IP se corresponda con los datos del diagrama inicial.</p>
 <p>En primer lugar, configuramos la dirección IP de bridge-lan, que se corresponderá con la puerta de enlace de la red 192.168.0.0/24.</p>
 <p>Para ello, accedemos al panel IP → Addresses y creamos un nuevo registro, pulsando la opción “New”.</p>
@@ -968,7 +985,7 @@ En el panel IP → Routes podemos ver la configuración de la ruta por defecto, 
 <p><img alt="img02" src="../img/113.png" /></p>
 <p>Comprobamos que todo ha ido bien, consultando el panel IP → Addresses.</p>
 <p><img alt="img02" src="../img/114.png" /></p>
-<h1 id="creando-los-servidores-dhcp-para-bridge-lan-y-bridge-dmz_1">Creando los servidores DHCP para bridge-lan y bridge-dmz</h1>
+<h1 id="creando-los-servidores-dhcp-para-bridge-lan-y-bridge-dmz">Creando los servidores DHCP para bridge-lan y bridge-dmz</h1>
 <p>Vamos a crear dos servidores DHCP. Uno para bridge-lan, que se encargará de proporcionar parámetros de red a los clientes conectados, y uno para bridge-dmz, de manera que podamos centralizar la configuración de red de nuestros servidores.</p>
 <p>Para ello, utilizaremos en los dos casos el panel IP → DHCP Server, pulsando el botón DHCP Setup.</p>
 <p><img alt="img02" src="../img/115.png" /></p>
@@ -1019,7 +1036,7 @@ Podemos comprobar los datos de los servidores DHCP creados, en el panel IP → D
 <li>Un lease dinámico, asignado al cliente de la red LAN, y otro asignado al appliance de Winbox, utilizado para configurar el router, si está configurado para obtener IP por DHCP.</li>
 </ul>
 <p><img alt="img02" src="../img/142.png" /></p>
-<h1 id="configurando-nat-para-proporcionar-salida-a-internet-a-las-redes-dmz-y-lan_1">Configurando NAT, para proporcionar salida a internet a las redes DMZ y LAN.</h1>
+<h1 id="configurando-nat-para-proporcionar-salida-a-internet-a-las-redes-dmz-y-lan">Configurando NAT, para proporcionar salida a internet a las redes DMZ y LAN.</h1>
 <p>En nuestro escenario, los equipos de la LAN y los servidores de la DMZ utilizan direcciones IP privadas, que no son enrutables directamente en Internet. Para que estos dispositivos puedan comunicarse con redes externas, el router debe traducir sus direcciones privadas a la dirección IP pública (o de salida) de la interfaz WAN.</p>
 <p>La técnica que utilizaremos es src-nat con masquerade, que es el método más habitual cuando la interfaz WAN obtiene su dirección IP de forma dinámica (por ejemplo, mediante DHCP). De esta manera, todo el tráfico que salga de la LAN o la DMZ hacia Internet será identificado como procedente del router, y las respuestas podrán volver correctamente a su destino original.</p>
 <p>Aunque en MikroTik sería posible utilizar una única regla NAT genérica para dar salida a Internet a todas las redes internas, en este escenario es mucho más recomendable crear una regla NAT diferenciada para cada bridge (LAN y DMZ).</p>
@@ -1040,7 +1057,7 @@ Podemos comprobar los datos de los servidores DHCP creados, en el panel IP → D
 <p><img alt="img02" src="../img/146.png" /></p>
 <p>Una vez comprobada la configuración, podemos tratar de conectar a internet con el cliente o con el servidor:</p>
 <p><img alt="img02" src="../img/148.png" /></p>
-<h1 id="configurando-las-reglas-de-firewall-necesarias-para-proteger-nuestra-infraestructura_1">Configurando las reglas de firewall necesarias para proteger nuestra infraestructura.</h1>
+<h1 id="configurando-las-reglas-de-firewall-necesarias-para-proteger-nuestra-infraestructura">Configurando las reglas de firewall necesarias para proteger nuestra infraestructura.</h1>
 <p>En esta sección abordaremos la configuración del firewall del router MikroTik, uno de los elementos clave para garantizar la seguridad de nuestra infraestructura de red.</p>
 <p>Para mantener una configuración clara y coherente, separaremos las reglas según su función, trabajando de forma diferenciada sobre las cadenas principales:</p>
 <ul>
@@ -1053,7 +1070,7 @@ Podemos comprobar los datos de los servidores DHCP creados, en el panel IP → D
 <li>entender fácilmente qué tráfico se permite y cuál se bloquea,</li>
 <li>y evitar configuraciones confusas o peligrosas.</li>
 </ul>
-<h1 id="reglas-input-proteger-el-router_1">Reglas INPUT: proteger el router</h1>
+<h1 id="reglas-input-proteger-el-router">Reglas INPUT: proteger el router</h1>
 <p>Las reglas input del firewall controlan el tráfico que va dirigido al propio router, no a los equipos de la red. Es decir, deciden quién y cómo puede comunicarse con el router para tareas como administración, diagnóstico o servicios internos.</p>
 <p>Aceptar conexiones ya establecidas / relacionadas</p>
 <p>Vamos a añadir una regla que permita al router aceptar tráfico que forma parte de conexiones ya establecidas o que está relacionado con una conexión previa válida.</p>
@@ -1087,7 +1104,7 @@ siguientes parámetros:</p>
 <p>Podemos observar todas las reglas de filtrado configuradas hasta el momento.</p>
 <p><img alt="img02" src="../img/156.png" />
 Cabe recordar que las reglas de filtrado se ejecutan en orden, de arriba abajo, hasta encontrar una regla cuyas condiciones coinciden con los datos del paquete analizado, ejecutando la regla sin analizar las siguientes.</p>
-<h1 id="reglas-forward-politicas-entre-zonas_1">Reglas FORWARD: políticas entre zonas</h1>
+<h1 id="reglas-forward-politicas-entre-zonas">Reglas FORWARD: políticas entre zonas</h1>
 <p>Las reglas forward del firewall controlan el tráfico que atraviesa el router, es decir, las comunicaciones entre redes distintas como LAN, DMZ y WAN.</p>
 <p>Estas reglas deciden:</p>
 <ul>
@@ -1126,7 +1143,7 @@ Cabe recordar que las reglas de filtrado se ejecutan en orden, de arriba abajo, 
 <h2 id="comprobacion-de-reglas-forward-aplicadas">Comprobación de reglas forward aplicadas.</h2>
 <p>Para comprobar las reglas aplicadas hasta el momento, accedemos a la pestaña Filter Rules del panel ip→firewall. Si lo queremos, podemos filtrar las reglas, para mostrar solo las que contengan la cadena forward:</p>
 <p><img alt="img02" src="../img/167.png" /></p>
-<h1 id="publicacion-del-servicio-http-a-internet-wan-dmz_1">Publicación del servicio HTTP a internet (WAN → DMZ)</h1>
+<h1 id="publicacion-del-servicio-http-a-internet-wan-dmz">Publicación del servicio HTTP a internet (WAN → DMZ)</h1>
 <p>En esta sección vamos a publicar un servicio HTTP alojado en un servidor de la DMZ, permitiendo su acceso desde Internet de forma controlada y segura.</p>
 <p>La publicación de servicios no consiste en “abrir la DMZ”, sino en crear excepciones muy concretas al firewall.</p>
 <h2 id="dst-nat-redirigir-tcp80-hacia-el-servidor-dmz">DST-NAT: redirigir TCP/80 hacia el servidor DMZ</h2>
@@ -1143,7 +1160,7 @@ Cabe recordar que las reglas de filtrado se ejecutan en orden, de arriba abajo, 
 <p><img alt="img02" src="../img/171.png" /></p>
 <p>Y rellenamos los datos del formulario, para configurar la regla, como sigue:</p>
 <p><img alt="img02" src="../img/172.png" /></p>
-<h1 id="corregir-la-ordenacion-de-las-reglas-aplicadas_1">Corregir la ordenación de las reglas aplicadas.</h1>
+<h1 id="corregir-la-ordenacion-de-las-reglas-aplicadas">Corregir la ordenación de las reglas aplicadas.</h1>
 <p>Para validar la configuración del router, vamos a revisar todas las reglas forward, ejecutando:</p>
 <p><img alt="img02" src="../img/173.png" /></p>
 <p>Si observamos la salida, la regla 12 bloquea todas las conexiones dirigidas desde la red WAN a la red DMZ, y la regla 14 habilita el protocolo HTTP desde la red WAN a la red DMZ.</p>
@@ -1151,7 +1168,7 @@ Cabe recordar que las reglas de filtrado se ejecutan en orden, de arriba abajo, 
 <p><img alt="img02" src="../img/174.png" /></p>
 <p>Para modificar el orden de evaluación, podemos arrastrar la regla 14 encima de la regla 12.</p>
 <p>Con este cambio, nuestras reglas serán totalmente funcionales, y podemos validar el escenario completo.</p>
-<h1 id="configuracion-del-servidor-http-en-alpine-linux-y-validacion-del-escenario_1">Configuración del servidor http en Alpine Linux y validación del escenario.</h1>
+<h1 id="configuracion-del-servidor-http-en-alpine-linux-y-validacion-del-escenario">Configuración del servidor http en Alpine Linux y validación del escenario.</h1>
 <p>Para instalar e iniciar el servicio http en Alpine Linux, debemos abrir un terminal, y ejecutar el siguiente script:</p>
 <div class="highlight"><pre><span></span><code>apk<span class="w"> </span>update<span class="p">;</span>
 apk<span class="w"> </span>add<span class="w"> </span>python3<span class="p">;</span>
@@ -1170,24 +1187,24 @@ python3<span class="w"> </span>-m<span class="w"> </span>http.server<span class=
 <p>Por último, vamos a tratar de conectar desde el servidor en la DMZ al cliente, a través de su IP privada. En la captura podemos comprobar como no se obtiene respuesta de la petición:</p>
 <p><img alt="img02" src="../img/178.png" /></p>
 <p>Con esta configuración dejamos el servicio HTTP publicado de forma controlada y segura, validando en la práctica cómo NAT y firewall trabajan conjuntamente sin comprometer el aislamiento entre LAN, DMZ y WAN.</p>
-<h1 id="anadiendo-un-nuevo-segmento-de-red_1">Añadiendo un nuevo segmento de red.</h1>
+<h1 id="anadiendo-un-nuevo-segmento-de-red">Añadiendo un nuevo segmento de red.</h1>
 <p>Nuestra red LAN ha crecido en tamaño y complejidad, por lo que hemos decidido segmentar la red de oficina situándola detrás de un segundo router dentro de la propia LAN, siguiendo el esquema propuesto.</p>
 <p><img alt="img02" src="../img/179.png" /></p>
 <p>Para esta nueva red de oficina utilizaremos el rango 192.168.1.0/24, que quedará diferenciada de la LAN principal y gestionada por el router interno.</p>
-<h1 id="reserva-de-ip-lease-estatica-para-r2-en-r1_1">Reserva de IP (Lease) estática para R2 en R1</h1>
+<h1 id="reserva-de-ip-lease-estatica-para-r2-en-r1">Reserva de IP (Lease) estática para R2 en R1</h1>
 <p>Antes de configurar el segundo router (en adelante R2), es recomendable asegurar que su interfaz conectada a la LAN principal reciba siempre la misma dirección IP.</p>
 <p>Aunque podríamos configurar una IP estática directamente, en este escenario optaremos por una reserva DHCP en el router principal (en adelante R1).</p>
 <p>En primer lugar, vamos a obtener la dirección MAC de ether1 en R2, mirando la configuración del appliance.</p>
 <p><img alt="img02" src="../img/180.png" /></p>
 <p>Copiamos la dirección MAC, y configuramos un lease en el servidor DHCP de la LAN, en R1, accediendo a la pestaña Leases del panel IP→DHCP Server.</p>
 <p><img alt="img02" src="../img/181.png" /></p>
-<h1 id="configuracion-de-cliente-dhcp-en-ether1-de-r2_1">Configuración de cliente DHCP en ether1 de R2</h1>
+<h1 id="configuracion-de-cliente-dhcp-en-ether1-de-r2">Configuración de cliente DHCP en ether1 de R2</h1>
 <p>Una vez creada la reserva DHCP en el router principal (R1), el siguiente paso consiste en iniciar el segundo router (R2) y configurar su interfaz ether1 como cliente DHCP.</p>
 <p>Para ello, conectamos WinBox al puerto ether1, conectamos al router, y creamos el nuevo cliente DHCP, en el panel IP→DHCP Client.</p>
 <p><img alt="img02" src="../img/182.png" /></p>
 <p>Desconectamos WinBox del router, conectamos el primer puerto del router al switch, para que el cliente DHCP pueda obtener IP, y podremos acceder a la configuración del router desde un navegador conectado a la red LAN de R1, utilizando la IP reservada.</p>
 <p><img alt="img02" src="../img/183.png" /></p>
-<h1 id="configuracion-de-la-red-1921681024-en-r2_1">Configuración de la red 192.168.1.0/24 en R2</h1>
+<h1 id="configuracion-de-la-red-1921681024-en-r2">Configuración de la red 192.168.1.0/24 en R2</h1>
 <p>Una vez que el router interno (R2) dispone de conectividad con la LAN principal, el siguiente paso consiste en configurar la nueva red de oficina, que quedará segmentada detrás de este segundo router.</p>
 <p>Esta red utilizará el rango 192.168.1.0/24 y R2 actuará como puerta de enlace de esta nueva subred, gestionando su direccionamiento y encaminando el tráfico hacia la LAN principal a través de R1.</p>
 <p>Para el ejemplo, vamos a añadir las tres interfaces restantes de R2 al bridge “bridge-oficina”. Para ello, accedemos a la pestaña Bridge del panel Bridge, pulsamos el botón “New” y rellenamos el formulario:</p>
@@ -1198,7 +1215,7 @@ python3<span class="w"> </span>-m<span class="w"> </span>http.server<span class=
 <p><img alt="img02" src="../img/186.png" /></p>
 <p>Una vez configurado el bridge, y añadidos los puertos al mismo, debemos asignarle IP, en el panel IP→Addresses, pulsando el botón “New” y rellenando el formulario.</p>
 <p><img alt="img02" src="../img/187.png" /></p>
-<h1 id="configuracion-del-servidor-dhcp-para-la-red-de-oficina-en-r2_1">Configuración del servidor DHCP para la red de oficina, en R2</h1>
+<h1 id="configuracion-del-servidor-dhcp-para-la-red-de-oficina-en-r2">Configuración del servidor DHCP para la red de oficina, en R2</h1>
 <p>Para facilitar la gestión de la red de oficina, vamos a configurar un servidor DHCP, que gestione la asignación de IPs a los elementos conectados al bridge-oficina.</p>
 <p>Para ello, accedemos al panel IP→DHCP Server, y pulsamos el botón DHCP Setup, asignando los siguientes valores:</p>
 <p><img alt="img02" src="../img/188.png" /></p>
@@ -1212,7 +1229,7 @@ python3<span class="w"> </span>-m<span class="w"> </span>http.server<span class=
 <p><img alt="img02" src="../img/192.png" /></p>
 <p>Esto ocurre porque todavía no hemos configurado el enrutamiento entre R1 y la nueva red de oficina situada detrás de R2. Aunque los equipos de la red de oficina pueden enviar tráfico hacia R1 (gracias a que su puerta de enlace es R2, y R2 sí conoce a R1), R1 no tiene ninguna ruta hacia 192.168.1.0/24, por lo que cuando recibe las respuestas destinadas a esa subred no sabe a qué siguiente salto reenviarlas.</p>
 <p>El resultado es un fallo de conectividad por ausencia de ruta de retorno: el tráfico “sale”, pero la respuesta no puede volver al origen. La solución consiste en añadir en R1 una ruta estática hacia 192.168.1.0/24 indicando como gateway la IP de R2 en la LAN principal (por ejemplo, 192.168.0.2).</p>
-<h1 id="configuracion-ruta-de-r1-a-la-red-de-oficina_1">Configuración Ruta de R1 a la red de oficina</h1>
+<h1 id="configuracion-ruta-de-r1-a-la-red-de-oficina">Configuración Ruta de R1 a la red de oficina</h1>
 <p>Para resolver el problema de enrutamiento entre R1 y la red de oficina situada detrás de R2, es necesario acceder a la configuración del router principal (R1) y dirigirse al apartado IP → Routes.</p>
 <p>En este punto añadiremos una nueva ruta estática, indicando que la red 192.168.1.0/24 es alcanzable a través del router interno (R2), cuya dirección en la LAN principal actúa como siguiente salto.</p>
 <p>Para ello, pulsamos el botón “New” y completamos el formulario.</p>
@@ -1224,7 +1241,7 @@ python3<span class="w"> </span>-m<span class="w"> </span>http.server<span class=
 <p>También podemos validar el acceso a internet, dado que no se requiere configurar un NAT adicional (con la configuración de NAT en R1 es suficiente.</p>
 <p><img alt="img02" src="../img/196.png" /></p>
 <p>Para finalizar, podemos reforzar la arquitectura configurando en R2 las reglas de seguridad que consideremos oportunas en su firewall, siguiendo el mismo criterio aplicado previamente en R1. De este modo, cada docente podrá ajustar el nivel de segmentación y control de acceso según los objetivos didácticos del ejercicio, ya sea manteniendo una configuración básica de enrutamiento o incorporando políticas más restrictivas que refuercen la separación entre redes.</p>
-<h1 id="conclusion_1">Conclusión.</h1>
+<h1 id="conclusion">Conclusión.</h1>
 <p>A lo largo de este manual hemos diseñado y desplegado una arquitectura completa basada en RouterOS, partiendo de un escenario simple y evolucionándolo progresivamente hacia una infraestructura segmentada y estructurada. Hemos trabajado la separación de zonas (WAN, DMZ y LAN), la publicación controlada de servicios mediante NAT, la aplicación rigurosa de políticas de firewall siguiendo el principio de mínimo privilegio y, finalmente, la ampliación del entorno mediante un segundo router interno con enrutamiento estático.</p>
 <p>El objetivo no ha sido únicamente lograr conectividad, sino comprender el porqué de cada decisión técnica: cómo fluye el tráfico, cómo se establece el retorno, cómo interactúan NAT y firewall, y cómo un diseño coherente reduce riesgos y facilita el mantenimiento. Esta visión permite pasar de una configuración “funcional” a una arquitectura razonada y profesional.</p>
 <p>El escenario desarrollado constituye una base sólida sobre la que cada docente puede profundizar según el nivel del grupo: endurecimiento adicional del firewall, segmentación más granular, control por listas de direcciones, implementación de protocolos dinámicos de enrutamiento o simulación de entornos corporativos más complejos.</p>
