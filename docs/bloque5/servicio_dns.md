@@ -39,6 +39,8 @@ Para el desarrollo de los ejemplos y prácticas de esta unidad partiremos del es
 
 De este modo, los ejemplos no se plantearán en un entorno aislado, sino en un escenario realista en el que el DNS interactúa con la LAN, la DMZ y el acceso a Internet, permitiendo comprender su papel dentro de una arquitectura de red completa.
 
+![img02](img/1.png)
+
 ## Verificar el estado actual del DNS
 
 Para analizar el estado actual del servidor DNS, podemos ejecutar el siguiente comando:
@@ -46,6 +48,7 @@ Para analizar el estado actual del servidor DNS, podemos ejecutar el siguiente c
 ```bash
 /ip/dns/print
 ```
+![img02](img/2.png)
 
 En la salida se pueden observar los siguientes parámetros básicos:
 
@@ -67,7 +70,7 @@ En este caso, configuraremos los servidores 1.1.1.1 (DNS público de cloudflare)
 ```bash
 /ip/dns/set servers=1.1.1.1,8.8.8.8
 ```
-
+![img02](img/3.png)
 ## Habilitar las peticiones DNS desde clientes externos.
 
 Vamos a configurar la opción que permitirá a los clientes utilizar el servidor DNS del router ejecutando el siguiente comando:
@@ -75,7 +78,7 @@ Vamos a configurar la opción que permitirá a los clientes utilizar el servidor
 ```bash
 /ip/dns/set allow-remote-requests=yes
 ```
-
+![img02](img/4.png)
 Debemos recordar que esta configuración no obliga a los clientes a usar el router. Solo lo permite.
 
 ## Evitar dynamic-servers
@@ -89,6 +92,7 @@ Para ello, en primer lugar, mostramos el listado de clientes dhcp del router, ej
 ```bash
 /ip/dhcp-client/print
 ```
+![img02](img/5.png)
 
 Identificamos el índice del cliente DHCP (en este caso el 0), y ejecutamos el siguiente comando, para eliminar el uso de dns proporcionados dinámicamente:
 
@@ -101,12 +105,14 @@ Como alternativa, se puede modificar el parámetro utilizando un filtro por inte
 ```bash
 ip/dhcp-client/set [find where interface=ether1] use-peer-dns=no
 ```
+![img02](img/6.png)
 
 Podemos comprobar el resultado, mirando el detalle de la configuración del servidor DNS:
 
 ```bash
 /ip/dns/print
 ```
+![img02](img/7.png)
 
 En la salida podremos observar como el parámetro dynamic-servers se encuentra vacío, y solo quedan los servidores DNS configurados de manera manual.
 
@@ -115,7 +121,7 @@ Podemos validar la resolución de nombres, ejecutando en el router el siguiente 
 ```bash
 :put [:resolve www.google.com]
 ```
-
+![img02](img/8.png)
 ## Integración del servicio DNS en los servidores DHCP
 
 Con la configuración actual, el router puede resolver peticiones DNS, pero los clientes de LAN y DMZ no lo utilizan. Vamos a modificar la configuración del servidor DHCP, para que los clientes de la LAN (y DMZ si procede) utilicen el router como servidor DNS.
@@ -125,7 +131,7 @@ Antes de modificar la configuración, vamos a identificar las IP del router en c
 ```bash
 ip/address/print.
 ```
-
+![img02](img/9.png)
 En la captura podemos observar la IP de bridge-lan (192.168.0.1/24) y la IP de bridge-dmz (10.10.0.1/24).
 
 También debemos revisar la configuración de los servidores DHCP del router, para poder identificar sobre qué servidor debemos realizar cada modificación, ejecutando el siguiente comando:
@@ -133,30 +139,35 @@ También debemos revisar la configuración de los servidores DHCP del router, pa
 ```bash
 ip/dhcp-server/print.
 ```
-
+![img02](img/10.png)
 Teniendo en cuenta las capturas anteriores, vamos a modificar el parámetro dns-server de la configuración de red de los dos servidores DHCP, para que utilicen la IP del router como servidor DNS de los clientes:
 
 ```bash
 ip/dhcp-server/network/set [find where interface=bridge-lan] dns-server=192.168.0.1
 ip/dhcp-server/network/set [find where interface=bridge-dmz] dns-server=10.10.0.1
 ```
-
+![img02](img/11.png)
 También podríamos haber ejecutado los comandos utilizando el índice del servidor DHCP, en lugar de un filtro:
 
 ```bash
 ip/dhcp-server/network/set 0 dns-server=192.168.0.1
 ip/dhcp-server/network/set 1 dns-server=10.10.0.1
 ```
+![img02](img/12.png)
 
 Validamos, mostrando la configuración de las redes de los servidores DHCP
 
 ```bash
 ip/dhcp-server/network/print
 ```
-
+![img02](img/13.png)
 Si accedemos a un cliente y renovamos su IP, podremos comprobar la nueva configuración recibida:
 
+![img02](img/14.png)
+
 Recuerda que en el tema anterior configuramos reglas de firewall, que impedirán realizar peticiones DNS al router, desde cualquier red.
+
+![img02](img/15.png)
 
 Para permitir este tráfico, deberás habilitar las peticiones desde la red interna:
 
@@ -172,6 +183,7 @@ in-interface=bridge-lan action=accept place-before=4 \
 comment="IN: allow DNS UDP from LAN"
 ```
 
+![img02](img/16.png)
 - Y habilitamos la misma regla para peticiones realizadas desde bridge-dmz, incluyendo la regla antes de la regla de bloqueo general de la cadena input
 
 ```bash
@@ -183,14 +195,16 @@ ip/firewall/filter/add chain=input protocol=udp dst-port=53 \
 in-interface=bridge-dmz action=accept place-before=4 \
 comment="IN: allow DNS UDP from DMZ"
 ```
-
+![img02](img/17.png)
 Volvemos a comprobar el estado de las reglas de firewall, para la cadena input:
 
 ```bash
 ip/firewall/filter/print where chain=input
 ```
-
+![img02](img/18.png)
 Si todo ha ido bien, ya podremos realizar resoluciones de nombre desde la red interna:
+
+![img02](img/19.png)
 
 Se pueden crear reglas para listas de interfaces, de manera que podamos agrupar las reglas que son para todas las redes internas, por ejemplo. Si quieres saber más sobre el tema, busca información sobre el uso del parámetro interface-list en mikrotik
 
@@ -207,7 +221,7 @@ En primer lugar, vamos a listar las entradas estáticas de nuestro servidor DNS:
 ```bash
 ip/dns/static/print
 ```
-
+![img02](img/20.png)
 Como vemos, el servidor no tiene ninguna entrada configurada por defecto.
 
 Para crear una entrada DNS estática para nuestro servidor web, que resuelva el nombre “intranet.local” a la IP 10.10.0.10, utilizaremos el siguiente comando:
@@ -216,8 +230,10 @@ Para crear una entrada DNS estática para nuestro servidor web, que resuelva el 
 ip/dns/static/add name=intranet.local address=10.10.0.10 \
 comment="Intranet DMZ"
 ```
-
+![img02](img/21.png)
 A continuación, podemos comprobar como el nombre DNS se puede utilizar desde los appliances desplegados en la red interna:
+
+![img02](img/22.png)
 
 Vamos a añadir una nueva entrada, para el dominio intranet.gva.es, que se traduzca por la misma IP.
 
@@ -225,8 +241,10 @@ Vamos a añadir una nueva entrada, para el dominio intranet.gva.es, que se tradu
 ip/dns/static/add name=intranet.gva.es address=10.10.0.10 \
 comment="Intranet gva falsa"
 ```
-
+![img02](img/23.png)
 Comprobemos como el cliente resolverá la IP interna, si intenta acceder al nuevo dominio configurado.
+
+![img02](img/24.png)
 
 Con esto nuestros alumnos podrán comprender como la configuración del servidor DNS de la red puede condicionar la navegación de todos los clientes 😊
 
@@ -244,6 +262,8 @@ ip/dns/cache/print
 
 Este comando muestra los nombres de dominio que han sido resueltos recientemente, la dirección IP asociada y el tiempo restante de validez (TTL).
 
+![img02](img/25.png)
+
 Esta comprobación permite verificar que el servicio DNS está funcionando correctamente, que los clientes están utilizando el router como servidor DNS y que el mecanismo de optimización mediante caché está operativo.
 
 Podemos borrar la cache DNS ejecutando:
@@ -251,12 +271,15 @@ Podemos borrar la cache DNS ejecutando:
 ```bash
 ip/dns/cache/flush
 ```
+![img02](img/26.png)
 
 ## Interceptar peticiones DNS de la red interna, y forzar su resolución
 
 Aunque hayamos configurado nuestro servidor DNS en el router, los clientes de la red interna pueden utilizar su servidor preferido, modificando su configuración de red.
 
 En la siguiente captura podemos ver una configuración de red de Alpine Linux que seguiría enviando las peticiones de resolución de nombre al servidor DNS de Google (8.8.8.8)
+
+![img02](img/27.png)
 
 Para evitar este comportamiento, podemos redirigir las peticiones a servidores DNS externos, para que las resuelva el servidor DNS de nuestro router, mediante estas cuatro instrucciones:
 
@@ -278,7 +301,11 @@ in-interface=bridge-dmz action=redirect to-ports=53 \
 comment="Forzar DNS UDP de DMZ hacia router"
 ```
 
+![img02](img/28.png)
+
 Si volvemos a probar la resolución desde la misma máquina de la red interna, veremos que se ha forzado la resolución desde el servidor DNS del router.
+
+![img02](img/29.png)
 
 Esto es debido a que hemos forzado el siguiente comportamiento:
 
