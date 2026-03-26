@@ -4,8 +4,8 @@
 
 Introducción  
 Paso 1 – Crear interfaces VLAN L3 sobre bridge-vlan  
-PASO 2 — Asignar direccionamiento IP a cada VLAN  
-PASO 3 — Configuración de servidor DHCP por VLAN  
+Paso 2 — Asignar direccionamiento IP a cada VLAN  
+Paso 3 — Configuración de servidor DHCP por VLAN  
 Paso 4 — Configuración de los clientes para obtener dirección IP mediante DHCP  
 Diferencia operativa entre comunicación intra-VLAN e inter-VLAN  
 
@@ -68,23 +68,24 @@ Es fundamental comprender que:
 En términos prácticos, estamos “dándole dirección IP” a cada VLAN para convertirla en una red enrutable. Este es el punto exacto donde el dispositivo deja de ser solo un switch segmentado y empieza a comportarse como un router inter-VLAN.
 
 A continuación, creamos una interfaz VLAN lógica de Capa 3 asociada a la VLAN 10 sobre el bridge “bridge-vlan”:
-
+```
 interface/vlan/add \
 name=vlan10 \
 interface=bridge-vlan \
 vlan-id=10
-
+```
 ---
 
 Este comando genera una interfaz virtual que procesará exclusivamente el tráfico etiquetado con VLAN ID 10 y permitirá, en el siguiente paso, asignarle direccionamiento IP.
 
 Seguidamente, repetimos el procedimiento para la VLAN 20:
 
+```
 interface/vlan/add \
 name=vlan20 \
 interface=bridge-vlan \
 vlan-id=20
-
+```
 De este modo, disponemos de dos interfaces independientes —vlan10 y vlan20— preparadas para actuar como gateway de sus respectivas redes.
 
 Para comprobar que ambas interfaces se han creado correctamente, ejecutamos:
@@ -108,21 +109,22 @@ En este ejemplo utilizaremos el siguiente esquema:
 Este diseño es habitual en entornos empresariales, ya que asocia cada VLAN a una subred diferenciada, facilitando la identificación, la gestión y el diagnóstico de red.
 
 Para asignar las direcciones IP a cada interfaz VLAN, ejecutamos:
-
+```
 ip/address/add \
 address=192.168.10.1/24 \
 interface=vlan10
-
+```
+```
 ip/address/add \
 address=192.168.20.1/24 \
 interface=vlan20
-
+```
 Podemos comprobar la asignación, ejecutando:
-
+```
 ip/address/print
+```
 
-
----![img02](img/42.png)
+![img02](img/42.png)
 
 Como se explicó previamente, al asignar una dirección IP a una interfaz en RouterOS se producen automáticamente varios efectos a nivel de routing:
 
@@ -141,9 +143,9 @@ En consecuencia, a partir de este punto:
 - Queda habilitado el routing inter-VLAN a nivel de Capa 3.  
 
 Para verificar la presencia de las rutas conectadas, ejecutamos:
-
+```
 ip/route/print
-
+```
 
 ![img02](img/43.png)
 En la tabla de rutas deben aparecer ambas redes marcadas como DAC (Dynamic, Active, Connected), lo que confirma que el router está preparado para realizar encaminamiento entre ellas.
@@ -159,37 +161,37 @@ Hasta este momento, los dispositivos cliente requieren configuración manual de 
 En RouterOS, el servidor DHCP se asocia siempre a una interfaz específica. Esto implica que cada VLAN debe disponer de su propio servicio DHCP vinculado a su interfaz de Capa 3 correspondiente (vlan10 y vlan20). De esta forma, cada red gestionará automáticamente su propio direccionamiento sin interferir con las demás.
 
 Para configurar el servidor DHCP de la VLAN 10, ejecutaremos el asistente de configuración:
-
+```
 ip/dhcp-server/setup
-
+```
 Y seleccionaremos los siguientes parámetros:
 
 
 ![img02](img/44.png)
 Para configurar el servidor DHCP de la VLAN 20, volvemos a ejecutar el asistente:
-
+```
 ip/dhcp-server/setup
-
+```
 Y seleccionaremos los siguientes parámetros:
 
 ![img02](img/45.png)
 
 Con esto, cada VLAN dispone de su propio servicio DHCP independiente. Para comprobar que ambos servidores están activos, ejecutamos:
-
+```
 ip/dhcp-server/print
-
+```
 ![img02](img/46.png)
 
 Para verificar las redes asociadas a cada servidor, ejecutamos:
-
+```
 ip/dhcp-server/network/print
-
+```
 ![img02](img/47.png)
 
 Y para comprobar las concesiones asignadas a los clientes (si ya han solicitado dirección), ejecutamos:
-
+```
 ip/dhcp-server/lease/print
-
+```
 ![img02](img/48.png)
 
 En este punto, el router no solo enruta entre VLAN, sino que también gestiona automáticamente el direccionamiento de cada red, reproduciendo el comportamiento habitual de un gateway en un entorno empresarial segmentado.
@@ -213,9 +215,9 @@ Una vez aplicada la modificación en la configuración de red de cada instancia,
 Durante el arranque, cada cliente enviará una solicitud DHCP (DHCP Discover) dentro de su dominio de broadcast. El router, a través del servidor DHCP asociado a la interfaz VLAN correspondiente, responderá asignando una dirección IP disponible junto con los parámetros de red definidos.
 
 Para verificar que las direcciones se han asignado correctamente, podemos ejecutar en el router el siguiente comando:
-
+```
 ip/dhcp-server/lease/print
-
+```
 La salida mostrará las concesiones activas, indicando la dirección IP asignada, la dirección MAC del cliente y el estado de la concesión. Esto confirma que el servicio DHCP está funcionando correctamente en cada VLAN.
 
 ![img02](img/51.png)
