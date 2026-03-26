@@ -1,0 +1,1202 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>Configuración de routing inter-VLAN. - Curso MikroTik</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#configuracion-de-routing-inter-vlan" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Curso MikroTik" class="md-header__button md-logo" aria-label="Curso MikroTik" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Curso MikroTik
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Configuración de routing inter-VLAN.
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Curso MikroTik" class="md-nav__button md-logo" aria-label="Curso MikroTik" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Curso MikroTik
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inicio
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Bloque 1. Introducción
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Bloque 1. Introducción
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduccion/01_mikrotik_routeros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introducción a MikroTik y RouterOS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduccion/02_virtualizacion_gns3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Virtualización de RouterOS con GNS3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduccion/03_acceso_routeros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Conectando a RouterOS para su administración
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Bloque 2. Configuración básica
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Bloque 2. Configuración básica
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque2/eliminar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Eliminar configuración
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque2/dhcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Configuración de DHCP (ip dinámica)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque2/ip_estatica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Configuración de IP estática
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque2/bridge_dinamico/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Configuración de bridge dinámico
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque2/bridge_estatica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Configuración de bridge estático
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque2/tarea_bloque2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Actividad práctica
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Bloque 3. Servicios de red esenciales (DHCP y NAT)
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Bloque 3. Servicios de red esenciales (DHCP y NAT)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque3/dhcp_bridge_manual/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Configuración de DHCP Server sobre un bridge, de manera manual
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque3/dhcp_bridge_asistente/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Configuración de DHCP Server sobre un bridge, utilizando el asistente
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque3/dhcp_reservas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Reservas de IP en DHCP (DHCP Static Leases)l
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque3/configuracion_nat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Configuración de NAT (Network Address Translation)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque3/actividad_bloque3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Actividad práctica
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Bloque 4. Firewall, redirección de puertos y DMZ
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Bloque 4. Firewall, redirección de puertos y DMZ
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque4/configuracion_reglas_firewall/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Configuración de firewall en RouterOS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque4/redireccion_puertos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Redirección de puertos (Port Forwarding)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque4/configuracion_dmz/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Configuración de DMZ (Zona Desmilitarizada)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque4/configuracion_dmz_gui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Configuración de DMZ - Gui
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Bloque 5. Configuración de VLANS y servicio DNS
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Bloque 5. Configuración de VLANS y servicio DNS
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../servicio_dns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Servicio DNS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Índice
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducción
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-1-crear-interfaces-vlan-l3-sobre-bridge-vlan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paso 1 – Crear interfaces VLAN L3 sobre bridge-vlan
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-2-asignar-direccionamiento-ip-a-cada-vlan" class="md-nav__link">
+    <span class="md-ellipsis">
+      PASO 2 — Asignar direccionamiento IP a cada VLAN
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-3-configuracion-de-servidor-dhcp-por-vlan" class="md-nav__link">
+    <span class="md-ellipsis">
+      PASO 3 — Configuración de servidor DHCP por VLAN
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-4-configuracion-de-los-clientes-para-obtener-direccion-ip-mediante-dhcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paso 4 — Configuración de los clientes para obtener dirección IP mediante DHCP
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#diferencia-operativa-entre-comunicacion-intra-vlan-e-inter-vlan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diferencia operativa entre comunicación intra-VLAN e inter-VLAN
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="configuracion-de-routing-inter-vlan">Configuración de routing inter-VLAN.</h1>
+<h2 id="indice">Índice</h2>
+<p>Introducción<br />
+Paso 1 – Crear interfaces VLAN L3 sobre bridge-vlan<br />
+PASO 2 — Asignar direccionamiento IP a cada VLAN<br />
+PASO 3 — Configuración de servidor DHCP por VLAN<br />
+Paso 4 — Configuración de los clientes para obtener dirección IP mediante DHCP<br />
+Diferencia operativa entre comunicación intra-VLAN e inter-VLAN  </p>
+<hr />
+<h2 id="introduccion">Introducción</h2>
+<p>En este documento abordaremos la configuración de routing inter-VLAN en RouterOS v7, partiendo de un escenario previamente segmentado en Capa 2.</p>
+<p>Tomamos como base el resultado obtenido en la práctica AF18 – Configuración de un bridge con filtrado VLAN, donde se implementó un entorno VLAN-aware sobre un bridge, con las VLAN 10 y 20 correctamente operativas a nivel de switching. En dicha fase se configuró:</p>
+<ul>
+<li>Un bridge con vlan-filtering=yes.  </li>
+<li>Asignación de puertos como access y/o trunk.  </li>
+<li>Tabla de VLAN definida mediante /interface bridge vlan.  </li>
+<li>Separación efectiva de dominios de broadcast.  </li>
+</ul>
+<p>Ese escenario permitía segmentación de tráfico, pero no comunicación entre VLAN, ya que el dispositivo únicamente estaba actuando en Capa 2.
+<img alt="img02" src="../img/40.png" /></p>
+<hr />
+<p>En esta nueva etapa incorporaremos funcionalidad de Capa 3, convirtiendo el equipo en un router inter-VLAN capaz de:</p>
+<ul>
+<li>Asignar una subred IP distinta a cada VLAN.  </li>
+<li>Configurarse como gateway para cada red.  </li>
+<li>Permitir la comunicación entre dispositivos de distintas VLAN.  </li>
+<li>Verificar el funcionamiento del encaminamiento.  </li>
+<li>(Opcionalmente) aplicar políticas de control mediante firewall.  </li>
+</ul>
+<p>En términos arquitectónicos, pasaremos de un dispositivo que segmenta tráfico a nivel de switching a un equipo que:</p>
+<ul>
+<li>Recibe tráfico etiquetado.  </li>
+<li>Lo procesa en la pila IP.  </li>
+<li>Consulta la tabla de rutas.  </li>
+<li>Reenvía el tráfico hacia la red correspondiente.  </li>
+</ul>
+<p>Este es el comportamiento típico de un router de núcleo o gateway en entornos empresariales.</p>
+<p>No se repetirá la configuración de Capa 2 ya realizada en el documento AF18 - Configuración de un bridge con filtrado VLAN.</p>
+<p>Nos centraremos exclusivamente en la transición hacia Capa 3 y en el funcionamiento del encaminamiento inter-VLAN.</p>
+<hr />
+<h2 id="paso-1-crear-interfaces-vlan-l3-sobre-bridge-vlan">Paso 1 – Crear interfaces VLAN L3 sobre bridge-vlan</h2>
+<p>Hasta este momento, el bridge bridge-vlan estaba operando exclusivamente en Capa 2. Su función consistía en separar el tráfico por VLAN y mantener aislados los dominios de broadcast, pero no tenía capacidad de realizar encaminamiento entre redes.</p>
+<p>En este paso crearemos interfaces VLAN lógicas de Capa 3 asociadas al bridge. Estas interfaces permitirán que el router:</p>
+<ul>
+<li>Reciba tráfico etiquetado por VLAN.  </li>
+<li>Lo procese a nivel IP.  </li>
+<li>Actúe como gateway para cada red.  </li>
+</ul>
+<p>Es fundamental comprender que:</p>
+<ul>
+<li>El bridge sigue haciendo switching.  </li>
+<li>Las nuevas interfaces VLAN permiten hacer routing.  </li>
+<li>No estamos modificando la configuración L2 existente.  </li>
+</ul>
+<p>En términos prácticos, estamos “dándole dirección IP” a cada VLAN para convertirla en una red enrutable. Este es el punto exacto donde el dispositivo deja de ser solo un switch segmentado y empieza a comportarse como un router inter-VLAN.</p>
+<p>A continuación, creamos una interfaz VLAN lógica de Capa 3 asociada a la VLAN 10 sobre el bridge “bridge-vlan”:</p>
+<p>interface/vlan/add \
+name=vlan10 \
+interface=bridge-vlan \
+vlan-id=10</p>
+<hr />
+<p>Este comando genera una interfaz virtual que procesará exclusivamente el tráfico etiquetado con VLAN ID 10 y permitirá, en el siguiente paso, asignarle direccionamiento IP.</p>
+<p>Seguidamente, repetimos el procedimiento para la VLAN 20:</p>
+<p>interface/vlan/add \
+name=vlan20 \
+interface=bridge-vlan \
+vlan-id=20</p>
+<p>De este modo, disponemos de dos interfaces independientes —vlan10 y vlan20— preparadas para actuar como gateway de sus respectivas redes.</p>
+<p>Para comprobar que ambas interfaces se han creado correctamente, ejecutamos:
+<div class="highlight"><pre><span></span><code>interface/vlan/print
+</code></pre></div></p>
+<h2 id="_1"><img alt="img02" src="../img/41.png" /></h2>
+<p>El resultado muestra las dos interfaces asociadas al bridge bridge-vlan con sus
+correspondientes identificadores VLAN.</p>
+<h2 id="paso-2-asignar-direccionamiento-ip-a-cada-vlan">PASO 2 — Asignar direccionamiento IP a cada VLAN</h2>
+<p>Una vez creadas las interfaces VLAN de Capa 3, el siguiente paso consiste en asignar una subred IP distinta a cada una de ellas, permitiendo que el router actúe como gateway para ambas redes.</p>
+<p>En este ejemplo utilizaremos el siguiente esquema:</p>
+<ul>
+<li>VLAN 10 → 192.168.10.0/24 Gateway: 192.168.10.1  </li>
+<li>VLAN 20 → 192.168.20.0/24 Gateway: 192.168.20.1  </li>
+</ul>
+<p>Este diseño es habitual en entornos empresariales, ya que asocia cada VLAN a una subred diferenciada, facilitando la identificación, la gestión y el diagnóstico de red.</p>
+<p>Para asignar las direcciones IP a cada interfaz VLAN, ejecutamos:</p>
+<p>ip/address/add \
+address=192.168.10.1/24 \
+interface=vlan10</p>
+<p>ip/address/add \
+address=192.168.20.1/24 \
+interface=vlan20</p>
+<p>Podemos comprobar la asignación, ejecutando:</p>
+<p>ip/address/print</p>
+<p>---<img alt="img02" src="../img/42.png" /></p>
+<p>Como se explicó previamente, al asignar una dirección IP a una interfaz en RouterOS se producen automáticamente varios efectos a nivel de routing:</p>
+<ul>
+<li>El sistema crea una ruta conectada en la tabla de enrutamiento.  </li>
+<li>La red asociada pasa a estar directamente alcanzable desde el router.  </li>
+<li>La dirección IP configurada se convierte en la puerta de enlace para los dispositivos de esa VLAN  </li>
+</ul>
+<hr />
+<p>Este comportamiento se debe a que RouterOS tiene el encaminamiento habilitado por defecto. No es necesario activar ningún mecanismo adicional para permitir el reenvío de tráfico entre redes directamente conectadas.</p>
+<p>En consecuencia, a partir de este punto:</p>
+<ul>
+<li>El router reconoce ambas subredes como propias.  </li>
+<li>Está capacitado para reenviar tráfico entre ellas.  </li>
+<li>Queda habilitado el routing inter-VLAN a nivel de Capa 3.  </li>
+</ul>
+<p>Para verificar la presencia de las rutas conectadas, ejecutamos:</p>
+<p>ip/route/print</p>
+<p><img alt="img02" src="../img/43.png" />
+En la tabla de rutas deben aparecer ambas redes marcadas como DAC (Dynamic, Active, Connected), lo que confirma que el router está preparado para realizar encaminamiento entre ellas.</p>
+<hr />
+<h2 id="paso-3-configuracion-de-servidor-dhcp-por-vlan">PASO 3 — Configuración de servidor DHCP por VLAN</h2>
+<p>Hasta este momento, los dispositivos cliente requieren configuración manual de dirección IP, máscara, gateway y DNS. Este enfoque no es escalable ni operativo en entornos reales, por lo que implementaremos un servidor DHCP independiente para cada VLAN.</p>
+<p>En RouterOS, el servidor DHCP se asocia siempre a una interfaz específica. Esto implica que cada VLAN debe disponer de su propio servicio DHCP vinculado a su interfaz de Capa 3 correspondiente (vlan10 y vlan20). De esta forma, cada red gestionará automáticamente su propio direccionamiento sin interferir con las demás.</p>
+<p>Para configurar el servidor DHCP de la VLAN 10, ejecutaremos el asistente de configuración:</p>
+<p>ip/dhcp-server/setup</p>
+<p>Y seleccionaremos los siguientes parámetros:</p>
+<p><img alt="img02" src="../img/44.png" />
+Para configurar el servidor DHCP de la VLAN 20, volvemos a ejecutar el asistente:</p>
+<p>ip/dhcp-server/setup</p>
+<p>Y seleccionaremos los siguientes parámetros:</p>
+<p><img alt="img02" src="../img/45.png" /></p>
+<p>Con esto, cada VLAN dispone de su propio servicio DHCP independiente. Para comprobar que ambos servidores están activos, ejecutamos:</p>
+<p>ip/dhcp-server/print</p>
+<p><img alt="img02" src="../img/46.png" /></p>
+<p>Para verificar las redes asociadas a cada servidor, ejecutamos:</p>
+<p>ip/dhcp-server/network/print</p>
+<p><img alt="img02" src="../img/47.png" /></p>
+<p>Y para comprobar las concesiones asignadas a los clientes (si ya han solicitado dirección), ejecutamos:</p>
+<p>ip/dhcp-server/lease/print</p>
+<p><img alt="img02" src="../img/48.png" /></p>
+<p>En este punto, el router no solo enruta entre VLAN, sino que también gestiona automáticamente el direccionamiento de cada red, reproduciendo el comportamiento habitual de un gateway en un entorno empresarial segmentado.</p>
+<hr />
+<h2 id="paso-4-configuracion-de-los-clientes-para-obtener-direccion-ip-mediante-dhcp">Paso 4 — Configuración de los clientes para obtener dirección IP mediante DHCP</h2>
+<p>Una vez configurados los servidores DHCP para cada VLAN, el siguiente paso consiste en adaptar los dispositivos cliente para que obtengan automáticamente su configuración de red.</p>
+<p>Para realizar este ajuste, debemos modificar la configuración de cada instancia cliente. En el entorno de laboratorio, hacemos clic con el botón derecho sobre la máquina correspondiente y seleccionamos la opción “Edit config”.</p>
+<p><img alt="img02" src="../img/49.png" /></p>
+<p>Dentro de cada instancia, localizamos el bloque de configuración de red donde anteriormente se definía la dirección IP de forma manual. En este punto, debemos comentar la configuración estática (dirección IP, máscara y gateway) y descomentar o activar la configuración que solicita dirección IP mediante DHCP.</p>
+<p><img alt="img02" src="../img/50.png" /></p>
+<p>Una vez aplicada la modificación en la configuración de red de cada instancia, procedemos a iniciarlas para que soliciten automáticamente una dirección IP al servidor DHCP correspondiente a su VLAN.</p>
+<p>Durante el arranque, cada cliente enviará una solicitud DHCP (DHCP Discover) dentro de su dominio de broadcast. El router, a través del servidor DHCP asociado a la interfaz VLAN correspondiente, responderá asignando una dirección IP disponible junto con los parámetros de red definidos.</p>
+<p>Para verificar que las direcciones se han asignado correctamente, podemos ejecutar en el router el siguiente comando:</p>
+<p>ip/dhcp-server/lease/print</p>
+<p>La salida mostrará las concesiones activas, indicando la dirección IP asignada, la dirección MAC del cliente y el estado de la concesión. Esto confirma que el servicio DHCP está funcionando correctamente en cada VLAN.</p>
+<p><img alt="img02" src="../img/51.png" /></p>
+<p>Como puede observarse, los equipos pertenecientes a la VLAN 10 han recibido direcciones IP dentro del rango 192.168.10.0/24, mientras que los equipos de la VLAN 20 han obtenido direcciones dentro del rango 192.168.20.0/24.</p>
+<p>Esto confirma que cada servidor DHCP está funcionando correctamente y que la asignación de direcciones se realiza en función de la interfaz VLAN asociada.</p>
+<p>A continuación, podemos verificar la conectividad realizando pruebas de ping entre los distintos equipos. Es recomendable comprobar:</p>
+<ul>
+<li>Conectividad intra-VLAN (entre dispositivos de la misma VLAN).  </li>
+<li>Conectividad inter-VLAN (entre dispositivos de VLAN 10 y VLAN 20).  </li>
+</ul>
+<p>En el segundo caso, el tráfico deberá atravesar el router, que actuará como gateway y realizará el encaminamiento entre redes.</p>
+<p>Si la configuración es correcta, los equipos de distintas VLAN podrán comunicarse entre sí a través del router, validando así el funcionamiento del routing inter-VLAN.</p>
+<p><img alt="img02" src="../img/52.png" /></p>
+<hr />
+<p>Con la configuración aplicada, es fundamental entender que las interfaces vlan10 y vlan20 funcionan como interfaces virtuales de Capa 3, equivalentes desde el punto de vista lógico a interfaces físicas independientes. Cada una representa una red distinta dentro del router, dispone de su propio direccionamiento IP y participa de forma autónoma en la tabla de enrutamiento.</p>
+<p>Por defecto, el tráfico entre las VLAN configuradas está permitido, ya que RouterOS reenvía automáticamente paquetes entre redes directamente conectadas. No obstante, este comportamiento puede regularse mediante reglas de firewall en la cadena forward, donde es posible definir qué comunicaciones se autorizan o se bloquean entre redes.</p>
+<p>El mecanismo es idéntico al empleado en el escenario de configuración de la DMZ: el router analiza el tráfico que atraviesa de una interfaz a otra y aplica políticas explícitas basadas en criterios definidos por el administrador. De este modo, una simple interconexión entre VLAN puede evolucionar hacia una arquitectura segmentada, controlada y alineada con los estándares de seguridad propios de entornos empresariales.</p>
+<hr />
+<h2 id="diferencia-operativa-entre-comunicacion-intra-vlan-e-inter-vlan">Diferencia operativa entre comunicación intra-VLAN e inter-VLAN</h2>
+<p>Cuando dos dispositivos pertenecen a la misma VLAN —por ejemplo, VLAN 10— y uno envía tráfico al otro, toda la comunicación se resuelve exclusivamente en Capa 2. El equipo emisor comprueba, mediante su máscara de red, que la dirección IP de destino forma parte de su misma subred, por lo que no necesita recurrir al gateway. Si desconoce la dirección MAC del destinatario, realiza una solicitud ARP dentro de la propia VLAN 10. Una vez obtenida la MAC, el paquete IP se encapsula en una trama Ethernet etiquetada con VLAN 10 y el bridge la reenvía directamente al puerto correspondiente. En este escenario el router no interviene en ningún momento, ya que el tráfico no abandona el dominio de broadcast de la VLAN.</p>
+<p>Sin embargo, cuando un dispositivo de VLAN 10 intenta comunicarse con otro de VLAN 20, el comportamiento cambia sustancialmente. El equipo emisor detecta que la dirección IP de destino no pertenece a su red local y, por tanto, envía el tráfico al gateway configurado (la dirección IP del router en VLAN 10). El bridge entrega la trama etiquetada a la interfaz vlan10, donde el tráfico asciende a Capa 3. El router analiza la cabecera IP, consulta la tabla de rutas y determina que la red de destino está asociada a la interfaz vlan20. Acto seguido, vuelve a encapsular el paquete en una nueva trama Ethernet, esta vez etiquetada con VLAN 20, y lo reenvía hacia el destino. En este caso sí interviene el router, produciéndose el encaminamiento inter-VLAN.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>
