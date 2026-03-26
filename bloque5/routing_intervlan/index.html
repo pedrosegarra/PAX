@@ -9,6 +9,8 @@
       
       
       
+        <link rel="prev" href="../vlan_bridge_config/">
+      
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -16,7 +18,7 @@
     
     
       
-        <title>Configuración de routing inter-VLAN. - Curso MikroTik</title>
+        <title>3. Configuración de routing inter-VLAN - Curso MikroTik</title>
       
     
     
@@ -94,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Configuración de routing inter-VLAN.
+              3. Configuración de routing inter-VLAN
             
           </span>
         </div>
@@ -803,18 +805,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
         
           
           <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
@@ -830,7 +834,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Bloque 5. Configuración de VLANS y servicio DNS
@@ -855,6 +859,166 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vlan_bridge_config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Configuración de un bridge con filtrado VLAN
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    3. Configuración de routing inter-VLAN
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Configuración de routing inter-VLAN
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Índice
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducción
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-1-crear-interfaces-vlan-l3-sobre-bridge-vlan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paso 1 – Crear interfaces VLAN L3 sobre bridge-vlan
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-2-asignar-direccionamiento-ip-a-cada-vlan" class="md-nav__link">
+    <span class="md-ellipsis">
+      PASO 2 — Asignar direccionamiento IP a cada VLAN
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-3-configuracion-de-servidor-dhcp-por-vlan" class="md-nav__link">
+    <span class="md-ellipsis">
+      PASO 3 — Configuración de servidor DHCP por VLAN
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-4-configuracion-de-los-clientes-para-obtener-direccion-ip-mediante-dhcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paso 4 — Configuración de los clientes para obtener dirección IP mediante DHCP
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#diferencia-operativa-entre-comunicacion-intra-vlan-e-inter-vlan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diferencia operativa entre comunicación intra-VLAN e inter-VLAN
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -985,8 +1149,8 @@
 <h2 id="indice">Índice</h2>
 <p>Introducción<br />
 Paso 1 – Crear interfaces VLAN L3 sobre bridge-vlan<br />
-PASO 2 — Asignar direccionamiento IP a cada VLAN<br />
-PASO 3 — Configuración de servidor DHCP por VLAN<br />
+Paso 2 — Asignar direccionamiento IP a cada VLAN<br />
+Paso 3 — Configuración de servidor DHCP por VLAN<br />
 Paso 4 — Configuración de los clientes para obtener dirección IP mediante DHCP<br />
 Diferencia operativa entre comunicación intra-VLAN e inter-VLAN  </p>
 <hr />
@@ -1036,19 +1200,21 @@ Diferencia operativa entre comunicación intra-VLAN e inter-VLAN  </p>
 <li>No estamos modificando la configuración L2 existente.  </li>
 </ul>
 <p>En términos prácticos, estamos “dándole dirección IP” a cada VLAN para convertirla en una red enrutable. Este es el punto exacto donde el dispositivo deja de ser solo un switch segmentado y empieza a comportarse como un router inter-VLAN.</p>
-<p>A continuación, creamos una interfaz VLAN lógica de Capa 3 asociada a la VLAN 10 sobre el bridge “bridge-vlan”:</p>
-<p>interface/vlan/add \
+<p>A continuación, creamos una interfaz VLAN lógica de Capa 3 asociada a la VLAN 10 sobre el bridge “bridge-vlan”:
+<div class="highlight"><pre><span></span><code>interface/vlan/add \
 name=vlan10 \
 interface=bridge-vlan \
-vlan-id=10</p>
+vlan-id=10
+</code></pre></div></p>
 <hr />
 <p>Este comando genera una interfaz virtual que procesará exclusivamente el tráfico etiquetado con VLAN ID 10 y permitirá, en el siguiente paso, asignarle direccionamiento IP.</p>
 <p>Seguidamente, repetimos el procedimiento para la VLAN 20:</p>
-<p>interface/vlan/add \
+<p><div class="highlight"><pre><span></span><code>interface/vlan/add \
 name=vlan20 \
 interface=bridge-vlan \
-vlan-id=20</p>
-<p>De este modo, disponemos de dos interfaces independientes —vlan10 y vlan20— preparadas para actuar como gateway de sus respectivas redes.</p>
+vlan-id=20
+</code></pre></div>
+De este modo, disponemos de dos interfaces independientes —vlan10 y vlan20— preparadas para actuar como gateway de sus respectivas redes.</p>
 <p>Para comprobar que ambas interfaces se han creado correctamente, ejecutamos:
 <div class="highlight"><pre><span></span><code>interface/vlan/print
 </code></pre></div></p>
@@ -1063,16 +1229,19 @@ correspondientes identificadores VLAN.</p>
 <li>VLAN 20 → 192.168.20.0/24 Gateway: 192.168.20.1  </li>
 </ul>
 <p>Este diseño es habitual en entornos empresariales, ya que asocia cada VLAN a una subred diferenciada, facilitando la identificación, la gestión y el diagnóstico de red.</p>
-<p>Para asignar las direcciones IP a cada interfaz VLAN, ejecutamos:</p>
-<p>ip/address/add \
+<p>Para asignar las direcciones IP a cada interfaz VLAN, ejecutamos:
+<div class="highlight"><pre><span></span><code>ip/address/add \
 address=192.168.10.1/24 \
-interface=vlan10</p>
-<p>ip/address/add \
+interface=vlan10
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ip/address/add \
 address=192.168.20.1/24 \
-interface=vlan20</p>
-<p>Podemos comprobar la asignación, ejecutando:</p>
-<p>ip/address/print</p>
-<p>---<img alt="img02" src="../img/42.png" /></p>
+interface=vlan20
+</code></pre></div>
+Podemos comprobar la asignación, ejecutando:
+<div class="highlight"><pre><span></span><code>ip/address/print
+</code></pre></div></p>
+<p><img alt="img02" src="../img/42.png" /></p>
 <p>Como se explicó previamente, al asignar una dirección IP a una interfaz en RouterOS se producen automáticamente varios efectos a nivel de routing:</p>
 <ul>
 <li>El sistema crea una ruta conectada en la tabla de enrutamiento.  </li>
@@ -1087,31 +1256,37 @@ interface=vlan20</p>
 <li>Está capacitado para reenviar tráfico entre ellas.  </li>
 <li>Queda habilitado el routing inter-VLAN a nivel de Capa 3.  </li>
 </ul>
-<p>Para verificar la presencia de las rutas conectadas, ejecutamos:</p>
-<p>ip/route/print</p>
+<p>Para verificar la presencia de las rutas conectadas, ejecutamos:
+<div class="highlight"><pre><span></span><code>ip/route/print
+</code></pre></div></p>
 <p><img alt="img02" src="../img/43.png" />
 En la tabla de rutas deben aparecer ambas redes marcadas como DAC (Dynamic, Active, Connected), lo que confirma que el router está preparado para realizar encaminamiento entre ellas.</p>
 <hr />
 <h2 id="paso-3-configuracion-de-servidor-dhcp-por-vlan">PASO 3 — Configuración de servidor DHCP por VLAN</h2>
 <p>Hasta este momento, los dispositivos cliente requieren configuración manual de dirección IP, máscara, gateway y DNS. Este enfoque no es escalable ni operativo en entornos reales, por lo que implementaremos un servidor DHCP independiente para cada VLAN.</p>
 <p>En RouterOS, el servidor DHCP se asocia siempre a una interfaz específica. Esto implica que cada VLAN debe disponer de su propio servicio DHCP vinculado a su interfaz de Capa 3 correspondiente (vlan10 y vlan20). De esta forma, cada red gestionará automáticamente su propio direccionamiento sin interferir con las demás.</p>
-<p>Para configurar el servidor DHCP de la VLAN 10, ejecutaremos el asistente de configuración:</p>
-<p>ip/dhcp-server/setup</p>
-<p>Y seleccionaremos los siguientes parámetros:</p>
+<p>Para configurar el servidor DHCP de la VLAN 10, ejecutaremos el asistente de configuración:
+<div class="highlight"><pre><span></span><code>ip/dhcp-server/setup
+</code></pre></div>
+Y seleccionaremos los siguientes parámetros:</p>
 <p><img alt="img02" src="../img/44.png" />
-Para configurar el servidor DHCP de la VLAN 20, volvemos a ejecutar el asistente:</p>
-<p>ip/dhcp-server/setup</p>
-<p>Y seleccionaremos los siguientes parámetros:</p>
+Para configurar el servidor DHCP de la VLAN 20, volvemos a ejecutar el asistente:
+<div class="highlight"><pre><span></span><code>ip/dhcp-server/setup
+</code></pre></div>
+Y seleccionaremos los siguientes parámetros:</p>
 <p><img alt="img02" src="../img/45.png" /></p>
-<p>Con esto, cada VLAN dispone de su propio servicio DHCP independiente. Para comprobar que ambos servidores están activos, ejecutamos:</p>
-<p>ip/dhcp-server/print</p>
-<p><img alt="img02" src="../img/46.png" /></p>
-<p>Para verificar las redes asociadas a cada servidor, ejecutamos:</p>
-<p>ip/dhcp-server/network/print</p>
-<p><img alt="img02" src="../img/47.png" /></p>
-<p>Y para comprobar las concesiones asignadas a los clientes (si ya han solicitado dirección), ejecutamos:</p>
-<p>ip/dhcp-server/lease/print</p>
-<p><img alt="img02" src="../img/48.png" /></p>
+<p>Con esto, cada VLAN dispone de su propio servicio DHCP independiente. Para comprobar que ambos servidores están activos, ejecutamos:
+<div class="highlight"><pre><span></span><code>ip/dhcp-server/print
+</code></pre></div>
+<img alt="img02" src="../img/46.png" /></p>
+<p>Para verificar las redes asociadas a cada servidor, ejecutamos:
+<div class="highlight"><pre><span></span><code>ip/dhcp-server/network/print
+</code></pre></div>
+<img alt="img02" src="../img/47.png" /></p>
+<p>Y para comprobar las concesiones asignadas a los clientes (si ya han solicitado dirección), ejecutamos:
+<div class="highlight"><pre><span></span><code>ip/dhcp-server/lease/print
+</code></pre></div>
+<img alt="img02" src="../img/48.png" /></p>
 <p>En este punto, el router no solo enruta entre VLAN, sino que también gestiona automáticamente el direccionamiento de cada red, reproduciendo el comportamiento habitual de un gateway en un entorno empresarial segmentado.</p>
 <hr />
 <h2 id="paso-4-configuracion-de-los-clientes-para-obtener-direccion-ip-mediante-dhcp">Paso 4 — Configuración de los clientes para obtener dirección IP mediante DHCP</h2>
@@ -1122,9 +1297,10 @@ Para configurar el servidor DHCP de la VLAN 20, volvemos a ejecutar el asistente
 <p><img alt="img02" src="../img/50.png" /></p>
 <p>Una vez aplicada la modificación en la configuración de red de cada instancia, procedemos a iniciarlas para que soliciten automáticamente una dirección IP al servidor DHCP correspondiente a su VLAN.</p>
 <p>Durante el arranque, cada cliente enviará una solicitud DHCP (DHCP Discover) dentro de su dominio de broadcast. El router, a través del servidor DHCP asociado a la interfaz VLAN correspondiente, responderá asignando una dirección IP disponible junto con los parámetros de red definidos.</p>
-<p>Para verificar que las direcciones se han asignado correctamente, podemos ejecutar en el router el siguiente comando:</p>
-<p>ip/dhcp-server/lease/print</p>
-<p>La salida mostrará las concesiones activas, indicando la dirección IP asignada, la dirección MAC del cliente y el estado de la concesión. Esto confirma que el servicio DHCP está funcionando correctamente en cada VLAN.</p>
+<p>Para verificar que las direcciones se han asignado correctamente, podemos ejecutar en el router el siguiente comando:
+<div class="highlight"><pre><span></span><code>ip/dhcp-server/lease/print
+</code></pre></div>
+La salida mostrará las concesiones activas, indicando la dirección IP asignada, la dirección MAC del cliente y el estado de la concesión. Esto confirma que el servicio DHCP está funcionando correctamente en cada VLAN.</p>
 <p><img alt="img02" src="../img/51.png" /></p>
 <p>Como puede observarse, los equipos pertenecientes a la VLAN 10 han recibido direcciones IP dentro del rango 192.168.10.0/24, mientras que los equipos de la VLAN 20 han obtenido direcciones dentro del rango 192.168.20.0/24.</p>
 <p>Esto confirma que cada servidor DHCP está funcionando correctamente y que la asignación de direcciones se realiza en función de la interfaz VLAN asociada.</p>
