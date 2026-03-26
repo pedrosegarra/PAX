@@ -1200,10 +1200,12 @@ Conclusión </p>
 <h2 id="escenario-de-partida">Escenario de partida.</h2>
 <p>Para el desarrollo de los ejemplos y prácticas de esta unidad partiremos del escenario previamente configurado en el documento AF16 – Configuración de una DMZ.</p>
 <p>De este modo, los ejemplos no se plantearán en un entorno aislado, sino en un escenario realista en el que el DNS interactúa con la LAN, la DMZ y el acceso a Internet, permitiendo comprender su papel dentro de una arquitectura de red completa.</p>
+<p><img alt="img02" src="../img/1.png" /></p>
 <h2 id="verificar-el-estado-actual-del-dns">Verificar el estado actual del DNS</h2>
 <p>Para analizar el estado actual del servidor DNS, podemos ejecutar el siguiente comando:</p>
-<div class="highlight"><pre><span></span><code>/ip/dns/print
+<p><div class="highlight"><pre><span></span><code>/ip/dns/print
 </code></pre></div>
+<img alt="img02" src="../img/2.png" /></p>
 <p>En la salida se pueden observar los siguientes parámetros básicos:</p>
 <ul>
 <li><strong>servers:</strong> (vacío)</li>
@@ -1218,54 +1220,67 @@ Conclusión </p>
 <h2 id="configurar-servidores-dns-conocidos-de-manera-manual">Configurar servidores DNS conocidos de manera manual.</h2>
 <p>Vamos a configurar dos servidores DNS conocidos, para que nuestro servidor DNS consulte a los mismos, cuando no tenga respuesta en caché.</p>
 <p>En este caso, configuraremos los servidores 1.1.1.1 (DNS público de cloudflare) y 8.8.8.8 (DNS público de Google), ejecutando el siguiente comando:</p>
-<div class="highlight"><pre><span></span><code>/ip/dns/set<span class="w"> </span><span class="nv">servers</span><span class="o">=</span><span class="m">1</span>.1.1.1,8.8.8.8
+<p><div class="highlight"><pre><span></span><code>/ip/dns/set<span class="w"> </span><span class="nv">servers</span><span class="o">=</span><span class="m">1</span>.1.1.1,8.8.8.8
 </code></pre></div>
+<img alt="img02" src="../img/3.png" /></p>
 <h2 id="habilitar-las-peticiones-dns-desde-clientes-externos">Habilitar las peticiones DNS desde clientes externos.</h2>
 <p>Vamos a configurar la opción que permitirá a los clientes utilizar el servidor DNS del router ejecutando el siguiente comando:</p>
-<div class="highlight"><pre><span></span><code>/ip/dns/set<span class="w"> </span>allow-remote-requests<span class="o">=</span>yes
+<p><div class="highlight"><pre><span></span><code>/ip/dns/set<span class="w"> </span>allow-remote-requests<span class="o">=</span>yes
 </code></pre></div>
-<p>Debemos recordar que esta configuración no obliga a los clientes a usar el router. Solo lo permite.</p>
+<img alt="img02" src="../img/4.png" />
+Debemos recordar que esta configuración no obliga a los clientes a usar el router. Solo lo permite.</p>
 <h2 id="evitar-dynamic-servers">Evitar dynamic-servers</h2>
 <p>Si tenemos configurado un cliente DHCP en la interfaz ether1, para obtener la configuración de la red WAN del servidor DNS de la red, RouterOS incluye los servidores DNS proporcionados en el parámetro dynamic-servers.</p>
 <p>Para evitar confusiones sobre que servidor DNS se está utilizando en las resoluciones de nombres, vamos a eliminar este parámetro.</p>
 <p>Para ello, en primer lugar, mostramos el listado de clientes dhcp del router, ejecutando:</p>
-<div class="highlight"><pre><span></span><code>/ip/dhcp-client/print
+<p><div class="highlight"><pre><span></span><code>/ip/dhcp-client/print
 </code></pre></div>
+<img alt="img02" src="../img/5.png" /></p>
 <p>Identificamos el índice del cliente DHCP (en este caso el 0), y ejecutamos el siguiente comando, para eliminar el uso de dns proporcionados dinámicamente:</p>
 <div class="highlight"><pre><span></span><code>ip/dhcp-client/set<span class="w"> </span><span class="m">0</span><span class="w"> </span>use-peer-dns<span class="o">=</span>no
 </code></pre></div>
 <p>Como alternativa, se puede modificar el parámetro utilizando un filtro por interfaz:</p>
-<div class="highlight"><pre><span></span><code>ip/dhcp-client/set<span class="w"> </span><span class="o">[</span>find<span class="w"> </span>where<span class="w"> </span><span class="nv">interface</span><span class="o">=</span>ether1<span class="o">]</span><span class="w"> </span>use-peer-dns<span class="o">=</span>no
+<p><div class="highlight"><pre><span></span><code>ip/dhcp-client/set<span class="w"> </span><span class="o">[</span>find<span class="w"> </span>where<span class="w"> </span><span class="nv">interface</span><span class="o">=</span>ether1<span class="o">]</span><span class="w"> </span>use-peer-dns<span class="o">=</span>no
 </code></pre></div>
+<img alt="img02" src="../img/6.png" /></p>
 <p>Podemos comprobar el resultado, mirando el detalle de la configuración del servidor DNS:</p>
-<div class="highlight"><pre><span></span><code>/ip/dns/print
+<p><div class="highlight"><pre><span></span><code>/ip/dns/print
 </code></pre></div>
+<img alt="img02" src="../img/7.png" /></p>
 <p>En la salida podremos observar como el parámetro dynamic-servers se encuentra vacío, y solo quedan los servidores DNS configurados de manera manual.</p>
 <p>Podemos validar la resolución de nombres, ejecutando en el router el siguiente comando:</p>
-<div class="highlight"><pre><span></span><code>:put<span class="w"> </span><span class="o">[</span>:resolve<span class="w"> </span>www.google.com<span class="o">]</span>
+<p><div class="highlight"><pre><span></span><code>:put<span class="w"> </span><span class="o">[</span>:resolve<span class="w"> </span>www.google.com<span class="o">]</span>
 </code></pre></div>
+<img alt="img02" src="../img/8.png" /></p>
 <h2 id="integracion-del-servicio-dns-en-los-servidores-dhcp">Integración del servicio DNS en los servidores DHCP</h2>
 <p>Con la configuración actual, el router puede resolver peticiones DNS, pero los clientes de LAN y DMZ no lo utilizan. Vamos a modificar la configuración del servidor DHCP, para que los clientes de la LAN (y DMZ si procede) utilicen el router como servidor DNS.</p>
 <p>Antes de modificar la configuración, vamos a identificar las IP del router en cada uno de los bridges, ejecutando el comando:</p>
-<div class="highlight"><pre><span></span><code>ip/address/print.
+<p><div class="highlight"><pre><span></span><code>ip/address/print.
 </code></pre></div>
-<p>En la captura podemos observar la IP de bridge-lan (192.168.0.1/24) y la IP de bridge-dmz (10.10.0.1/24).</p>
+<img alt="img02" src="../img/9.png" />
+En la captura podemos observar la IP de bridge-lan (192.168.0.1/24) y la IP de bridge-dmz (10.10.0.1/24).</p>
 <p>También debemos revisar la configuración de los servidores DHCP del router, para poder identificar sobre qué servidor debemos realizar cada modificación, ejecutando el siguiente comando:</p>
-<div class="highlight"><pre><span></span><code>ip/dhcp-server/print.
+<p><div class="highlight"><pre><span></span><code>ip/dhcp-server/print.
 </code></pre></div>
-<p>Teniendo en cuenta las capturas anteriores, vamos a modificar el parámetro dns-server de la configuración de red de los dos servidores DHCP, para que utilicen la IP del router como servidor DNS de los clientes:</p>
-<div class="highlight"><pre><span></span><code>ip/dhcp-server/network/set<span class="w"> </span><span class="o">[</span>find<span class="w"> </span>where<span class="w"> </span><span class="nv">interface</span><span class="o">=</span>bridge-lan<span class="o">]</span><span class="w"> </span>dns-server<span class="o">=</span><span class="m">192</span>.168.0.1
+<img alt="img02" src="../img/10.png" />
+Teniendo en cuenta las capturas anteriores, vamos a modificar el parámetro dns-server de la configuración de red de los dos servidores DHCP, para que utilicen la IP del router como servidor DNS de los clientes:</p>
+<p><div class="highlight"><pre><span></span><code>ip/dhcp-server/network/set<span class="w"> </span><span class="o">[</span>find<span class="w"> </span>where<span class="w"> </span><span class="nv">interface</span><span class="o">=</span>bridge-lan<span class="o">]</span><span class="w"> </span>dns-server<span class="o">=</span><span class="m">192</span>.168.0.1
 ip/dhcp-server/network/set<span class="w"> </span><span class="o">[</span>find<span class="w"> </span>where<span class="w"> </span><span class="nv">interface</span><span class="o">=</span>bridge-dmz<span class="o">]</span><span class="w"> </span>dns-server<span class="o">=</span><span class="m">10</span>.10.0.1
 </code></pre></div>
-<p>También podríamos haber ejecutado los comandos utilizando el índice del servidor DHCP, en lugar de un filtro:</p>
-<div class="highlight"><pre><span></span><code>ip/dhcp-server/network/set<span class="w"> </span><span class="m">0</span><span class="w"> </span>dns-server<span class="o">=</span><span class="m">192</span>.168.0.1
+<img alt="img02" src="../img/11.png" />
+También podríamos haber ejecutado los comandos utilizando el índice del servidor DHCP, en lugar de un filtro:</p>
+<p><div class="highlight"><pre><span></span><code>ip/dhcp-server/network/set<span class="w"> </span><span class="m">0</span><span class="w"> </span>dns-server<span class="o">=</span><span class="m">192</span>.168.0.1
 ip/dhcp-server/network/set<span class="w"> </span><span class="m">1</span><span class="w"> </span>dns-server<span class="o">=</span><span class="m">10</span>.10.0.1
 </code></pre></div>
+<img alt="img02" src="../img/12.png" /></p>
 <p>Validamos, mostrando la configuración de las redes de los servidores DHCP</p>
-<div class="highlight"><pre><span></span><code>ip/dhcp-server/network/print
+<p><div class="highlight"><pre><span></span><code>ip/dhcp-server/network/print
 </code></pre></div>
-<p>Si accedemos a un cliente y renovamos su IP, podremos comprobar la nueva configuración recibida:</p>
+<img alt="img02" src="../img/13.png" />
+Si accedemos a un cliente y renovamos su IP, podremos comprobar la nueva configuración recibida:</p>
+<p><img alt="img02" src="../img/14.png" /></p>
 <p>Recuerda que en el tema anterior configuramos reglas de firewall, que impedirán realizar peticiones DNS al router, desde cualquier red.</p>
+<p><img alt="img02" src="../img/15.png" /></p>
 <p>Para permitir este tráfico, deberás habilitar las peticiones desde la red interna:</p>
 <ul>
 <li>Habilitamos peticiones TCP y UDP al puerto 53 desde bridge-lan, incluyendo la regla antes de la regla de bloqueo general de la cadena input</li>
@@ -1278,10 +1293,9 @@ ip/firewall/filter/add<span class="w"> </span><span class="nv">chain</span><span
 <span class="k">in</span>-interface<span class="o">=</span>bridge-lan<span class="w"> </span><span class="nv">action</span><span class="o">=</span>accept<span class="w"> </span>place-before<span class="o">=</span><span class="m">4</span><span class="w"> </span><span class="se">\</span>
 <span class="nv">comment</span><span class="o">=</span><span class="s2">&quot;IN: allow DNS UDP from LAN&quot;</span>
 </code></pre></div>
-<ul>
-<li>Y habilitamos la misma regla para peticiones realizadas desde bridge-dmz, incluyendo la regla antes de la regla de bloqueo general de la cadena input</li>
-</ul>
-<div class="highlight"><pre><span></span><code>ip/firewall/filter/add<span class="w"> </span><span class="nv">chain</span><span class="o">=</span>input<span class="w"> </span><span class="nv">protocol</span><span class="o">=</span>tcp<span class="w"> </span>dst-port<span class="o">=</span><span class="m">53</span><span class="w"> </span><span class="se">\</span>
+<p><img alt="img02" src="../img/16.png" />
+- Y habilitamos la misma regla para peticiones realizadas desde bridge-dmz, incluyendo la regla antes de la regla de bloqueo general de la cadena input</p>
+<p><div class="highlight"><pre><span></span><code>ip/firewall/filter/add<span class="w"> </span><span class="nv">chain</span><span class="o">=</span>input<span class="w"> </span><span class="nv">protocol</span><span class="o">=</span>tcp<span class="w"> </span>dst-port<span class="o">=</span><span class="m">53</span><span class="w"> </span><span class="se">\</span>
 <span class="k">in</span>-interface<span class="o">=</span>bridge-dmz<span class="w"> </span><span class="nv">action</span><span class="o">=</span>accept<span class="w"> </span>place-before<span class="o">=</span><span class="m">4</span><span class="w"> </span><span class="se">\</span>
 <span class="nv">comment</span><span class="o">=</span><span class="s2">&quot;IN: allow DNS TCP from DMZ&quot;</span>
 
@@ -1289,29 +1303,37 @@ ip/firewall/filter/add<span class="w"> </span><span class="nv">chain</span><span
 <span class="k">in</span>-interface<span class="o">=</span>bridge-dmz<span class="w"> </span><span class="nv">action</span><span class="o">=</span>accept<span class="w"> </span>place-before<span class="o">=</span><span class="m">4</span><span class="w"> </span><span class="se">\</span>
 <span class="nv">comment</span><span class="o">=</span><span class="s2">&quot;IN: allow DNS UDP from DMZ&quot;</span>
 </code></pre></div>
-<p>Volvemos a comprobar el estado de las reglas de firewall, para la cadena input:</p>
-<div class="highlight"><pre><span></span><code>ip/firewall/filter/print<span class="w"> </span>where<span class="w"> </span><span class="nv">chain</span><span class="o">=</span>input
+<img alt="img02" src="../img/17.png" />
+Volvemos a comprobar el estado de las reglas de firewall, para la cadena input:</p>
+<p><div class="highlight"><pre><span></span><code>ip/firewall/filter/print<span class="w"> </span>where<span class="w"> </span><span class="nv">chain</span><span class="o">=</span>input
 </code></pre></div>
-<p>Si todo ha ido bien, ya podremos realizar resoluciones de nombre desde la red interna:</p>
+<img alt="img02" src="../img/18.png" />
+Si todo ha ido bien, ya podremos realizar resoluciones de nombre desde la red interna:</p>
+<p><img alt="img02" src="../img/19.png" /></p>
 <p>Se pueden crear reglas para listas de interfaces, de manera que podamos agrupar las reglas que son para todas las redes internas, por ejemplo. Si quieres saber más sobre el tema, busca información sobre el uso del parámetro interface-list en mikrotik</p>
 <h2 id="configuracion-de-registros-dns-estaticos">Configuración de registros DNS estáticos</h2>
 <p>Una vez configurado y protegido el servicio DNS, el siguiente paso consiste en incorporar resolución de nombres interna mediante entradas estáticas.</p>
 <p>En una red estructurada como la del escenario AF16 (con LAN y DMZ), no es recomendable acceder a los servicios únicamente por dirección IP; lo correcto es utilizar nombres coherentes que faciliten la administración y reflejen la función de cada equipo.</p>
 <p>En este apartado aprenderemos a crear registros DNS estáticos en el router para que los servicios internos puedan resolverse localmente, sin depender de servidores externos y manteniendo el control completo de la resolución dentro de la red.</p>
 <p>En primer lugar, vamos a listar las entradas estáticas de nuestro servidor DNS:</p>
-<div class="highlight"><pre><span></span><code>ip/dns/static/print
+<p><div class="highlight"><pre><span></span><code>ip/dns/static/print
 </code></pre></div>
-<p>Como vemos, el servidor no tiene ninguna entrada configurada por defecto.</p>
+<img alt="img02" src="../img/20.png" />
+Como vemos, el servidor no tiene ninguna entrada configurada por defecto.</p>
 <p>Para crear una entrada DNS estática para nuestro servidor web, que resuelva el nombre “intranet.local” a la IP 10.10.0.10, utilizaremos el siguiente comando:</p>
-<div class="highlight"><pre><span></span><code>ip/dns/static/add<span class="w"> </span><span class="nv">name</span><span class="o">=</span>intranet.local<span class="w"> </span><span class="nv">address</span><span class="o">=</span><span class="m">10</span>.10.0.10<span class="w"> </span><span class="se">\</span>
+<p><div class="highlight"><pre><span></span><code>ip/dns/static/add<span class="w"> </span><span class="nv">name</span><span class="o">=</span>intranet.local<span class="w"> </span><span class="nv">address</span><span class="o">=</span><span class="m">10</span>.10.0.10<span class="w"> </span><span class="se">\</span>
 <span class="nv">comment</span><span class="o">=</span><span class="s2">&quot;Intranet DMZ&quot;</span>
 </code></pre></div>
-<p>A continuación, podemos comprobar como el nombre DNS se puede utilizar desde los appliances desplegados en la red interna:</p>
+<img alt="img02" src="../img/21.png" />
+A continuación, podemos comprobar como el nombre DNS se puede utilizar desde los appliances desplegados en la red interna:</p>
+<p><img alt="img02" src="../img/22.png" /></p>
 <p>Vamos a añadir una nueva entrada, para el dominio intranet.gva.es, que se traduzca por la misma IP.</p>
-<div class="highlight"><pre><span></span><code>ip/dns/static/add<span class="w"> </span><span class="nv">name</span><span class="o">=</span>intranet.gva.es<span class="w"> </span><span class="nv">address</span><span class="o">=</span><span class="m">10</span>.10.0.10<span class="w"> </span><span class="se">\</span>
+<p><div class="highlight"><pre><span></span><code>ip/dns/static/add<span class="w"> </span><span class="nv">name</span><span class="o">=</span>intranet.gva.es<span class="w"> </span><span class="nv">address</span><span class="o">=</span><span class="m">10</span>.10.0.10<span class="w"> </span><span class="se">\</span>
 <span class="nv">comment</span><span class="o">=</span><span class="s2">&quot;Intranet gva falsa&quot;</span>
 </code></pre></div>
-<p>Comprobemos como el cliente resolverá la IP interna, si intenta acceder al nuevo dominio configurado.</p>
+<img alt="img02" src="../img/23.png" />
+Comprobemos como el cliente resolverá la IP interna, si intenta acceder al nuevo dominio configurado.</p>
+<p><img alt="img02" src="../img/24.png" /></p>
 <p>Con esto nuestros alumnos podrán comprender como la configuración del servidor DNS de la red puede condicionar la navegación de todos los clientes 😊</p>
 <h2 id="comprobacion-del-estado-de-la-cache-dns">Comprobación del estado de la caché DNS</h2>
 <p>Una vez realizadas varias consultas DNS, es recomendable comprobar el estado de la caché del router para entender cómo está gestionando las resoluciones.</p>
@@ -1320,13 +1342,16 @@ ip/firewall/filter/add<span class="w"> </span><span class="nv">chain</span><span
 <div class="highlight"><pre><span></span><code>ip/dns/cache/print
 </code></pre></div>
 <p>Este comando muestra los nombres de dominio que han sido resueltos recientemente, la dirección IP asociada y el tiempo restante de validez (TTL).</p>
+<p><img alt="img02" src="../img/25.png" /></p>
 <p>Esta comprobación permite verificar que el servicio DNS está funcionando correctamente, que los clientes están utilizando el router como servidor DNS y que el mecanismo de optimización mediante caché está operativo.</p>
 <p>Podemos borrar la cache DNS ejecutando:</p>
-<div class="highlight"><pre><span></span><code>ip/dns/cache/flush
+<p><div class="highlight"><pre><span></span><code>ip/dns/cache/flush
 </code></pre></div>
+<img alt="img02" src="../img/26.png" /></p>
 <h2 id="interceptar-peticiones-dns-de-la-red-interna-y-forzar-su-resolucion">Interceptar peticiones DNS de la red interna, y forzar su resolución</h2>
 <p>Aunque hayamos configurado nuestro servidor DNS en el router, los clientes de la red interna pueden utilizar su servidor preferido, modificando su configuración de red.</p>
 <p>En la siguiente captura podemos ver una configuración de red de Alpine Linux que seguiría enviando las peticiones de resolución de nombre al servidor DNS de Google (8.8.8.8)</p>
+<p><img alt="img02" src="../img/27.png" /></p>
 <p>Para evitar este comportamiento, podemos redirigir las peticiones a servidores DNS externos, para que las resuelva el servidor DNS de nuestro router, mediante estas cuatro instrucciones:</p>
 <div class="highlight"><pre><span></span><code>ip/firewall/nat/add<span class="w"> </span><span class="nv">chain</span><span class="o">=</span>dstnat<span class="w"> </span><span class="nv">protocol</span><span class="o">=</span>tcp<span class="w"> </span>dst-port<span class="o">=</span><span class="m">53</span><span class="w"> </span><span class="se">\</span>
 <span class="k">in</span>-interface<span class="o">=</span>bridge-lan<span class="w"> </span><span class="nv">action</span><span class="o">=</span>redirect<span class="w"> </span>to-ports<span class="o">=</span><span class="m">53</span><span class="w"> </span><span class="se">\</span>
@@ -1344,7 +1369,9 @@ ip/firewall/nat/add<span class="w"> </span><span class="nv">chain</span><span cl
 <span class="k">in</span>-interface<span class="o">=</span>bridge-dmz<span class="w"> </span><span class="nv">action</span><span class="o">=</span>redirect<span class="w"> </span>to-ports<span class="o">=</span><span class="m">53</span><span class="w"> </span><span class="se">\</span>
 <span class="nv">comment</span><span class="o">=</span><span class="s2">&quot;Forzar DNS UDP de DMZ hacia router&quot;</span>
 </code></pre></div>
+<p><img alt="img02" src="../img/28.png" /></p>
 <p>Si volvemos a probar la resolución desde la misma máquina de la red interna, veremos que se ha forzado la resolución desde el servidor DNS del router.</p>
+<p><img alt="img02" src="../img/29.png" /></p>
 <p>Esto es debido a que hemos forzado el siguiente comportamiento:</p>
 <ul>
 <li>Cliente intenta consultar 8.8.8.8:53</li>
