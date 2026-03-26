@@ -2,13 +2,13 @@
 
 # Índice
 
-¿Qué es MikroTik?  
-Filosofía  
-Ecosistema  
-MikroTik frente a otros fabricantes de redes  
-RouterOS: el corazón del sistema  
-¿Qué permite hacer RouterOS?  
-Formas de interactuar con RouterOS  
+## ¿Qué es MikroTik?  
+### Filosofía  
+### Ecosistema  
+### MikroTik frente a otros fabricantes de redes  
+## RouterOS: el corazón del sistema  
+### ¿Qué permite hacer RouterOS?  
+### Formas de interactuar con RouterOS  
 
 ---
 
