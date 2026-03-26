@@ -28,6 +28,9 @@ nav:
       - 4. Configuración de DMZ - Gui: bloque4/configuracion_dmz_gui.md
   - Bloque 5. Configuración de VLANS y servicio DNS:
       - 1. Servicio DNS: bloque5/servicio_dns.md
+      - 2. Configuración de un bridge con filtrado VLAN: bloque5/vlan_bridge_config.md
+      - 3. Configuración de routing inter-VLAN: bloque5/routing_intervlan.md
+
 
 
 
