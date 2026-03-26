@@ -1,0 +1,1443 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../bloque4/configuracion_dmz_gui/">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>1. Servicio DNS - Curso MikroTik</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#servicio-dns" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Curso MikroTik" class="md-header__button md-logo" aria-label="Curso MikroTik" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Curso MikroTik
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1. Servicio DNS
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Curso MikroTik" class="md-nav__button md-logo" aria-label="Curso MikroTik" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Curso MikroTik
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inicio
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Bloque 1. Introducción
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Bloque 1. Introducción
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduccion/01_mikrotik_routeros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introducción a MikroTik y RouterOS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduccion/02_virtualizacion_gns3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Virtualización de RouterOS con GNS3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduccion/03_acceso_routeros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Conectando a RouterOS para su administración
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Bloque 2. Configuración básica
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Bloque 2. Configuración básica
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque2/eliminar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Eliminar configuración
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque2/dhcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Configuración de DHCP (ip dinámica)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque2/ip_estatica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Configuración de IP estática
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque2/bridge_dinamico/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Configuración de bridge dinámico
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque2/bridge_estatica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Configuración de bridge estático
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque2/tarea_bloque2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Actividad práctica
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Bloque 3. Servicios de red esenciales (DHCP y NAT)
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Bloque 3. Servicios de red esenciales (DHCP y NAT)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque3/dhcp_bridge_manual/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Configuración de DHCP Server sobre un bridge, de manera manual
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque3/dhcp_bridge_asistente/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Configuración de DHCP Server sobre un bridge, utilizando el asistente
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque3/dhcp_reservas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Reservas de IP en DHCP (DHCP Static Leases)l
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque3/configuracion_nat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Configuración de NAT (Network Address Translation)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque3/actividad_bloque3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Actividad práctica
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Bloque 4. Firewall, redirección de puertos y DMZ
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Bloque 4. Firewall, redirección de puertos y DMZ
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque4/configuracion_reglas_firewall/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Configuración de firewall en RouterOS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque4/redireccion_puertos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Redirección de puertos (Port Forwarding)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque4/configuracion_dmz/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Configuración de DMZ (Zona Desmilitarizada)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque4/configuracion_dmz_gui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Configuración de DMZ - Gui
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Bloque 5. Configuración de VLANS y servicio DNS
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Bloque 5. Configuración de VLANS y servicio DNS
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    1. Servicio DNS
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Servicio DNS
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Índice
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducción
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#escenario-de-partida" class="md-nav__link">
+    <span class="md-ellipsis">
+      Escenario de partida.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verificar-el-estado-actual-del-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verificar el estado actual del DNS
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configurar-servidores-dns-conocidos-de-manera-manual" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configurar servidores DNS conocidos de manera manual.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#habilitar-las-peticiones-dns-desde-clientes-externos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Habilitar las peticiones DNS desde clientes externos.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evitar-dynamic-servers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Evitar dynamic-servers
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integracion-del-servicio-dns-en-los-servidores-dhcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integración del servicio DNS en los servidores DHCP
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-de-registros-dns-estaticos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración de registros DNS estáticos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comprobacion-del-estado-de-la-cache-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comprobación del estado de la caché DNS
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interceptar-peticiones-dns-de-la-red-interna-y-forzar-su-resolucion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interceptar peticiones DNS de la red interna, y forzar su resolución
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusión
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Índice
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducción
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#escenario-de-partida" class="md-nav__link">
+    <span class="md-ellipsis">
+      Escenario de partida.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verificar-el-estado-actual-del-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verificar el estado actual del DNS
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configurar-servidores-dns-conocidos-de-manera-manual" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configurar servidores DNS conocidos de manera manual.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#habilitar-las-peticiones-dns-desde-clientes-externos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Habilitar las peticiones DNS desde clientes externos.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evitar-dynamic-servers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Evitar dynamic-servers
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integracion-del-servicio-dns-en-los-servidores-dhcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integración del servicio DNS en los servidores DHCP
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-de-registros-dns-estaticos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración de registros DNS estáticos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comprobacion-del-estado-de-la-cache-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comprobación del estado de la caché DNS
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interceptar-peticiones-dns-de-la-red-interna-y-forzar-su-resolucion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interceptar peticiones DNS de la red interna, y forzar su resolución
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusión
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="servicio-dns">Servicio DNS.</h1>
+<h2 id="indice">Índice</h2>
+<p>Introducción
+Escenario de partida
+Verificar el estado actual del DNS<br />
+Configurar servidores DNS conocidos de manera manual<br />
+Habilitar las peticiones DNS desde clientes externos<br />
+Evitar dynamic-servers 
+Integración del servicio DNS en los servidores DHCP 
+Configuración de registros DNS estáticos <br />
+Comprobación del estado de la caché DNS<br />
+Interceptar peticiones DNS de la red interna, y forzar su resolución <br />
+Conclusión </p>
+<h2 id="introduccion">Introducción</h2>
+<p>El sistema operativo MikroTik RouterOS incorpora un servicio DNS integrado que puede actuar como DNS caché, DNS reenviador (forwarder), resolver para el propio router y servidor DNS para los equipos de la red.</p>
+<p>Es fundamental comprender que RouterOS no es un servidor DNS autoritativo completo, como podría ser BIND o un entorno basado en Active Directory, sino un sistema orientado principalmente a la resolución y reenvío de consultas.</p>
+<p>Cuando un cliente realiza una petición DNS al router, este sigue un proceso estructurado:</p>
+<ul>
+<li>Primero comprueba si existe una entrada estática configurada.</li>
+<li>Si no existe una entrada estática, revisa su caché.</li>
+<li>En caso de no encontrar respuesta en la caché, reenvía la consulta a los servidores DNS externos definidos.</li>
+<li>Cuando el servicio DNS encuentra una respuesta válida, la almacena temporalmente y la devuelve al cliente.</li>
+</ul>
+<p>El servicio DNS forma parte del sistema y no requiere instalación ni activación independiente; el router puede resolver nombres para su propio funcionamiento siempre que tenga servidores configurados.</p>
+<p>No obstante, para que los dispositivos de la red puedan utilizarlo como servidor DNS es necesario habilitar explícitamente el acceso desde equipos externos.</p>
+<p>En los próximos apartados trabajaremos de forma práctica y estructurada la configuración del servicio DNS en RouterOS.</p>
+<h2 id="escenario-de-partida">Escenario de partida.</h2>
+<p>Para el desarrollo de los ejemplos y prácticas de esta unidad partiremos del escenario previamente configurado en el documento AF16 – Configuración de una DMZ.</p>
+<p>De este modo, los ejemplos no se plantearán en un entorno aislado, sino en un escenario realista en el que el DNS interactúa con la LAN, la DMZ y el acceso a Internet, permitiendo comprender su papel dentro de una arquitectura de red completa.</p>
+<p><img alt="img02" src="../img/1.png" /></p>
+<h2 id="verificar-el-estado-actual-del-dns">Verificar el estado actual del DNS</h2>
+<p>Para analizar el estado actual del servidor DNS, podemos ejecutar el siguiente comando:</p>
+<p><div class="highlight"><pre><span></span><code>/ip/dns/print
+</code></pre></div>
+<img alt="img02" src="../img/2.png" /></p>
+<p>En la salida se pueden observar los siguientes parámetros básicos:</p>
+<ul>
+<li><strong>servers:</strong> (vacío)</li>
+<li>No hay DNS “manuales” configurados (por ejemplo 1.1.1.1, 8.8.8.8).</li>
+<li>Eso no significa que el router no pueda resolver; significa que depende de los “dynamic-servers”.</li>
+<li><strong>dynamic-servers:</strong> 192.168.122.1</li>
+<li>Servidores dinámicos recibidos del servidor DHCP al que se ha conectado el router (en este caso, el servidor DNS de la red NAT de GNS3)</li>
+<li><strong>allow-remote-requests:</strong> no</li>
+<li>No se permiten conexiones remotas al servicio DNS.</li>
+<li>Los clientes en LAN/DMZ no pueden usar al router como servidor DNS.</li>
+</ul>
+<h2 id="configurar-servidores-dns-conocidos-de-manera-manual">Configurar servidores DNS conocidos de manera manual.</h2>
+<p>Vamos a configurar dos servidores DNS conocidos, para que nuestro servidor DNS consulte a los mismos, cuando no tenga respuesta en caché.</p>
+<p>En este caso, configuraremos los servidores 1.1.1.1 (DNS público de cloudflare) y 8.8.8.8 (DNS público de Google), ejecutando el siguiente comando:</p>
+<p><div class="highlight"><pre><span></span><code>/ip/dns/set<span class="w"> </span><span class="nv">servers</span><span class="o">=</span><span class="m">1</span>.1.1.1,8.8.8.8
+</code></pre></div>
+<img alt="img02" src="../img/3.png" /></p>
+<h2 id="habilitar-las-peticiones-dns-desde-clientes-externos">Habilitar las peticiones DNS desde clientes externos.</h2>
+<p>Vamos a configurar la opción que permitirá a los clientes utilizar el servidor DNS del router ejecutando el siguiente comando:</p>
+<p><div class="highlight"><pre><span></span><code>/ip/dns/set<span class="w"> </span>allow-remote-requests<span class="o">=</span>yes
+</code></pre></div>
+<img alt="img02" src="../img/4.png" />
+Debemos recordar que esta configuración no obliga a los clientes a usar el router. Solo lo permite.</p>
+<h2 id="evitar-dynamic-servers">Evitar dynamic-servers</h2>
+<p>Si tenemos configurado un cliente DHCP en la interfaz ether1, para obtener la configuración de la red WAN del servidor DNS de la red, RouterOS incluye los servidores DNS proporcionados en el parámetro dynamic-servers.</p>
+<p>Para evitar confusiones sobre que servidor DNS se está utilizando en las resoluciones de nombres, vamos a eliminar este parámetro.</p>
+<p>Para ello, en primer lugar, mostramos el listado de clientes dhcp del router, ejecutando:</p>
+<p><div class="highlight"><pre><span></span><code>/ip/dhcp-client/print
+</code></pre></div>
+<img alt="img02" src="../img/5.png" /></p>
+<p>Identificamos el índice del cliente DHCP (en este caso el 0), y ejecutamos el siguiente comando, para eliminar el uso de dns proporcionados dinámicamente:</p>
+<div class="highlight"><pre><span></span><code>ip/dhcp-client/set<span class="w"> </span><span class="m">0</span><span class="w"> </span>use-peer-dns<span class="o">=</span>no
+</code></pre></div>
+<p>Como alternativa, se puede modificar el parámetro utilizando un filtro por interfaz:</p>
+<p><div class="highlight"><pre><span></span><code>ip/dhcp-client/set<span class="w"> </span><span class="o">[</span>find<span class="w"> </span>where<span class="w"> </span><span class="nv">interface</span><span class="o">=</span>ether1<span class="o">]</span><span class="w"> </span>use-peer-dns<span class="o">=</span>no
+</code></pre></div>
+<img alt="img02" src="../img/6.png" /></p>
+<p>Podemos comprobar el resultado, mirando el detalle de la configuración del servidor DNS:</p>
+<p><div class="highlight"><pre><span></span><code>/ip/dns/print
+</code></pre></div>
+<img alt="img02" src="../img/7.png" /></p>
+<p>En la salida podremos observar como el parámetro dynamic-servers se encuentra vacío, y solo quedan los servidores DNS configurados de manera manual.</p>
+<p>Podemos validar la resolución de nombres, ejecutando en el router el siguiente comando:</p>
+<p><div class="highlight"><pre><span></span><code>:put<span class="w"> </span><span class="o">[</span>:resolve<span class="w"> </span>www.google.com<span class="o">]</span>
+</code></pre></div>
+<img alt="img02" src="../img/8.png" /></p>
+<h2 id="integracion-del-servicio-dns-en-los-servidores-dhcp">Integración del servicio DNS en los servidores DHCP</h2>
+<p>Con la configuración actual, el router puede resolver peticiones DNS, pero los clientes de LAN y DMZ no lo utilizan. Vamos a modificar la configuración del servidor DHCP, para que los clientes de la LAN (y DMZ si procede) utilicen el router como servidor DNS.</p>
+<p>Antes de modificar la configuración, vamos a identificar las IP del router en cada uno de los bridges, ejecutando el comando:</p>
+<p><div class="highlight"><pre><span></span><code>ip/address/print.
+</code></pre></div>
+<img alt="img02" src="../img/9.png" />
+En la captura podemos observar la IP de bridge-lan (192.168.0.1/24) y la IP de bridge-dmz (10.10.0.1/24).</p>
+<p>También debemos revisar la configuración de los servidores DHCP del router, para poder identificar sobre qué servidor debemos realizar cada modificación, ejecutando el siguiente comando:</p>
+<p><div class="highlight"><pre><span></span><code>ip/dhcp-server/print.
+</code></pre></div>
+<img alt="img02" src="../img/10.png" />
+Teniendo en cuenta las capturas anteriores, vamos a modificar el parámetro dns-server de la configuración de red de los dos servidores DHCP, para que utilicen la IP del router como servidor DNS de los clientes:</p>
+<p><div class="highlight"><pre><span></span><code>ip/dhcp-server/network/set<span class="w"> </span><span class="o">[</span>find<span class="w"> </span>where<span class="w"> </span><span class="nv">interface</span><span class="o">=</span>bridge-lan<span class="o">]</span><span class="w"> </span>dns-server<span class="o">=</span><span class="m">192</span>.168.0.1
+ip/dhcp-server/network/set<span class="w"> </span><span class="o">[</span>find<span class="w"> </span>where<span class="w"> </span><span class="nv">interface</span><span class="o">=</span>bridge-dmz<span class="o">]</span><span class="w"> </span>dns-server<span class="o">=</span><span class="m">10</span>.10.0.1
+</code></pre></div>
+<img alt="img02" src="../img/11.png" />
+También podríamos haber ejecutado los comandos utilizando el índice del servidor DHCP, en lugar de un filtro:</p>
+<p><div class="highlight"><pre><span></span><code>ip/dhcp-server/network/set<span class="w"> </span><span class="m">0</span><span class="w"> </span>dns-server<span class="o">=</span><span class="m">192</span>.168.0.1
+ip/dhcp-server/network/set<span class="w"> </span><span class="m">1</span><span class="w"> </span>dns-server<span class="o">=</span><span class="m">10</span>.10.0.1
+</code></pre></div>
+<img alt="img02" src="../img/12.png" /></p>
+<p>Validamos, mostrando la configuración de las redes de los servidores DHCP</p>
+<p><div class="highlight"><pre><span></span><code>ip/dhcp-server/network/print
+</code></pre></div>
+<img alt="img02" src="../img/13.png" />
+Si accedemos a un cliente y renovamos su IP, podremos comprobar la nueva configuración recibida:</p>
+<p><img alt="img02" src="../img/14.png" /></p>
+<p>Recuerda que en el tema anterior configuramos reglas de firewall, que impedirán realizar peticiones DNS al router, desde cualquier red.</p>
+<p><img alt="img02" src="../img/15.png" /></p>
+<p>Para permitir este tráfico, deberás habilitar las peticiones desde la red interna:</p>
+<ul>
+<li>Habilitamos peticiones TCP y UDP al puerto 53 desde bridge-lan, incluyendo la regla antes de la regla de bloqueo general de la cadena input</li>
+</ul>
+<div class="highlight"><pre><span></span><code>ip/firewall/filter/add<span class="w"> </span><span class="nv">chain</span><span class="o">=</span>input<span class="w"> </span><span class="nv">protocol</span><span class="o">=</span>tcp<span class="w"> </span>dst-port<span class="o">=</span><span class="m">53</span><span class="w"> </span><span class="se">\</span>
+<span class="k">in</span>-interface<span class="o">=</span>bridge-lan<span class="w"> </span><span class="nv">action</span><span class="o">=</span>accept<span class="w"> </span>place-before<span class="o">=</span><span class="m">4</span><span class="w"> </span><span class="se">\</span>
+<span class="nv">comment</span><span class="o">=</span><span class="s2">&quot;IN: allow DNS TCP from LAN&quot;</span>
+
+ip/firewall/filter/add<span class="w"> </span><span class="nv">chain</span><span class="o">=</span>input<span class="w"> </span><span class="nv">protocol</span><span class="o">=</span>udp<span class="w"> </span>dst-port<span class="o">=</span><span class="m">53</span><span class="w"> </span><span class="se">\</span>
+<span class="k">in</span>-interface<span class="o">=</span>bridge-lan<span class="w"> </span><span class="nv">action</span><span class="o">=</span>accept<span class="w"> </span>place-before<span class="o">=</span><span class="m">4</span><span class="w"> </span><span class="se">\</span>
+<span class="nv">comment</span><span class="o">=</span><span class="s2">&quot;IN: allow DNS UDP from LAN&quot;</span>
+</code></pre></div>
+<p><img alt="img02" src="../img/16.png" />
+- Y habilitamos la misma regla para peticiones realizadas desde bridge-dmz, incluyendo la regla antes de la regla de bloqueo general de la cadena input</p>
+<p><div class="highlight"><pre><span></span><code>ip/firewall/filter/add<span class="w"> </span><span class="nv">chain</span><span class="o">=</span>input<span class="w"> </span><span class="nv">protocol</span><span class="o">=</span>tcp<span class="w"> </span>dst-port<span class="o">=</span><span class="m">53</span><span class="w"> </span><span class="se">\</span>
+<span class="k">in</span>-interface<span class="o">=</span>bridge-dmz<span class="w"> </span><span class="nv">action</span><span class="o">=</span>accept<span class="w"> </span>place-before<span class="o">=</span><span class="m">4</span><span class="w"> </span><span class="se">\</span>
+<span class="nv">comment</span><span class="o">=</span><span class="s2">&quot;IN: allow DNS TCP from DMZ&quot;</span>
+
+ip/firewall/filter/add<span class="w"> </span><span class="nv">chain</span><span class="o">=</span>input<span class="w"> </span><span class="nv">protocol</span><span class="o">=</span>udp<span class="w"> </span>dst-port<span class="o">=</span><span class="m">53</span><span class="w"> </span><span class="se">\</span>
+<span class="k">in</span>-interface<span class="o">=</span>bridge-dmz<span class="w"> </span><span class="nv">action</span><span class="o">=</span>accept<span class="w"> </span>place-before<span class="o">=</span><span class="m">4</span><span class="w"> </span><span class="se">\</span>
+<span class="nv">comment</span><span class="o">=</span><span class="s2">&quot;IN: allow DNS UDP from DMZ&quot;</span>
+</code></pre></div>
+<img alt="img02" src="../img/17.png" />
+Volvemos a comprobar el estado de las reglas de firewall, para la cadena input:</p>
+<p><div class="highlight"><pre><span></span><code>ip/firewall/filter/print<span class="w"> </span>where<span class="w"> </span><span class="nv">chain</span><span class="o">=</span>input
+</code></pre></div>
+<img alt="img02" src="../img/18.png" />
+Si todo ha ido bien, ya podremos realizar resoluciones de nombre desde la red interna:</p>
+<p><img alt="img02" src="../img/19.png" /></p>
+<p>Se pueden crear reglas para listas de interfaces, de manera que podamos agrupar las reglas que son para todas las redes internas, por ejemplo. Si quieres saber más sobre el tema, busca información sobre el uso del parámetro interface-list en mikrotik</p>
+<h2 id="configuracion-de-registros-dns-estaticos">Configuración de registros DNS estáticos</h2>
+<p>Una vez configurado y protegido el servicio DNS, el siguiente paso consiste en incorporar resolución de nombres interna mediante entradas estáticas.</p>
+<p>En una red estructurada como la del escenario AF16 (con LAN y DMZ), no es recomendable acceder a los servicios únicamente por dirección IP; lo correcto es utilizar nombres coherentes que faciliten la administración y reflejen la función de cada equipo.</p>
+<p>En este apartado aprenderemos a crear registros DNS estáticos en el router para que los servicios internos puedan resolverse localmente, sin depender de servidores externos y manteniendo el control completo de la resolución dentro de la red.</p>
+<p>En primer lugar, vamos a listar las entradas estáticas de nuestro servidor DNS:</p>
+<p><div class="highlight"><pre><span></span><code>ip/dns/static/print
+</code></pre></div>
+<img alt="img02" src="../img/20.png" />
+Como vemos, el servidor no tiene ninguna entrada configurada por defecto.</p>
+<p>Para crear una entrada DNS estática para nuestro servidor web, que resuelva el nombre “intranet.local” a la IP 10.10.0.10, utilizaremos el siguiente comando:</p>
+<p><div class="highlight"><pre><span></span><code>ip/dns/static/add<span class="w"> </span><span class="nv">name</span><span class="o">=</span>intranet.local<span class="w"> </span><span class="nv">address</span><span class="o">=</span><span class="m">10</span>.10.0.10<span class="w"> </span><span class="se">\</span>
+<span class="nv">comment</span><span class="o">=</span><span class="s2">&quot;Intranet DMZ&quot;</span>
+</code></pre></div>
+<img alt="img02" src="../img/21.png" />
+A continuación, podemos comprobar como el nombre DNS se puede utilizar desde los appliances desplegados en la red interna:</p>
+<p><img alt="img02" src="../img/22.png" /></p>
+<p>Vamos a añadir una nueva entrada, para el dominio intranet.gva.es, que se traduzca por la misma IP.</p>
+<p><div class="highlight"><pre><span></span><code>ip/dns/static/add<span class="w"> </span><span class="nv">name</span><span class="o">=</span>intranet.gva.es<span class="w"> </span><span class="nv">address</span><span class="o">=</span><span class="m">10</span>.10.0.10<span class="w"> </span><span class="se">\</span>
+<span class="nv">comment</span><span class="o">=</span><span class="s2">&quot;Intranet gva falsa&quot;</span>
+</code></pre></div>
+<img alt="img02" src="../img/23.png" />
+Comprobemos como el cliente resolverá la IP interna, si intenta acceder al nuevo dominio configurado.</p>
+<p><img alt="img02" src="../img/24.png" /></p>
+<p>Con esto nuestros alumnos podrán comprender como la configuración del servidor DNS de la red puede condicionar la navegación de todos los clientes 😊</p>
+<h2 id="comprobacion-del-estado-de-la-cache-dns">Comprobación del estado de la caché DNS</h2>
+<p>Una vez realizadas varias consultas DNS, es recomendable comprobar el estado de la caché del router para entender cómo está gestionando las resoluciones.</p>
+<p>En MikroTik RouterOS, la caché DNS almacena temporalmente las respuestas obtenidas, evitando tener que consultar repetidamente a los servidores externos y reduciendo así la latencia y el tráfico saliente.</p>
+<p>Para visualizar su contenido utilizamos el comando:</p>
+<div class="highlight"><pre><span></span><code>ip/dns/cache/print
+</code></pre></div>
+<p>Este comando muestra los nombres de dominio que han sido resueltos recientemente, la dirección IP asociada y el tiempo restante de validez (TTL).</p>
+<p><img alt="img02" src="../img/25.png" /></p>
+<p>Esta comprobación permite verificar que el servicio DNS está funcionando correctamente, que los clientes están utilizando el router como servidor DNS y que el mecanismo de optimización mediante caché está operativo.</p>
+<p>Podemos borrar la cache DNS ejecutando:</p>
+<p><div class="highlight"><pre><span></span><code>ip/dns/cache/flush
+</code></pre></div>
+<img alt="img02" src="../img/26.png" /></p>
+<h2 id="interceptar-peticiones-dns-de-la-red-interna-y-forzar-su-resolucion">Interceptar peticiones DNS de la red interna, y forzar su resolución</h2>
+<p>Aunque hayamos configurado nuestro servidor DNS en el router, los clientes de la red interna pueden utilizar su servidor preferido, modificando su configuración de red.</p>
+<p>En la siguiente captura podemos ver una configuración de red de Alpine Linux que seguiría enviando las peticiones de resolución de nombre al servidor DNS de Google (8.8.8.8)</p>
+<p><img alt="img02" src="../img/27.png" /></p>
+<p>Para evitar este comportamiento, podemos redirigir las peticiones a servidores DNS externos, para que las resuelva el servidor DNS de nuestro router, mediante estas cuatro instrucciones:</p>
+<div class="highlight"><pre><span></span><code>ip/firewall/nat/add<span class="w"> </span><span class="nv">chain</span><span class="o">=</span>dstnat<span class="w"> </span><span class="nv">protocol</span><span class="o">=</span>tcp<span class="w"> </span>dst-port<span class="o">=</span><span class="m">53</span><span class="w"> </span><span class="se">\</span>
+<span class="k">in</span>-interface<span class="o">=</span>bridge-lan<span class="w"> </span><span class="nv">action</span><span class="o">=</span>redirect<span class="w"> </span>to-ports<span class="o">=</span><span class="m">53</span><span class="w"> </span><span class="se">\</span>
+<span class="nv">comment</span><span class="o">=</span><span class="s2">&quot;Forzar DNS TCP de LAN hacia router&quot;</span>
+
+ip/firewall/nat/add<span class="w"> </span><span class="nv">chain</span><span class="o">=</span>dstnat<span class="w"> </span><span class="nv">protocol</span><span class="o">=</span>udp<span class="w"> </span>dst-port<span class="o">=</span><span class="m">53</span><span class="w"> </span><span class="se">\</span>
+<span class="k">in</span>-interface<span class="o">=</span>bridge-lan<span class="w"> </span><span class="nv">action</span><span class="o">=</span>redirect<span class="w"> </span>to-ports<span class="o">=</span><span class="m">53</span><span class="w"> </span><span class="se">\</span>
+<span class="nv">comment</span><span class="o">=</span><span class="s2">&quot;Forzar DNS UDP de LAN hacia router&quot;</span>
+
+ip/firewall/nat/add<span class="w"> </span><span class="nv">chain</span><span class="o">=</span>dstnat<span class="w"> </span><span class="nv">protocol</span><span class="o">=</span>tcp<span class="w"> </span>dst-port<span class="o">=</span><span class="m">53</span><span class="w"> </span><span class="se">\</span>
+<span class="k">in</span>-interface<span class="o">=</span>bridge-dmz<span class="w"> </span><span class="nv">action</span><span class="o">=</span>redirect<span class="w"> </span>to-ports<span class="o">=</span><span class="m">53</span><span class="w"> </span><span class="se">\</span>
+<span class="nv">comment</span><span class="o">=</span><span class="s2">&quot;Forzar DNS TCP de DMZ hacia router&quot;</span>
+
+ip/firewall/nat/add<span class="w"> </span><span class="nv">chain</span><span class="o">=</span>dstnat<span class="w"> </span><span class="nv">protocol</span><span class="o">=</span>udp<span class="w"> </span>dst-port<span class="o">=</span><span class="m">53</span><span class="w"> </span><span class="se">\</span>
+<span class="k">in</span>-interface<span class="o">=</span>bridge-dmz<span class="w"> </span><span class="nv">action</span><span class="o">=</span>redirect<span class="w"> </span>to-ports<span class="o">=</span><span class="m">53</span><span class="w"> </span><span class="se">\</span>
+<span class="nv">comment</span><span class="o">=</span><span class="s2">&quot;Forzar DNS UDP de DMZ hacia router&quot;</span>
+</code></pre></div>
+<p><img alt="img02" src="../img/28.png" /></p>
+<p>Si volvemos a probar la resolución desde la misma máquina de la red interna, veremos que se ha forzado la resolución desde el servidor DNS del router.</p>
+<p><img alt="img02" src="../img/29.png" /></p>
+<p>Esto es debido a que hemos forzado el siguiente comportamiento:</p>
+<ul>
+<li>Cliente intenta consultar 8.8.8.8:53</li>
+<li>El paquete entra por bridge-lan o bridge-dmz</li>
+<li>dstnat modifica el destino → router:53</li>
+<li>El servicio DNS del router procesa la consulta</li>
+<li>Si no tiene respuesta reenvía a los DNS externos configurados</li>
+<li>Devuelve la respuesta al cliente</li>
+<li>El cliente no percibe la modificación.</li>
+</ul>
+<h2 id="conclusion">Conclusión</h2>
+<p>Con la configuración realizada, el servicio DNS del router queda completamente integrado en la arquitectura de red: resuelve consultas externas, mantiene una caché optimizando el rendimiento, ofrece resolución interna mediante entradas estáticas y, si se ha configurado la redirección, impone una política de uso centralizado para todos los equipos de la LAN y la DMZ.</p>
+<p>De este modo, el DNS deja de ser un simple servicio auxiliar y pasa a formar parte activa del diseño y la seguridad de la red, interactuando con DHCP, NAT y firewall dentro de una configuración coherente y controlada.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>
