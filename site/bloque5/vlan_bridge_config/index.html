@@ -1,0 +1,1579 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../servicio_dns/">
+      
+      
+        <link rel="next" href="../routing_intervlan/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>2. Configuración de un bridge con filtrado VLAN - Curso MikroTik</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#segmentacion-de-red-mediante-vlan-en-capa-2" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Curso MikroTik" class="md-header__button md-logo" aria-label="Curso MikroTik" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Curso MikroTik
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              2. Configuración de un bridge con filtrado VLAN
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Curso MikroTik" class="md-nav__button md-logo" aria-label="Curso MikroTik" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Curso MikroTik
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inicio
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Bloque 1. Introducción
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Bloque 1. Introducción
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduccion/01_mikrotik_routeros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introducción a MikroTik y RouterOS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduccion/02_virtualizacion_gns3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Virtualización de RouterOS con GNS3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduccion/03_acceso_routeros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Conectando a RouterOS para su administración
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Bloque 2. Configuración básica
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Bloque 2. Configuración básica
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque2/eliminar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Eliminar configuración
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque2/dhcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Configuración de DHCP (ip dinámica)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque2/ip_estatica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Configuración de IP estática
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque2/bridge_dinamico/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Configuración de bridge dinámico
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque2/bridge_estatica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Configuración de bridge estático
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque2/tarea_bloque2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Actividad práctica
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Bloque 3. Servicios de red esenciales (DHCP y NAT)
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Bloque 3. Servicios de red esenciales (DHCP y NAT)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque3/dhcp_bridge_manual/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Configuración de DHCP Server sobre un bridge, de manera manual
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque3/dhcp_bridge_asistente/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Configuración de DHCP Server sobre un bridge, utilizando el asistente
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque3/dhcp_reservas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Reservas de IP en DHCP (DHCP Static Leases)l
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque3/configuracion_nat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Configuración de NAT (Network Address Translation)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque3/actividad_bloque3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Actividad práctica
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Bloque 4. Firewall, redirección de puertos y DMZ
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Bloque 4. Firewall, redirección de puertos y DMZ
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque4/configuracion_reglas_firewall/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Configuración de firewall en RouterOS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque4/redireccion_puertos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Redirección de puertos (Port Forwarding)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque4/configuracion_dmz/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Configuración de DMZ (Zona Desmilitarizada)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bloque4/configuracion_dmz_gui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Configuración de DMZ - Gui
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Bloque 5. Configuración de VLANS y servicio DNS
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Bloque 5. Configuración de VLANS y servicio DNS
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../servicio_dns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Servicio DNS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    2. Configuración de un bridge con filtrado VLAN
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Configuración de un bridge con filtrado VLAN
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Índice
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducción
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-inicial-del-escenario" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración inicial del escenario
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuración inicial del escenario">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#router-mikrotik" class="md-nav__link">
+    <span class="md-ellipsis">
+      Router MikroTik
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#switch-superior-switchl2oficina" class="md-nav__link">
+    <span class="md-ellipsis">
+      Switch superior (SwitchL2oficina)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#switch-inferior-switchl2produccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Switch inferior (SwitchL2producción)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-del-switch-superior" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración del switch superior
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-del-switch-inferior" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración del switch inferior
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-de-los-equipos-alpine-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración de los equipos Alpine Linux
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-del-router-mikrotik" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración del router Mikrotik
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-1-crear-el-bridge-con-filtrado-vlan-activado" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paso 1 – Crear el bridge con filtrado VLAN activado
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-2-anadir-los-puertos-al-bridge-como-enlaces-trunk" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paso 2 – Añadir los puertos al bridge como enlaces trunk
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-3-declarar-la-vlan-10-en-la-tabla-vlan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paso 3 – Declarar la VLAN 10 en la tabla VLAN
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-4-declarar-la-vlan-20-en-la-tabla-vlan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paso 4 – Declarar la VLAN 20 en la tabla VLAN
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-5-validacion-de-la-configuracion-aplicada" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paso 5 – validación de la configuración aplicada
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../routing_intervlan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Configuración de routing inter-VLAN
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Índice
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducción
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-inicial-del-escenario" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración inicial del escenario
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuración inicial del escenario">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#router-mikrotik" class="md-nav__link">
+    <span class="md-ellipsis">
+      Router MikroTik
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#switch-superior-switchl2oficina" class="md-nav__link">
+    <span class="md-ellipsis">
+      Switch superior (SwitchL2oficina)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#switch-inferior-switchl2produccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Switch inferior (SwitchL2producción)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-del-switch-superior" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración del switch superior
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-del-switch-inferior" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración del switch inferior
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-de-los-equipos-alpine-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración de los equipos Alpine Linux
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-del-router-mikrotik" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración del router Mikrotik
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-1-crear-el-bridge-con-filtrado-vlan-activado" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paso 1 – Crear el bridge con filtrado VLAN activado
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-2-anadir-los-puertos-al-bridge-como-enlaces-trunk" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paso 2 – Añadir los puertos al bridge como enlaces trunk
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-3-declarar-la-vlan-10-en-la-tabla-vlan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paso 3 – Declarar la VLAN 10 en la tabla VLAN
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-4-declarar-la-vlan-20-en-la-tabla-vlan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paso 4 – Declarar la VLAN 20 en la tabla VLAN
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-5-validacion-de-la-configuracion-aplicada" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paso 5 – validación de la configuración aplicada
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="segmentacion-de-red-mediante-vlan-en-capa-2">Segmentación de red mediante VLAN en Capa 2.</h1>
+<h2 id="indice">Índice</h2>
+<p>Introducción<br />
+Configuración inicial del escenario<br />
+Configuración del switch superior<br />
+Configuración del switch inferior<br />
+Configuración de los equipos Alpine Linux<br />
+Configuración del router Mikrotik<br />
+Paso 1 – Crear el bridge con filtrado VLAN activado<br />
+Paso 2 – Añadir los puertos al bridge como enlaces trunk<br />
+Paso 3 – Declarar la VLAN 10 en la tabla VLAN<br />
+Paso 4 – Declarar la VLAN 20 en la tabla VLAN<br />
+Paso 5 – validación de la configuración aplicada  </p>
+<hr />
+<h2 id="introduccion">Introducción</h2>
+<p>En este documento abordamos uno de los conceptos estructurales en el diseño de redes conmutadas modernas: la segmentación lógica mediante VLAN (Virtual Local Area Network).</p>
+<p>El propósito de esta práctica no es configurar enrutamiento inter-VLAN ni desplegar servicios de red avanzados. El objetivo es comprender con claridad cómo se implementa la separación de tráfico en Capa 2 del modelo OSI, es decir, en el plano de conmutación Ethernet, utilizando filtrado VLAN en un bridge de RouterOS v7.</p>
+<p>Para realizar el ejercicio utilizaremos:</p>
+<ul>
+<li>Switches genéricos de capa 2  </li>
+<li>Un router MikroTik (RouterOS v7)  </li>
+<li>Varios equipos finales (instancias Alpine en GNS3)  </li>
+</ul>
+<p>Todos los equipos compartirán el mismo rango de direcciones IP. Sin embargo, estarán distribuidos en VLAN diferentes.</p>
+<p><img alt="img02" src="../img/30.png" /></p>
+<p>Esta decisión es deliberada desde el punto de vista didáctico: permitirá demostrar que la separación en VLAN opera en Capa 2, independientemente del direccionamiento IP configurado en los hosts.</p>
+<p>Recordemos que cada VLAN:</p>
+<ul>
+<li>Constituye un dominio de broadcast independiente  </li>
+<li>Aísla el tráfico respecto a otras VLAN en el plano de conmutación  </li>
+<li>Requiere etiquetado IEEE 802.1Q cuando el tráfico atraviesa enlaces troncales  </li>
+</ul>
+<p>En consecuencia, aunque los dispositivos estén conectados al mismo hardware físico, si pertenecen a VLAN distintas no podrán comunicarse entre sí a nivel de Capa 2. El aislamiento se produce antes de que intervenga cualquier mecanismo de enrutamiento.</p>
+<hr />
+<h2 id="configuracion-inicial-del-escenario">Configuración inicial del escenario</h2>
+<p>Comenzaremos creando un nuevo proyecto en GNS3 que reproducirá la topología de trabajo.</p>
+<p>El escenario estará compuesto por:</p>
+<ul>
+<li>Una instancia de RouterOS v7 (MikroTik)  </li>
+<li>Dos instancias de Ethernet Switch genérico (Capa 2)  </li>
+<li>Tres instancias de Alpine Linux (equipos finales)  </li>
+</ul>
+<p>Una vez creados los dispositivos, realizaremos las conexiones tal como se muestra en la figura del escenario.</p>
+<p><img alt="img02" src="../img/31.png" /></p>
+<hr />
+<p>La interconexión deberá realizarse del siguiente modo:</p>
+<h3 id="router-mikrotik">Router MikroTik</h3>
+<ul>
+<li>ether1 → conectado a NAT (salida a Internet)  </li>
+<li>ether2 → conectado al puerto 1 del switch superior (SwitchL2oficina)  </li>
+<li>ether3 → conectado al puerto 1 del switch inferior (SwitchL2producción)  </li>
+</ul>
+<h3 id="switch-superior-switchl2oficina">Switch superior (SwitchL2oficina)</h3>
+<ul>
+<li>Puerto 2 → conectado a Alpine-1-vlan10  </li>
+<li>Puerto 3 → conectado a Alpine-2-vlan20  </li>
+</ul>
+<h3 id="switch-inferior-switchl2produccion">Switch inferior (SwitchL2producción)</h3>
+<ul>
+<li>Puerto 2 → conectado a Alpine-3-vlan10  </li>
+</ul>
+<hr />
+<h2 id="configuracion-del-switch-superior">Configuración del switch superior</h2>
+<p>En este punto configuraremos el switch superior para que gestione correctamente el tráfico VLAN que recibirá desde el MikroTik.</p>
+<p>El objetivo es establecer:</p>
+<ul>
+<li>Un puerto troncal hacia el router, capaz de transportar múltiples VLAN etiquetadas mediante IEEE 802.1Q.  </li>
+<li>Puertos de acceso para los equipos finales, cada uno perteneciente a su VLAN correspondiente.  </li>
+</ul>
+<p>La configuración deberá quedar de la siguiente manera:</p>
+<ul>
+<li>
+<p>Puerto 1 (conectado a Mikrotik), configurado como Trunk 802.1Q (dot1q).<br />
+Este puerto transportará tramas etiquetadas en este enlace.  </p>
+</li>
+<li>
+<p>Puerto 2 (conectado a Alpine-1-vlan10), configurado como access 10 (VLAN 10).<br />
+Las tramas saldrán sin etiqueta hacia el host, pero el switch las asociará internamente a la VLAN 10.  </p>
+</li>
+<li>
+<p>Puerto 3 (conectado a Alpine-2-vlan20), configurado como access 20 (VLAN 20).<br />
+Las tramas saldrán sin etiqueta hacia el host, pero el switch las asociará internamente a la VLAN 20.  </p>
+</li>
+</ul>
+<h2 id="_1"><img alt="img02" src="../img/32.png" /></h2>
+<h2 id="configuracion-del-switch-inferior">Configuración del switch inferior</h2>
+<p>Configuraremos el switch inferior de manera similar al switch superior, con el objetivo de que gestione correctamente el tráfico VLAN que recibirá desde el MikroTik.</p>
+<p>Para ello, estableceremos:</p>
+<ul>
+<li>Un puerto troncal hacia el router, capaz de transportar múltiples VLAN etiquetadas mediante IEEE 802.1Q.  </li>
+<li>Puertos de acceso para los equipos finales, cada uno perteneciente a su VLAN correspondiente.  </li>
+</ul>
+<p>La configuración deberá quedar del siguiente modo:</p>
+<ul>
+<li>
+<p>Puerto 1 (conectado a Mikrotik), configurado como Trunk 802.1Q (dot1q).<br />
+Este puerto transportará tramas etiquetadas en este.  </p>
+</li>
+<li>
+<p>Puerto 2 (conectado a Alpine-3-vlan10), configurado como access 10 (VLAN 10).<br />
+Las tramas saldrán sin etiqueta hacia el host, pero el switch las asociará internamente a la VLAN 10.  </p>
+</li>
+</ul>
+<h2 id="_2"><img alt="img02" src="../img/33.png" /></h2>
+<p>Llegados a este punto, es importante que el alumnado observe que:</p>
+<ul>
+<li>Aunque Alpine-1 y Alpine-3 están conectados a switches físicos distintos, ambos pertenecen a la VLAN 10.  </li>
+<li>El tráfico entre ellos podrá circular porque el trunk transporta la VLAN 10 etiquetada hasta el MikroTik.  </li>
+<li>El aislamiento no depende del switch físico, sino de la pertenencia a la VLAN.  </li>
+</ul>
+<p>Este matiz es fundamental antes de pasar a la configuración del bridge con vlan-filtering en RouterOS, donde el MikroTik actuará como elemento central de segmentación en Capa 2.</p>
+<hr />
+<h2 id="configuracion-de-los-equipos-alpine-linux">Configuración de los equipos Alpine Linux</h2>
+<p>Para realizar las pruebas de conectividad, asignaremos direccionamiento IP estático a todas las instancias de Alpine Linux.</p>
+<p>Todos los equipos compartirán el mismo rango de red (192.168.0.0/24), lo cual es una decisión deliberada para demostrar que la separación VLAN opera en Capa 2, independientemente del direccionamiento IP configurado.</p>
+<p>Propuesta de asignación:</p>
+<ul>
+<li>Alpine-1-vlan10 → IP 192.168.0.10/24  </li>
+<li>Alpine-2-vlan20 → IP 192.168.0.11/24  </li>
+<li>Alpine-3-vlan10 → IP 192.168.0.12/24  </li>
+</ul>
+<p>En esta fase no configuraremos puerta de enlace, ya que no estamos trabajando todavía con enrutamiento.</p>
+<p>Para configurar IP estática en las instancias Alpine, pulsamos botón derecho sobre la instancia y seleccionamos la opción “Edit config”.</p>
+<p><img alt="img02" src="../img/34.png" /></p>
+<p>Descomentamos y modificamos las líneas correspondientes a la configuración estática, adaptándolas al escenario.
+<img alt="img02" src="../img/35.png" /></p>
+<p>Es importante que el alumnado comprenda que estamos configurando la IP directamente en el sistema operativo, no en el switch ni en el router.</p>
+<p>Una vez modificada la configuración, arrancamos las instancias, y comprobamos que la IP se ha aplicado correctamente, ejecutando el comando &lt;<ip a>&gt;.</p>
+<p><img alt="img02" src="../img/36.png" /></p>
+<hr />
+<p>Se debe verificar:</p>
+<ul>
+<li>Que la interfaz tiene asignada la dirección correcta.  </li>
+<li>Que la máscara es /24.  </li>
+<li>Que la interfaz está en estado UP.  </li>
+</ul>
+<p>En este punto, podemos realizar una prueba de conectividad entre Alpine-1-vlan10 (192.168.0.10) y Alpine-2-vlan20 (192.168.0.11) ejecutando un ping entre ellas.</p>
+<p><img alt="img02" src="../img/38.png" /></p>
+<p>El resultado esperado es que no haya respuesta.</p>
+<p>Este comportamiento es correcto y deseado, ya que:</p>
+<ul>
+<li>Ambos equipos están en el mismo rango IP.  </li>
+<li>Pero pertenecen a VLAN diferentes.  </li>
+<li>Y, por tanto, se encuentran en dominios de broadcast distintos.  </li>
+</ul>
+<p>Aunque el direccionamiento IP coincida, la separación en Capa 2 impide que se resuelva ARP entre ellos.</p>
+<hr />
+<h2 id="configuracion-del-router-mikrotik">Configuración del router Mikrotik</h2>
+<p>Hasta este momento hemos trabajado con switches tradicionales de Capa 2, donde la gestión de VLAN se realiza directamente sobre los puertos del propio dispositivo. En ese modelo, un puerto configurado como access pertenece a una única VLAN y asigna internamente esa VLAN al tráfico no etiquetado que recibe. Por su parte, un puerto configurado como trunk transporta múltiples VLAN de forma simultánea, utilizando etiquetado IEEE 802.1Q para identificar a qué VLAN pertenece cada trama. En este enfoque, la lógica de segmentación se implementa íntegramente dentro del propio switch.</p>
+<p>Sin embargo, en RouterOS v7 el planteamiento es diferente. Un dispositivo MikroTik no es únicamente un router; también puede actuar como un switch de Capa 2 mediante la creación de un bridge. Este bridge agrupa interfaces físicas y permite la conmutación de tráfico entre ellas.</p>
+<p>La diferencia clave aparece cuando activamos el parámetro vlan-filtering=yes. En ese momento, el bridge deja de comportarse como un simple conmutador transparente y pasa a funcionar como un switch gestionable con soporte VLAN. Es decir, incorpora su propia tabla VLAN, permite definir qué puertos pertenecen a cada VLAN y controla qué tráfico puede circular por cada interfaz.</p>
+<p>En consecuencia, la segmentación ya no se configura directamente en cada puerto como ocurre en un switch tradicional. En RouterOS, la lógica VLAN se implementa en el bridge mediante la combinación de:</p>
+<ul>
+<li>La configuración de los puertos dentro del bridge.  </li>
+<li>La tabla VLAN del bridge.  </li>
+<li>La activación explícita del filtrado VLAN.  </li>
+</ul>
+<p>Una vez comprendido el modelo conceptual de funcionamiento del bridge con filtrado VLAN en RouterOS, vamos a trasladar estos principios teóricos a nuestro escenario y diseñar paso a paso su implementación práctica.</p>
+<hr />
+<h2 id="paso-1-crear-el-bridge-con-filtrado-vlan-activado">Paso 1 – Crear el bridge con filtrado VLAN activado</h2>
+<p>/interface/bridge/add \
+name=bridge-vlan \
+vlan-filtering=yes \
+protocol-mode=rstp</p>
+<hr />
+<h2 id="paso-2-anadir-los-puertos-al-bridge-como-enlaces-trunk">Paso 2 – Añadir los puertos al bridge como enlaces trunk</h2>
+<p>/interface/bridge/port/add \
+bridge=bridge-vlan \
+interface=ether2 \
+ingress-filtering=yes \
+frame-types=admit-only-vlan-tagged</p>
+<p>/interface/bridge/port/add \
+bridge=bridge-vlan \
+interface=ether3 \
+ingress-filtering=yes \
+frame-types=admit-only-vlan-tagged</p>
+<hr />
+<h2 id="paso-3-declarar-la-vlan-10-en-la-tabla-vlan">Paso 3 – Declarar la VLAN 10 en la tabla VLAN</h2>
+<p>/interface/bridge/vlan/add \
+bridge=bridge-vlan \
+vlan-ids=10 \
+tagged=bridge-vlan,ether2,ether3</p>
+<hr />
+<h2 id="paso-4-declarar-la-vlan-20-en-la-tabla-vlan">Paso 4 – Declarar la VLAN 20 en la tabla VLAN</h2>
+<p>/interface/bridge/vlan/add \
+bridge=bridge-vlan \
+vlan-ids=20 \
+tagged=bridge-vlan,ether2</p>
+<hr />
+<h2 id="paso-5-validacion-de-la-configuracion-aplicada">Paso 5 – validación de la configuración aplicada</h2>
+<p>Con esta configuración:</p>
+<ul>
+<li>El MikroTik actúa como un switch de Capa 2 con filtrado VLAN.  </li>
+<li>Los equipos en VLAN 10 pueden comunicarse entre sí, aunque estén en switches distintos.  </li>
+<li>Los equipos en VLAN 20 solo pueden comunicarse dentro de su VLAN.  </li>
+<li>No existe comunicación entre VLAN 10 y VLAN 20.  </li>
+</ul>
+<p>El aislamiento se produce íntegramente en Capa 2, sin necesidad de enrutamiento.</p>
+<p>Para validar la configuración, realizaremos pruebas de conectividad desde Alpine-1-vlan10 (192.168.0.10) hacia el resto de los equipos.</p>
+<p><img alt="img02" src="../img/39.png" /></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>

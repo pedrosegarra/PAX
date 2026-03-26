@@ -2,6 +2,8 @@ site_name: Curso MikroTik
 theme:
   name: material
 
+  features:
+    - content.code.copy
 nav:
   - Inicio: index.md
   - Bloque 1. Introducción:
