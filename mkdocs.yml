@@ -1,6 +1,16 @@
 site_name: Curso MikroTik
 theme:
   name: material
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Cambiar a modo oscuro
+
+    - scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Cambiar a modo claro
 
   features:
     - content.code.copy
