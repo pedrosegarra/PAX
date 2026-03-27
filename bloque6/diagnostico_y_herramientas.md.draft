@@ -1,0 +1,77 @@
+# Diagnóstico y Herramientas (Troubleshooting)
+
+## Introducción
+
+En el día a día de la administración de redes, configurar los equipos es solo una parte del trabajo. Una gran porción del tiempo se invierte en identificar por qué algo no funciona: rutas mal configuradas, reglas de firewall bloqueando tráfico legítimo, o bucles en la red. RouterOS proporciona potentes herramientas integradas para facilitar estas tareas de diagnóstico.
+
+## Herramientas Clásicas: Ping y Traceroute
+
+### Ping
+La herramienta más básica para verificar conectividad de Capa 3. En RouterOS, la herramienta Ping (`/ping`) es avanzada y permite especificar interfaces de salida, tamaños de paquete, y más.
+
+```routeros
+# Ping estándar
+ping 8.8.8.8
+
+# Ping forzando la salida por una interfaz específica
+ping 8.8.8.8 interface=ether1
+
+# Ping con un tamaño de paquete específico para detectar problemas de MTU
+ping 192.168.10.1 size=1500 do-not-fragment
+```
+
+### Traceroute
+Nos permite ver los saltos (routers intermedios) por los que pasa un paquete antes de llegar a su destino. Es vital para detectar dónde se interrumpe el enrutamiento.
+
+```routeros
+# Trazar ruta hacia un servidor en Internet
+tool traceroute 8.8.8.8
+```
+
+## Monitorización de Tráfico: Torch
+
+### ¿Qué es Torch?
+Torch es una de las herramientas más exclusivas y queridas de MikroTik. Permite monitorizar el tráfico en tiempo real que atraviesa una interfaz determinada, desglosándolo por IP de origen, IP de destino, puerto, protocolo, e identificando el uso de ancho de banda al instante (Rx/Tx Rate).
+
+### Uso Práctico de Torch
+Si un cliente de la red local se queja de que Internet va lento, puedes abrir Torch en la interfaz LAN (`ether2`), agrupar (Group By) por `Src. Address`, y ver en tiempo real qué IP local está consumiendo todo el ancho de banda.
+
+Desde la línea de comandos:
+```routeros
+# Monitorizar el puerto ether2 mostrando las IPs de origen
+tool torch interface=ether2 src-address=any
+```
+En Winbox, Torch se encuentra en `Tools -> Torch`. La interfaz gráfica es sumamente intuitiva y resulta ideal para rastrear flujos de conexiones.
+
+## Análisis Profundo: Packet Sniffer
+
+Cuando necesitas inspeccionar el interior de los paquetes (por ejemplo, ver qué IPs está repartiendo un servidor DHCP ajeno, o revisar cabeceras HTTP), MikroTik incluye un **Packet Sniffer** completo.
+
+Puedes configurar el sniffer para capturar tráfico filtrando por puertos o IPs, y luego guardarlo en un archivo `.pcap` para analizarlo cómodamente en tu ordenador con **Wireshark**.
+
+```routeros
+# Configurar sniffer para capturar tráfico ICMP en ether1
+tool sniffer set interface=ether1 filter-mac-protocol=ip filter-ip-protocol=icmp
+
+# Iniciar captura
+tool sniffer start
+
+# Detener captura
+tool sniffer stop
+```
+
+En entornos educativos, capturar las negociaciones de DORA (Discover, Offer, Request, ACK) de DHCP con Wireshark es una excelente práctica.
+
+## Log y Debugging
+
+El registro de eventos del sistema (Log) es el primer lugar al que acudir ante caídas y fallos.
+Por defecto, MikroTik guarda información general en memoria (`/log print`).
+Sin embargo, podemos enriquecer la información añadiendo "topics" de depuración.
+
+Si por ejemplo estamos teniendo problemas al establecer un túnel, o el DHCP no asigna IPs, podemos activar los logs del servicio específico:
+
+```routeros
+# Habilitar logs detallados (debug) para DHCP
+system logging add topics=dhcp,debug action=memory
+```
+Esto imprimirá en la pantalla de Log (o mediante `/log print`) toda la conversación de los procesos subyacentes.

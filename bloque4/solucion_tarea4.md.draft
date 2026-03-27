@@ -1,0 +1,74 @@
+# Solución: Firewall básico y Redirección de Puertos
+
+Aquí encontrarás la resolución paso a paso para la [Tarea: Firewall básico y Redirección de Puertos](tarea_bloque4.md).
+
+## Fase 1. Enrutamiento y NAT
+
+### 1.1 Configurar Direcciones IP
+
+Suponiendo que recibimos la IP desde la interfaz `ether1` (WAN) por DHCP, procedemos a asignar las IP de las redes locales (`ether2`) y DMZ (`ether3`).
+
+**CLI:**
+```routeros
+/ip address add address=192.168.10.1/24 interface=ether2
+/ip address add address=172.16.20.1/24 interface=ether3
+```
+
+### 1.2 Configurar NAT Masquerade
+Permitirá que cualquier máquina de las redes internas (LAN/DMZ) pueda acceder a Internet traduciendo su rango privado a la IP pública de la WAN (`ether1`).
+
+**CLI:**
+```routeros
+/ip firewall nat add chain=srcnat action=masquerade out-interface=ether1
+```
+
+---
+
+## Fase 2. Reglas de Protección (Input)
+
+El objetivo es asegurar el propio router MikroTik frente a conexiones no deseadas, de acuerdo con las especificaciones de la tarea.
+
+### 2.1 Permitir el tráfico establecido y relacionado
+Las conexiones que hayan sido autorizadas inicialmente por el router, así como tráfico derivado (por ejemplo, errores ICMP relacionados), se deben procesar primero para evitar carga de CPU.
+
+**CLI:**
+```routeros
+/ip firewall filter add chain=input connection-state=established,related action=accept
+```
+
+### 2.2 Crear Address List y permitir la Administración
+Se agrupan las IPs desde las que confía el administrador en la lista `Admin_IPs`.
+
+**CLI:**
+```routeros
+/ip firewall address-list add list=Admin_IPs address=192.168.10.50
+/ip firewall filter add chain=input src-address-list=Admin_IPs action=accept
+```
+
+### 2.3 Dropear el resto en Input
+Una vez tenemos acceso asegurado desde la IP del administrador (`192.168.10.50`), descartamos el resto del tráfico que vaya **dirigido al router**. *(Cuidado: si lo haces desde una IP diferente a la configurada, perderás la conexión a Winbox).*
+
+**CLI:**
+```routeros
+/ip firewall filter add chain=input action=drop
+```
+
+> [!TIP]
+> **Orden en WinBox:** Al ir a `IP > Firewall > Filter Rules`, verifica que la regla `Drop` quede siempre al final del conjunto que afecta a `input`. MikroTik procesa secuencialmente de arriba abajo.
+
+---
+
+## Fase 3. Redirección de Puertos (Port Forwarding)
+
+Para permitir que el acceso a la IP pública del router por el puerto 80 termine en el servidor web de la DMZ (`172.16.20.10:80`).
+
+### 3.1 Destino NAT (DST-NAT)
+Interceptamos la entrada hacia `ether1` por `tcp/80` y lo renombramos hacia la `172.16.20.10`.
+
+**CLI:**
+```routeros
+/ip firewall nat add chain=dstnat action=dst-nat drop=no in-interface=ether1 protocol=tcp dst-port=80 to-addresses=172.16.20.10 to-ports=80
+```
+
+> [!NOTE] 
+> Asegúrate de que el servidor web en `172.16.20.10` tiene configurada como puerta de enlace, la IP del router en la DMZ (`172.16.20.1`). De lo contrario, el servidor web no sabrá cómo enviar la respuesta hacia Internet.
