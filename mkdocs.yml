@@ -38,6 +38,7 @@ nav:
       - 2. Redirección de puertos (Port Forwarding): bloque4/redireccion_puertos.md
       - 3. Configuración de DMZ (Zona Desmilitarizada): bloque4/configuracion_dmz.md
       - 4. Configuración de DMZ - Gui: bloque4/configuracion_dmz_gui.md
+      - 5. Actividad: bloque4/Actividad.md
   - Bloque 5. Configuración de VLANS y servicio DNS:
       - 1. Servicio DNS: bloque5/servicio_dns.md
       - 2. Configuración de un bridge con filtrado VLAN: bloque5/vlan_bridge_config.md
