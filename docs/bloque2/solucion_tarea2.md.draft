@@ -1,0 +1,76 @@
+# Solución: Configuración de interfaz WAN con DHCP
+
+Aquí encontrarás los pasos necesarios para resolver la [Actividad: Configuración de interfaz WAN con DHCP](tarea_bloque2.md).
+
+## 1. Configurar la interfaz `ether1` como cliente DHCP
+
+Para que el router obtenga una configuración de red (IP, máscara, puerta de enlace y DNS) de forma automática por su primer puerto (`ether1`), debemos añadir un cliente DHCP a dicha interfaz.
+
+### Mediante WinBox (Modo Gráfico)
+1. Ve al menú **IP** > **DHCP Client**.
+2. Haz clic en el botón **+** (Add) para crear una nueva entrada.
+3. En la pestaña **DHCP**, selecciona **Interface:** `ether1`.
+4. Asegúrate de que las opciones **Use Peer DNS** y **Use Peer NTP** estén marcadas (por defecto lo están).
+5. Asegúrate de que **Add Default Route** está en `yes`.
+6. Haz clic en **Apply** y luego en **OK**.
+7. Verás en la lista que el estado pasa rápidamente a `bound`, mostrando tu nueva IP asignada en la columna **IP Address**.
+
+### Mediante Terminal (CLI)
+```routeros
+/ip dhcp-client add interface=ether1 use-peer-dns=yes use-peer-ntp=yes add-default-route=yes disabled=no
+```
+
+---
+
+## 2. Verificar que el router recibe una IP válida
+
+Desde la consola puedes revisar el estado del cliente DHCP para comprobar la IP otorgada y a qué hora expira su concesión:
+
+```routeros
+/ip dhcp-client print detail
+```
+*(Debes fijarte en que el parámetro `status` sea `bound` y leer el campo `address`)*.
+
+---
+
+## 3. Comprobar que existe una ruta por defecto
+
+Al haber configurado `add-default-route=yes`, el servidor DHCP del operador nos ha proporcionado una puerta de enlace a Internet. 
+Para comprobar nuestra tabla de rutas:
+
+### Mediante WinBox
+- Ve al menú **IP** > **Routes**. Debes ver una ruta automática con destino `0.0.0.0/0` marcada con unas 'D' y 'A' (`Dynamic`, `Active`).
+
+### Mediante Terminal
+```routeros
+/ip route print
+```
+*Salida esperada:* Debería verse una ruta hacia la dirección `0.0.0.0/0` saliendo por nuestro gateway (ej. `192.168.1.1` o el que corresponda al DHCP superior), indicada con los flags `DAC` o similar.
+
+---
+
+## 4. Verificar los servidores DNS configurados
+
+Nuestro router necesita DNS para traducir los nombres de dominio de Internet (como google.es) a direcciones IP.
+
+### Mediante WinBox
+- Ve a **IP** > **DNS**. En el campo `Dynamic Servers` aparecerán los servidores DNS inyectados en el router por el proveedor o el servidor superior.
+
+### Mediante Terminal
+```routeros
+/ip dns print
+```
+*Observa el campo `dynamic-servers` para ver las IPs de tus servidores de nombres asignados.*
+
+---
+
+## 5. Realizar una prueba de conectividad a Internet
+
+Finalmente, confirmamos que el router MikroTik tiene conectividad completa al exterior.
+
+### Mediante Terminal
+Ejecuta el comando ping utilizando el nombre de dominio:
+```routeros
+/ping google.es count=4
+```
+*Salida esperada:* Respuestas desde diversas IPs públicas resolviendo el dominio correctamente con tiempos alrededor de unos cuantos milisegundos (`ms`). Si la resolución DNS falla pero el ping a `8.8.8.8` funciona, hubo un problema con la obtención de DNS. Si ambos fallan, el problema es del enrutamiento o el puerto.

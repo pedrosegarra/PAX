@@ -1,0 +1,56 @@
+# Calidad de Servicio (QoS): Simple Queues
+
+## El Problema del Ancho de Banda
+
+En cualquier red compartida, el ancho de banda hacia el exterior (el canuto de Internet contratado) es limitado. Sin ninguna política de control, un solo usuario descargando archivos grandes torrent, o actualizaciones de sistema, puede acaparar toda la conexión, provocando que el resto de usuarios sufran alta latencia (lag) o bloqueos al abrir simples páginas web o realizar llamadas VoIP.
+
+MikroTik ofrece funcionalidades punteras para gestionar esto. La más sencilla y rápida de implementar se denomina **Simple Queues** (Colas Simples).
+
+## ¿Qué son las Simple Queues?
+
+Las Simple Queues permiten establecer límites de velocidad (Rate Limiting) de manera muy sencilla, basando el control en:
+- Una dirección IP específica (Ej. El teléfono de un empleado).
+- Una subred completa (Ej. `192.168.30.0/24`, toda la red de Alumnos).
+- Una interfaz entera.
+
+### Limitando Velocidades (Max Limit)
+
+Supongamos que el colegio tiene contratada una fibra de 600 Mbps (tanto de bajada como de subida).
+Deseamos garantizar que la VLAN 30 (Alumnos) no pueda consumir más de 100 Mbps en total, dejando así libres 500 Mbps para tareas administrativas críticas y profesores.
+
+La instrucción básica para crear esta limitación es:
+
+```routeros
+# Limitar subred 192.168.30.0/24 a 100M/100M (Upload/Download)
+queue simple add name="Limite_Alumnos" target=192.168.30.0/24 max-limit=100M/100M
+```
+
+Con este comando, la suma del tráfico generado por todos los dispositivos en la VLAN 30 nunca superará los 100 Megabits por segundo, ni en bajada ni en subida. MikroTik comenzará a encolar y a descartar paquetes transparentemente a los equipos clientes cuando se alcance el tope definido.
+
+### Priorizando el Tráfico (Priorities)
+
+A las secuencias de Simple Queues también se les pueden asignar prioridades.
+En entornos más sofisticados, en lugar de poner un límite fijo agresivo, garantizamos una velocidad mínima (CIR: Committed Information Rate) mediante el parámetro `limit-at`, y un techo máximo (MIR: Maximum Information Rate) con `max-limit`.
+
+```routeros
+# Ejemplo de priorización con Limit-At
+queue simple add name="Prioridad_VOZ" target=192.168.10.50 max-limit=10M/10M limit-at=5M/5M priority=1/1
+```
+En este ejemplo, al dispositivo de telefonía inteligente o videoconferencia en la IP `.50` se le garantiza 5Mbps pase lo que pase en la red, con ráfagas de hasta 10Mbps si hay ancho de banda de sobra, además de marcar la cola con prioridad 1 (siendo 1 la más crítica y 8 la de menor prioridad).
+
+## Monitorización de Colas
+
+Una vez establecidas, podemos comprobar continuamente si nuestras reglas de QoS están trabajando (es decir, comprobando el nivel de saturación) mediante:
+
+```routeros
+queue simple print
+```
+En la interfaz gráfica de Winbox (menú *Queues*), las Simple Queues utilizan colores intuitivos:
+- **Verde:** Consumo bajo (0 - 50%).
+- **Amarillo:** Consumo medio (51 - 74%).
+- **Rojo:** La regla está actuando de forma agresiva, la cola está llena descartando tráfico porque el objetivo ha alcanzado su límite (75 - 100%).
+
+## Ráfagas (Bursts) *Avanzado*
+
+MikroTik también soporta "Bursting", que permite al usuario superar su límite de velocidad (`max-limit`) temporalmente, durante un período de tiempo corto.
+Esto simula a nivel del usuario una sensación de tener "mayor velocidad", excelente en navegaciones web rápidas, y restringe sistemáticamente descargas grandes continuas cuando el Burst se acaba y vuelve a bajar a la velocidad sostenida y restringida.

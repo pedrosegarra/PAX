@@ -27,6 +27,7 @@ nav:
       - 4. Configuración de bridge dinámico: bloque2/bridge_dinamico.md
       - 5. Configuración de bridge estático: bloque2/bridge_estatica.md
       - 6. Actividad práctica: bloque2/tarea_bloque2.md
+      # Oculto temporalmente: - Solución Actividad Práctica: bloque2/solucion_tarea2.md
   - Bloque 3. Servicios de red esenciales (DHCP y NAT):
       - 1. Configuración de DHCP Server sobre un bridge, de manera manual: bloque3/dhcp_bridge_manual.md
       - 2. Configuración de DHCP Server sobre un bridge, utilizando el asistente: bloque3/dhcp_bridge_asistente.md
@@ -43,22 +44,17 @@ nav:
       - 1. Servicio DNS: bloque5/servicio_dns.md
       - 2. Configuración de un bridge con filtrado VLAN: bloque5/vlan_bridge_config.md
       - 3. Configuración de routing inter-VLAN: bloque5/routing_intervlan.md
+      - 4. Actividad Práctica: bloque5/tarea_bloque5.md
+      # Oculto temporalmente: - Solución Actividad Práctica: bloque5/solucion_tarea5.md
+  # Ocultos temporalmente:
+  # - Bloque 6. Diagnóstico y Herramientas:
+  #     - 1. Troubleshooting y Monitorización: bloque6/diagnostico_y_herramientas.md
+  # - Bloque 7. VPN y Accesos Remotos:
+  #     - 1. Introducción a WireGuard: bloque7/vpn_wireguard.md
+  # - Bloque 8. Calidad de Servicio (QoS):
+  #     - 1. Configuración de Simple Queues: bloque8/calidad_de_servicio_qos.md
+  # - Proyecto Final Integrador: proyecto_final/reto_integrador.md
 
-
-
-
-
-
-
-
-      
-
-            
-      
-
-    
-  
-       
 markdown_extensions:
   - admonition
   - pymdownx.details

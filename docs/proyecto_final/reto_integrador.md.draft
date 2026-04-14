@@ -1,0 +1,49 @@
+# Reto Final Integrador
+
+## Objetivo Global
+Poner a prueba y consolidar de manera unificada todos los conceptos adquiridos durante el curso: gestión de IPs dinámicas, enrutamiento estático, creación y distribución de VLANs, implementación de DHCP, políticas de control y seguridad, y publicación de un servidor interno al exterior (Port Forwarding y DMZ).
+
+## El Escenario: Despliegue en Pequeña Sucursal
+
+Has sido contratado para montar la red frontera de una pequeña sucursal tecnológica. Te proporcionan un único equipo central MikroTik, un switch genérico sin gestión L3 y varias máquinas. Su topología requiere las siguientes especificaciones:
+
+1. **Conectividad a Internet (WAN):** 
+   - La boca exterior (`ether1`) va conectada a un modem de un ISP que provee IPs por DHCP.
+
+2. **Red Interna Corporativa (LAN) sectorizada:**
+   - Todo el personal confluye a través del puerto `ether2` mediante VLANs.
+   - Existen dos departamentos:
+      - **Administración** (VLAN 100): `10.10.100.0/24`
+      - **Operadores** (VLAN 200): `10.10.200.0/24`
+
+3. **Zona de Servidores (DMZ):**
+   - Disponen de un servidor en un puerto aislado del router, `ether3`, donde se instalará un servidor web para clientes (IP `172.16.50.5/24`).
+
+## Requerimientos Técnicos
+
+Tu configuración deberá cumplir estrictamente lo siguiente:
+
+### 1. Conectividad Base
+- Interfaces WAN obteniendo parámetros de red por DHCP.
+- Interfaces sobre un `bridge` con *VLAN Filtering* o interfaces lógicas VLAN aplicadas al puerto troncal de la LAN, de modo que sirvan de *Gateway* para las subredes 100 y 200.
+- Servidor DHCP con un rango asignado (pool) de 50 a 100 IPs para los dos departamentos LAN.
+- El equipo de la DMZ deberá tener IP estática directamente asignada y usará al router como su propio gateway DNS.
+- Habilita la resolución DNS en el router permitiendo peticiones remotas ("Allow Remote Requests"), de modo que los clientes usen al router como servidor local DNS. 
+
+### 2. Controles Lógicos y Políticas de Seguridad
+- El router debe proveer Traducción de Red de Origen (SNAT/Masquerade) **exclusivamente** para el tráfico originado de las subredes corporativas que vaya al exterior (WAN).
+- Aplicar un cortafuegos (Firewall Filter) con las siguientes políticas:
+    - **Proteger al Router (Input):** Nada que venga desde la WAN debe poder alcanzar tu router, a menos que sean paquetes pidiendo PING (ICMP). Desde dentro, el Winbox solo puede abrirse desde la red de Administración (VLAN 100).
+    - **Protección de la DMZ y LAN (Forward):** 
+        - La red corporativa no tiene restricciones de conectividad y puede acceder libremente a Internet y a la zona de servidores (DMZ).
+        - La zona de servidores (DMZ) **no debe, bajo ningún concepto, poder iniciar conexiones hacia la base de la red corporativa** por seguridad si resultara comprometida. Dicho tráfico debe ser denegado por defecto.
+        - Publicar el servidor web de la DMZ al exterior mapeando (Port Forwarding) las peticiones del puerto 80 TCP de la WAN hacia el puerto 80 del servidor web.
+
+## Formato de Entrega
+Prepara un documento PDF unificado conteniendo explicaciones paso a paso de por qué has optado por configurar cada aspecto, acompañado del código `/export compact` de terminal.
+
+Al final del documento, es imprescindible mostrar imágenes verificando:
+- PINGS desde distintos elementos.
+- Un navegador externo entrando a la web publicada de la DMZ.
+- Capturas del funcionamiento de los DHCP.
+- Las tablas de rutas.

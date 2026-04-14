@@ -1,0 +1,73 @@
+# Accesos Remotos y Teletrabajo con VPN (WireGuard)
+
+## Introducción a WireGuard
+
+WireGuard es un protocolo y software de Red Privada Virtual (VPN) moderno, extremadamente rápido y que utiliza criptografía de última generación. En RouterOS v7, WireGuard viene soportado de forma nativa en el kernel, lo que resulta en un rendimiento superior y una configuración significativamente más sencilla comparada con tecnologías más antiguas como IPsec u OpenVPN.
+
+El uso típico consiste en permitir a un empleado (Road Warrior) conectarse desde su portátil en casa directamente a la red LAN de la empresa para acceder a los servidores internos, de manera encriptada y segura a través de Internet.
+
+## Conceptos Clave
+A diferencia de IPsec/OpenVPN, WireGuard no funciona con el concepto tradicional de Cliente y Servidor; todos los participantes son "pares" (Peers). Cada par se identifica por una **clave pública** y una **clave privada**. 
+El router de la empresa actúa como un par central (que escucha en un puerto UDP público), y los empleados actúan como pares remotos.
+
+## Configuración Básica en MikroTik (El Nodo Central)
+
+### 1. Crear la Interfaz WireGuard
+Crearemos la interfaz y RouterOS generará automáticamente un par de claves (Pública y Privada).
+
+```routeros
+# Crear la interfaz en el puerto 13231 (por defecto)
+interface wireguard add name=wireguard1 listen-port=13231
+```
+Para ver la clave pública que debes compartir con los clientes:
+```routeros
+interface wireguard print
+```
+
+### 2. Asignar un rango IP a la VPN
+Como cualquier interfaz de Capa 3, la interfaz WireGuard necesita una subred para comunicarse con los pares conectados.
+
+```routeros
+# Asignamos la IP 10.255.255.1/24 a nuestro router central
+ip address add address=10.255.255.1/24 interface=wireguard1
+```
+
+### 3. Permitir WireGuard en el Firewall (Input)
+El router debe aceptar las peticiones entrantes desde Internet dirigidas al puerto que hemos configurado para la VPN.
+
+```routeros
+ip firewall filter add chain=input action=accept protocol=udp port=13231 comment="Permitir WireGuard"
+```
+
+### 4. Configurar a los "Peers" (Clientes)
+Por cada dispositivo que queramos conectar (ej. el móvil o PC de un empleado), necesitamos conocer su "Clave Pública" y decirle a RouterOS a qué IP (dentro del rango `10.255.255.0/24`) queremos vincular esa clave.
+
+```routeros
+# Añadir el PC de Juan (Su clave pública es 'xxxxx...') asignándole la IP 10.255.255.2
+interface wireguard peers add interface=wireguard1 public-key="CLAVE_PUBLICA_DEL_CLIENTE" allowed-address=10.255.255.2/32
+```
+
+*(Nota: En Winbox/Smartphone, es habitual escanear un código QR para automatizar este intercambio).*
+
+## Configuración en el Cliente (Windows / móvil)
+
+El empleado descargará la aplicación de WireGuard e importará un archivo de texto con la siguiente estructura:
+
+```ini
+[Interface]
+PrivateKey = CLAVE_PRIVADA_DEL_CLIENTE
+Address = 10.255.255.2/24
+
+[Peer]
+PublicKey = CLAVE_PUBLICA_DEL_ROUTER_MIKROTIK
+Endpoint = IP_PUBLICA_DEL_ROUTER:13231
+AllowedIPs = 192.168.10.0/24, 10.255.255.0/24 
+```
+
+**Explicación de AllowedIPs en el cliente:**
+Esto indica a la aplicación del cliente remoto qué tráfico debe enviar a través del túnel. Al poner `192.168.10.0/24` (que imaginemos es la LAN de la oficina), el PC enviará únicamente el tráfico dirigido a esa red hacia la oficina, saliendo a Internet para todo lo demás por la red local de su casa (Split Tunneling).
+
+## Enrutamiento y Acceso a la LAN
+
+Una vez levantado el túnel, la IP `10.255.255.2` (cliente) podrá llegar a la `10.255.255.1` (Router).
+Para que el cliente alcance los servidores de la LAN (`192.168.10.x`), el firewall del router debe permitir el reenvío de paquetes (cadena de *forward*) entre la interfaz `wireguard1` y la interfaz de la LAN. Además, los equipos de la LAN deben tener configurado al router como su Gateway por defecto, de lo contrario no sabrán cómo devolver los paquetes hacia la red `10.255.255.0/24`.
