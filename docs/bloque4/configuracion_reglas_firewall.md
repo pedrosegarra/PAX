@@ -32,10 +32,12 @@ las decisiones del administrador. Esto exige un mayor rigor conceptual, pero a
 cambio ofrece una flexibilidad y precisión muy superiores.
 En este tema se abordará la configuración de reglas de firewall en MikroTik desde 
 una perspectiva práctica, poniendo el foco en:
+
 - La estructura real de una regla de firewall y sus parámetros.
 - El recorrido del tráfico a través del router y las distintas cadenas de filtrado.
 - La importancia del orden de las reglas y de las políticas por defecto.
 - Las diferencias clave respecto a firewalls basados en iptables/UFW.
+
 Este conocimiento será la base sobre la que se construirán configuraciones más 
 avanzadas, como la redirección de puertos, la segmentación de redes y la 
 implementación de DMZ, donde el control fino del tráfico es un requisito 
