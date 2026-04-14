@@ -1036,12 +1036,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../tarea_bloque4/" class="md-nav__link">
+      <a href="../Actividad/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    5. Actividad Práctica
+    5. Actividad
     
   </span>
   
@@ -1422,23 +1422,23 @@ las decisiones del administrador. Esto exige un mayor rigor conceptual, pero a
 cambio ofrece una flexibilidad y precisión muy superiores.
 En este tema se abordará la configuración de reglas de firewall en MikroTik desde 
 una perspectiva práctica, poniendo el foco en:
-• La estructura real de una regla de firewall y sus parámetros.
-• El recorrido del tráfico a través del router y las distintas cadenas de filtrado.
-• La importancia del orden de las reglas y de las políticas por defecto.
-• Las diferencias clave respecto a firewalls basados en iptables/UFW.
+- La estructura real de una regla de firewall y sus parámetros.
+- El recorrido del tráfico a través del router y las distintas cadenas de filtrado.
+- La importancia del orden de las reglas y de las políticas por defecto.
+- Las diferencias clave respecto a firewalls basados en iptables/UFW.
 Este conocimiento será la base sobre la que se construirán configuraciones más 
 avanzadas, como la redirección de puertos, la segmentación de redes y la 
 implementación de DMZ, donde el control fino del tráfico es un requisito 
 imprescindible.</p>
 <h2 id="como-se-define-una-regla-de-firewall-en-mikrotik">Cómo se define una regla de firewall en MikroTik.</h2>
 <p>Una regla de firewall, en MikroTik, se define a partir de tres elementos básicos:
-• Cadena (chain): indica en qué punto del recorrido del tráfico se aplica la 
+- Cadena (chain): indica en qué punto del recorrido del tráfico se aplica la 
 regla (input, forward u output). Toda regla debe pertenecer obligatoriamente 
 a una cadena.
-• Acción (action): define qué hace el firewall cuando el tráfico coincide con la 
+- Acción (action): define qué hace el firewall cuando el tráfico coincide con la 
 regla, como permitirlo (accept), bloquearlo (drop o reject) o registrarlo (log). 
 Sin una acción definida, la regla no tiene efecto.
-• Condiciones: permiten especificar qué tráfico debe coincidir con la regla, 
+- Condiciones: permiten especificar qué tráfico debe coincidir con la regla, 
 utilizando parámetros como la interfaz de entrada o salida, la dirección IP de 
 origen o destino, el protocolo, los puertos o el estado de la conexión. Estas 
 condiciones no son obligatorias, pero si no se define ninguna, la regla se 
@@ -1460,13 +1460,13 @@ una cadena concreta antes de comenzar la evaluación de reglas.</p>
 ella el router no sabría en qué contexto aplicar la regla. Una regla colocada en una 
 cadena incorrecta no tendrá ningún efecto, aunque esté correctamente definida.
 Las cadenas principales utilizadas en la configuración de firewall son:
-• input: filtra el tráfico cuyo destino es el propio router. Se utiliza para controlar 
+- input: filtra el tráfico cuyo destino es el propio router. Se utiliza para controlar 
 el acceso a los servicios de administración y gestión del dispositivo, como 
 Winbox, SSH, WebFig o ICMP.
-• forward: filtra el tráfico que atraviesa el router, es decir, el que va de una red 
+- forward: filtra el tráfico que atraviesa el router, es decir, el que va de una red 
 a otra. Es la cadena más utilizada para aplicar políticas de seguridad entre 
 redes internas, Internet y zonas intermedias como una DMZ.
-• output: filtra el tráfico generado por el propio router hacia otras redes. 
+- output: filtra el tráfico generado por el propio router hacia otras redes. 
 Aunque suele dejarse sin restricciones en muchos escenarios, permite un 
 control más estricto del comportamiento del dispositivo.</p>
 <h3 id="elementos-de-tipo-action">Elementos de tipo action</h3>
@@ -1475,14 +1475,14 @@ las condiciones de la regla, determinando el comportamiento final del firewall
 ante cada tipo de tráfico. Toda regla debe tener definida una acción; de lo contrario, 
 la regla no produce ningún efecto sobre el tráfico.
 Las acciones más habituales en la configuración de firewall de MikroTik son:
-• accept: permite el paso del tráfico y detiene el procesamiento de reglas para 
+- accept: permite el paso del tráfico y detiene el procesamiento de reglas para 
 ese paquete.
-• drop: bloquea el tráfico de forma silenciosa, sin notificar al origen. Es la 
+- drop: bloquea el tráfico de forma silenciosa, sin notificar al origen. Es la 
 opción más utilizada en políticas de seguridad.
-• reject: bloquea el tráfico e informa al origen mediante un mensaje de 
+- reject: bloquea el tráfico e informa al origen mediante un mensaje de 
 rechazo. Puede ser útil en entornos controlados, aunque no suele 
 recomendarse hacia Internet.
-• log: registra el tráfico que coincide con la regla en los logs del sistema. 
+- log: registra el tráfico que coincide con la regla en los logs del sistema. 
 Normalmente, se utiliza con fines de diagnóstico y suele combinarse con 
 reglas adicionales de aceptación o bloqueo.</p>
 <h3 id="elementos-de-tipo-filtro-condiciones">Elementos de tipo filtro (condiciones)</h3>
@@ -1490,18 +1490,18 @@ reglas adicionales de aceptación o bloqueo.</p>
 una regla concreta. Estas condiciones no son obligatorias, pero cuanto más 
 precisas sean, más específica y segura será la regla.
 Entre los filtros más utilizados se encuentran:
-• Interfaces
-  o in-interface → interfaz por la que entra el tráfico
-  o out-interface → interfaz por la que sale el tráfico
-• Direcciones IP
-  o src-address → dirección o red de origen.
-  o dst-address → dirección o red de destino.
-• Protocolos y puertos
-  o protocol → tcp, udp, icmp, etc.
-  o src-port → puerto de origen.
-  o dst-port → puerto de destino.
-• Estado de la conexión
-  o connection-state → new, established, related, invalid.
+- Interfaces
+  - in-interface → interfaz por la que entra el tráfico
+  - out-interface → interfaz por la que sale el tráfico
+- Direcciones IP
+  - src-address → dirección o red de origen.
+  - dst-address → dirección o red de destino.
+- Protocolos y puertos
+  - protocol → tcp, udp, icmp, etc.
+  - src-port → puerto de origen.
+  - dst-port → puerto de destino.
+- Estado de la conexión
+  - connection-state → new, established, related, invalid.
 Es importante tener en cuenta que si una regla no define ningún filtro, se aplicará a 
 todo el tráfico que pase por la cadena correspondiente, lo que puede tener un 
 impacto significativo en la conectividad de la red.</p>
@@ -1511,13 +1511,13 @@ secuencial y determinista. Esto significa que el router no evalúa todas las reg
 a la vez, ni selecciona la más específica, sino que analiza las reglas en el orden en 
 el que aparecen, de arriba hacia abajo, dentro de cada cadena.
 Cuando un paquete entra en el router, RouterOS realiza los siguientes pasos:
-• Determina a qué cadena pertenece el paquete (input, forward u output).
-• Comienza a evaluar las reglas de esa cadena en orden.
-• Comprueba si el paquete cumple las condiciones definidas en cada regla.
-• En el momento en que una regla coincide:
-  o Se ejecuta la acción asociada.
-  o El procesamiento se detiene para ese paquete.
-  o Las reglas posteriores no se evalúan.
+- Determina a qué cadena pertenece el paquete (input, forward u output).
+- Comienza a evaluar las reglas de esa cadena en orden.
+- Comprueba si el paquete cumple las condiciones definidas en cada regla.
+- En el momento en que una regla coincide:
+  - Se ejecuta la acción asociada.
+  - El procesamiento se detiene para ese paquete.
+  - Las reglas posteriores no se evalúan.
 Este comportamiento convierte el orden de las reglas en un elemento crítico de la 
 seguridad. Una regla demasiado genérica situada en una posición incorrecta puede 
 bloquear tráfico legítimo o permitir comunicaciones no deseadas, 
@@ -1551,19 +1551,19 @@ Podemos comprobar la nueva regla añadida, ejecutando el comando: </p>
 <img alt="img02" src="../img/3.png" />
 Con esta regla, conseguimos permitir el tráfico que forma parte de conexiones ya 
 establecidas (established) o relacionadas (related).
-  o established: paquetes que pertenecen a conexiones iniciadas 
+  - established: paquetes que pertenecen a conexiones iniciadas 
   previamente, por ejemplo, respuestas a solicitudes HTTP desde la 
   LAN.
-  o related: paquetes asociados a conexiones existentes, como 
+  - related: paquetes asociados a conexiones existentes, como 
   transferencias de datos de FTP (permitiendo abrir la conexión de 
   datos si se ha establecido una conexión de control) o respuestas 
   ICMP relacionadas con una conexión TCP.
 Ventajas de esta regla:
-• Las respuestas a conexiones iniciadas desde la LAN seguirán 
+- Las respuestas a conexiones iniciadas desde la LAN seguirán 
 funcionando sin necesidad de reglas adicionales.
-• Evita que RouterOS tenga que reevaluar cada paquete individualmente, 
+- Evita que RouterOS tenga que reevaluar cada paquete individualmente, 
 mejorando eficiencia y reduciendo carga de CPU.
-• Colocada al inicio de la cadena, garantiza que reglas posteriores no 
+- Colocada al inicio de la cadena, garantiza que reglas posteriores no 
 interfieran con tráfico legítimo.</p>
 <h3 id="ejemplo-2-bloquear-trafico-invalido">Ejemplo 2 – Bloquear tráfico inválido.</h3>
 <p>En MikroTik, un paquete se marca como invalid cuando no pertenece a ninguna 
@@ -1603,8 +1603,8 @@ Podemos comprobar la nueva regla añadida, ejecutando el comando: </p>
 </code></pre></div>
 <img alt="img02" src="../img/7.png" />
 Con esta regla, permitimos el tráfico que:
-• Se inicie en la red 10.10.0.0/24.
-• El destino sea accesible por la interfaz ether1.
+- Se inicie en la red 10.10.0.0/24.
+- El destino sea accesible por la interfaz ether1.
 Dado que en una regla anterior hemos permitido todo el tráfico que previamente 
 establecido, cuando llegue un paquete de respuesta por la interfaz ether1 hacia la 
 red 10.10.0.0/24, si la conexión está abierta, el tráfico estará permitido.</p>
