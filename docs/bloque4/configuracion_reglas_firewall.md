@@ -46,17 +46,21 @@ imprescindible.
 ## Cómo se define una regla de firewall en MikroTik.
 
 Una regla de firewall, en MikroTik, se define a partir de tres elementos básicos:
-- Cadena (chain): indica en qué punto del recorrido del tráfico se aplica la 
+
+- **Cadena (chain):** indica en qué punto del recorrido del tráfico se aplica la 
 regla (input, forward u output). Toda regla debe pertenecer obligatoriamente 
 a una cadena.
-- Acción (action): define qué hace el firewall cuando el tráfico coincide con la 
+
+- **Acción (action):** define qué hace el firewall cuando el tráfico coincide con la 
 regla, como permitirlo (accept), bloquearlo (drop o reject) o registrarlo (log). 
 Sin una acción definida, la regla no tiene efecto.
-- Condiciones: permiten especificar qué tráfico debe coincidir con la regla, 
+
+- **Condiciones:** permiten especificar qué tráfico debe coincidir con la regla, 
 utilizando parámetros como la interfaz de entrada o salida, la dirección IP de 
 origen o destino, el protocolo, los puertos o el estado de la conexión. Estas 
 condiciones no son obligatorias, pero si no se define ninguna, la regla se 
 aplicará a todo el tráfico de la cadena.
+
 A partir de estos tres elementos básicos es posible definir tantas reglas de firewall 
 como sean necesarias para controlar el tráfico de la red. MikroTik analiza las reglas 
 de forma secuencial, de arriba hacia abajo, dentro de cada cadena, evaluando si el 
@@ -77,6 +81,7 @@ Una regla de firewall debe pertenecer obligatoriamente a una cadena, ya que sin
 ella el router no sabría en qué contexto aplicar la regla. Una regla colocada en una 
 cadena incorrecta no tendrá ningún efecto, aunque esté correctamente definida.
 Las cadenas principales utilizadas en la configuración de firewall son:
+
 - input: filtra el tráfico cuyo destino es el propio router. Se utiliza para controlar 
 el acceso a los servicios de administración y gestión del dispositivo, como 
 Winbox, SSH, WebFig o ICMP.
