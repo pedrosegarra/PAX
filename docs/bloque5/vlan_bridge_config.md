@@ -16,7 +16,7 @@ Paso 5 – validación de la configuración aplicada
 
 ---
 
-## Introducción 2
+## Introducción 3
 
 En este documento abordamos uno de los conceptos estructurales en el diseño de redes conmutadas modernas: la segmentación lógica mediante VLAN (Virtual Local Area Network).
 
